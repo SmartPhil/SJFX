@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.xdf.dto.Opportunity" table="opportunity">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="stuName" column="sStuName"></property>
+		<property name="parentName" column="sParentName"></property>
+		<property name="contactTel1" column="sContactTel1"></property>
+		<property name="contactTel2" column="sContactTel2"></property>
+		<property name="channelName" column="sChannelName"></property>
+		<property name="channelType" column="sChannelType"></property>
+		<property name="createDate" column="dtCreateDate"></property>
+		<property name="needCls" column="sNeedCls"></property>
+		<property name="management" column="sManagement"></property>
+		<property name="isValid" column="nIsValid"></property>
+		<property name="noValidReason" column="sNoValidReason"></property>
+		<property name="isAssign" column="nIsAssign"></property>
+		<property name="assignEmployee" column="sAssignEmployee"></property>
+		<property name="followTime" column="dtFollowTime"></property>
+		<property name="nextFollowTime" column="dtNextFollowTime"></property>
+		<property name="state" column="nState"></property>
+	</class>
+</hibernate-mapping>

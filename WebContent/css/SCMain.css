@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+
+#header{
+	width: 1500px;
+	height: 100px;
+	background-image: url("../image/xdf_header.jpg");
+	background-color: #006A60;
+	background-repeat: no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+#title{
+	color: white;
+	font-size: 30px;
+	position: absolute;
+	right: 200px;
+	bottom: 30px;
+}
+#navigator ul{
+	list-style: none;
+}
+#navigator ul li{
+	float: left;
+	width: 100px;
+	cursor: default;
+}
+#navigator{
+	width: 1500px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #808080;
+	color: white;
+}
+#barDiv{
+	width: 500px;
+	height: 50px;
+	float: left;
+}
+#userDiv{
+	width: 200px;
+	height: 50px;
+	float: left;
+}
+table.tjByChannelTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+}
+table.tjByChannelTable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.tjByChannelTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+.oddrowcolor{
+	background-color:#d4e3e5;
+}
+.evenrowcolor{
+	background-color:#c3dde0;
+}
+#addChannelUserDiv{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	font-size: 12px;
+	display: none;
+}
+#tjByChannel{
+	background-color: blue;
+}
+#dealInformationDiv{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1500px;
+	display: none;
+	border: 1px solid black;
+}
+#customRebateDiv{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1500px;
+	display: none;
+}
+#customRebateTable input{
+	width: 50px;
+}
+table.imagetable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+	//margin-left: auto;
+	//margin-right: auto;
+}
+table.imagetable th {
+	background:#b5cfd2 url('./image/cell-blue.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.imagetable td {
+	background:#dcddc0 url('./image/cell-grey.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}

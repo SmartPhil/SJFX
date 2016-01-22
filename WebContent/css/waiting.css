@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.query_hint{
+ border:5px solid #939393;
+ width:150px;
+ height:50px;
+ line-height:55px;
+ padding:0 20px;
+ left:50%;
+ top:50%;
+ font-size:15px;
+ color:#333;
+ font-weight:bold;
+ text-align:center;
+ background-color:#f9f9f9;
+ display: none;
+}
+.query_hint img{position:relative;top:10px;left:-8px;}

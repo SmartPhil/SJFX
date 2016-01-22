@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+html{
+	margin:0px;
+	padding:5px;
+	padding-bottom:5px;
+	background-color:#F6F6F6;
+	color:#0E6B64;
+	font:14px "微软雅黑",arial,sans-serif;
+	background-image: url("../image/log_bg.jpg");
+}
+
+.loginDiv{
+	position:absolute;
+   	top:50%;  
+   	left:50%; 
+   	width:300px; 
+   	height:300px;
+   	margin-top:-150px;
+  	margin-left:-150px;
+}
+
+#table_login{
+	margin:auto auto;
+	width:500px;
+	height:278px;
+	background:url('../image/loginImage/login.gif') left top no-repeat;
+	color:#FFF;
+}
+
+.l-table-edit-td{ width:310px;padding:5px;}
+.l-table-edit-td-textd{  width:220px;padding:5px;}
+
+#table_login tr{height:30px;}
+#table_login .title{height:88px;}
+
+.inputbox { width:130px; height:20px; border:1px solid #FF9900}
+

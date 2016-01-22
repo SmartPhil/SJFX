@@ -1,0 +1,306 @@
+@CHARSET "UTF-8";
+#header{
+	width: 1700px;
+	height: 100px;
+	background-image: url("../image/xdf_header.jpg");
+	background-color: #006A60;
+	background-repeat: no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+#title{
+	color: white;
+	font-size: 30px;
+	position: absolute;
+	right: 200px;
+	bottom: 30px;
+}
+#navigator ul{
+	list-style: none;
+}
+#navigator ul li{
+	float: left;
+	width: 1000px;
+	cursor: default;
+}
+#sjInput{
+	background-color: blue;
+}
+#tjByChannel{
+	width: 800px;
+}
+#dataShowDiv{
+	width: 1700px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+}
+#mainTable{
+	text-align: center;
+}
+#navigator{
+	width: 1700px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #808080;
+	color: white;
+}
+#navigator ul{
+	list-style: none;
+}
+#navigator ul li{
+	float: left;
+	width: 90px;
+	cursor: default;
+}
+#barDiv{
+	width: 700px;
+	height: 50px;
+	float: left;
+}
+#userDiv{
+	width: 200px;
+	height: 50px;
+	float: left;
+}
+#assignDiv{
+	width: 1700px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+#assignTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+#assignTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#moveTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+#moveTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#moveDiv{
+	width: 1700px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+#handleTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+}
+#handleTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#handleDiv{
+	width: 1700px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+#tjByChannelDiv{
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+#tjByChannelTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:20px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+#tjByChannelTable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#tjByChannelTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#followContentDiv{
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+	border: 1px solid black;
+	width: 500px;
+	text-align: center;
+}
+#handleContentTable{
+	margin-left: auto;
+	margin-right: auto;
+}
+#addKFUserDiv{
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+.tablecss {
+	font-family: verdana,arial,sans-serif;
+	font-size:20px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.tablecss th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+.tablecss td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+
+#searchDiv{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 1700px;
+	border: 1px solid black;
+	height: 50px;
+}
+#queryDataDiv{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1700px;
+	display: none;
+}
+#queryTable{
+	border: 1px solid black;
+	text-align: center;
+}
+#markToInValidDiv{
+	width: 700px;
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+table.tjByChannelTable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+}
+table.tjByChannelTable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.tjByChannelTable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+#tjByChannelDiv{
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+	width: 700px;
+}
+#operation_div{
+	display: none;
+	border: 1px solid black;
+	position: absolute;
+	z-index: 1;
+	width: 300px;
+	height: 50px;
+	background-color: green;
+}
+#dealDiv {
+	display: none;
+}
+
+#queryDealDataDiv{
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1700px;
+	border: 1px solid black;
+}
+
+#dealDataTable{
+	text-align: center;
+}
+#importOppDiv{
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1700px;
+	border: 1px solid black;
+}
+
+#some_file_queue {
+    background-color: #FFF;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    height: 103px;
+    margin-bottom: 10px;
+    overflow: auto;
+    padding: 5px 10px;
+    width: 300px;
+}

@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+#header{
+	width: 800px;
+	height: 100px;
+	background-image: url("../image/xdf_header.jpg");
+	background-color: #006A60;
+	background-repeat: no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+#title{
+	color: white;
+	font-size: 30px;
+	position: absolute;
+	right: 200px;
+	bottom: 30px;
+}
+/* #navigator{
+	width: 800px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #808080;
+	color: white;
+} */
+#navigator ul{
+	list-style: none;
+}
+#navigator ul li{
+	float: left;
+	width: 70px;
+	cursor: default;
+}
+#barDiv{
+	width: 500px;
+	height: 50px;
+	float: left;
+}
+#userDiv{
+	width: 200px;
+	height: 50px;
+	float: left;
+}
+#body{
+	width: 800px;	
+	margin-left: auto;
+	margin-right: auto;
+}
+.bigInput{
+	width: 400px;
+	height: 100px;
+}
+#sjInput{
+	background-color: #FFB3FF;
+}
+#showSjTj{
+	display: none;
+}
