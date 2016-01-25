@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
+	alert("I'm an add info!");
 	$("#testInterface").click(function(){
 		$.ajax({
 			url : 'test.action',
