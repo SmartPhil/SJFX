@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<li role="presentation" class="active"><a href="#">未处理商机</a></li>
   				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
   				<li role="presentation"><a href="KF/adduser.jsp">添加用户</a></li>
-  				<li role="presentation"><a href="#">查询数据</a></li>
+  				<li role="presentation"><a href="KF/queryOpp.jsp">查询数据</a></li>
   				<li role="presentation"><a href="#">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
@@ -439,59 +439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<button id="btn_cancle_operation">取消</button>
 </div>
 
-<div id="addKFUserDiv">
-	
-</div>
-<div id="queryDataDiv">
-	<div id="searchDiv">
-		起始时间：<input name="beginDate" type="text" id="beginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
-		截止时间：<input name="endDate" type="text" id="endDate" onclick="WdatePicker()">
-		<button id="searchButton">查询</button>
-		<button id="exportExcel">导出</button>
-	</div>
-	<br>
-	
-	<div id="queryTable">
-		<table id="queryDataTable" cellpadding="0" cellspacing="0" border="0">
-			<thead>
-				<tr> 
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>需求课程</th>
-					<th>所属部门</th>
-					<th>渠道商</th>
-					<th>渠道商类型</th>
-					<th>创建日期</th>
-					<th>是否有效</th>
-					<th>无效原因</th>
-					<th>是否分配</th>
-					<th>分配员工</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>需求课程</th>
-					<th>所属部门</th>
-					<th>渠道商</th>
-					<th>渠道商类型</th>
-					<th>创建日期</th>
-					<th>是否有效</th>
-					<th>无效原因</th>
-					<th>是否分配</th>
-					<th>分配员工</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</div>
+
 <div id="tjByChannelDiv">
 	
 </div>

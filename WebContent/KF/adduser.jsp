@@ -23,7 +23,6 @@ $(document).ready(function(){
 		var confirmPassword = $("#kfConfirmPassword").val();
 		var name = $("#kfName").val();
 		var management = $("#kfManagement").val();
-		alert(management);
 		if(username == null || username == ""){
 			alert("用户名不能为空！");
 			return;
@@ -58,6 +57,20 @@ $(document).ready(function(){
 		})
 	});
 	
+	$("#kfPassword").blur(function(){
+		var psw = $("#kfPassword").val();
+		if(psw == null || psw == ""){
+			$("#pswNotNullAlert").css("display","block");
+		}else{
+			$("#pswNotNullAlert").css("display","none");
+		}
+		if(canSubmit()){
+			$("#submitAddKFUser").removeAttr("disabled");
+		}else{
+			$("#submitAddKFUser").attr("disabled","disabled");
+		}
+	});
+	
 	$("#kfConfirmPassword").blur(function(){
 		var psw = $("#kfPassword").val();
 		var confirmPsw = $("#kfConfirmPassword").val();
@@ -68,14 +81,19 @@ $(document).ready(function(){
 		}else{
 			$("#confirmPswAlert").css("display","none");
 		}
-			
+		if(canSubmit()){
+			$("#submitAddKFUser").removeAttr("disabled");
+		}else{
+			$("#submitAddKFUser").attr("disabled","disabled");
+		}
 	});
 	
 	$("#kfUsername").blur(function(){
 		var username = $("#kfUsername").val();
 		if(username == null || username == ""){
 			$("#usernameNotNull").css("display","block");
-			return;
+		}else{
+			$("#usernameNotNull").css("display","none");
 		}
 		
 		$.ajax({
@@ -96,7 +114,36 @@ $(document).ready(function(){
 				alert("网络出错！请检查网络或者联系管理员！");
 			}
 		});
+		if(canSubmit()){
+			$("#submitAddKFUser").removeAttr("disabled");
+		}else{
+			$("#submitAddKFUser").attr("disabled","disabled");
+		}
 	});
+	
+	function canSubmit(){
+		var username = $("#kfUsername").val();
+		var password = $("#kfPassword").val();
+		var confirmPassword = $("#kfConfirmPassword").val();
+		var result1 = false;
+		if(username != null && username != "" && password != null && password != "" && confirmPassword != null && confirmPassword != ""){
+			result1 = true;
+		}else{
+			result1 = false;
+		}
+		var result2 = false;
+		var namedis = ($("#usernameNotNull").css("display") == "none" && $("#usernameIsExist").css("display") == "none");
+		var pswdis = ($("#pswNotNullAlert").css("display") == "none");
+		var confirmPswDis = ($("#confirmPswAlert").css("display") == "none");
+		if(namedis && pswdis && confirmPswDis){
+			result2 = true;
+		}
+		if(result1 && result2){
+			return true;
+		}else{
+			return false;
+		}
+	}
 });
 </script>
 </head>
@@ -120,7 +167,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="toKF.action">未处理商机</a></li>
   				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
   				<li role="presentation" class="active"><a href="#">添加用户</a></li>
-  				<li role="presentation"><a href="#">查询数据</a></li>
+  				<li role="presentation"><a href="KF/queryOpp.jsp">查询数据</a></li>
   				<li role="presentation"><a href="#">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
@@ -144,6 +191,9 @@ $(document).ready(function(){
   		<div class="form-group">
     		<label for="exampleInputPassword1">密码</label>
     		<input type="password" class="form-control" id="kfPassword" name="kfPassword" placeholder="请输入密码">
+    		<div id="pswNotNullAlert" style="display: none;" class="alert alert-danger" role="alert">
+    			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 密码不能为空！
+    		</div>
   		</div>
   		<div class="form-group">
     		<label for="exampleInputFile">确认密码</label>
@@ -164,7 +214,7 @@ $(document).ready(function(){
     		<% }%>
     		</select>
   		</div>
-  		<input type="button" data-loading-text="添加中……" class="btn btn-primary" id="submitAddKFUser" value="添加"/>
+  		<input type="button" data-loading-text="添加中……" class="btn btn-primary" id="submitAddKFUser" value="添加" disabled="disabled"/>
 	</form>
 </div>
 </body>
