@@ -229,17 +229,28 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		Transaction ts = session.beginTransaction();
 		
 		try {
-			String hql = "from Opportunity where createDate >= ? and createDate <= ? and management = ?";
+			//String hql = "from Opportunity where createDate >= ? and createDate <= ? and management = ?";
+			String hql = "from Opportunity where management =:management";
+			if(beginDate != null){
+				hql += " and createDate >=:beginDate";
+			}
+			if(endDate != null){
+				hql += " and createDate <=:endDate";
+			}
 			Query query = session.createQuery(hql);
-			Calendar beginCalendar = Calendar.getInstance();
-			beginCalendar.setTime(beginDate);
-			Calendar endCalendar = Calendar.getInstance();
-			endCalendar.setTime(endDate);
-			query.setCalendar(0, beginCalendar);
-			query.setCalendar(1, endCalendar);
+			if(beginDate != null){
+				Calendar beginCalendar = Calendar.getInstance();
+				beginCalendar.setTime(beginDate);
+				query.setCalendar("beginDate", beginCalendar);
+			}
+			if(endDate != null){
+				Calendar endCalendar = Calendar.getInstance();
+				endCalendar.setTime(endDate);
+				query.setCalendar("endDate", endCalendar);
+			}
 			List<Opportunity> result = new ArrayList<Opportunity>();
 			for (int i = 0; i < managementArr.length; i++) {
-				query.setString(2, managementArr[i]);
+				query.setString("management", managementArr[i]);
 				List<Opportunity> oppList = query.list();
 				result.addAll(oppList);
 			}

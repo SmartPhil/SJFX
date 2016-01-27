@@ -46,11 +46,12 @@ $(document).ready(function(){
 	$("#searchButton").click(function(){
 		var beginDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
-				
+		var stuContact = $("#stuContactTel").val();
+		var user = $("#usernameShow").text().split(":")[1];			
 		$.ajax({
 			url : "searchOpp.action",
 			type : "post",
-			data : {"beginDate":beginDate,"endDate":endDate},
+			data : {"user" : user, "beginDate" : beginDate, "endDate" : endDate, "stuContact" : stuContact},
 			success : function(data){
 				t.clear().draw(false);
 				var result = eval("(" + data + ")");
