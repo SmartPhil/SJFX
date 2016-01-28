@@ -221,7 +221,7 @@ $(document).ready(function(){
   				<li role="presentation" class="active"><a href="#">数据量统计</a></li>
   				<li role="presentation"><a href="KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation"><a href="KF/queryOpp.jsp">查询数据</a></li>
-  				<li role="presentation"><a href="#">成单数据</a></li>
+  				<li role="presentation"><a href="KF/tj.jsp">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
 		</div>

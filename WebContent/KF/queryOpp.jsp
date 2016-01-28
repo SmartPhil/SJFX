@@ -71,6 +71,43 @@ $(document).ready(function(){
 			}
 		})
 	});
+	
+	$("#exportOppInfo").click(function(){
+		/* var beginDate = $("#beginDate").val();
+		var endDate = $("#endDate").val();
+		var stuContact = $("#stuContactTel").val();
+		var username = $("#usernameShow").text().split(":")[1]; */
+		var paramArray = new Array();
+		paramArray = $(t.node()).toArray();
+		alert(paramArray.length);
+		for (var i = 0; i < paramArray.length; i++) {
+			alert(paramArray[i]);
+		}
+		for (var i = 0; i < trs.length; i++) {
+			var data = t.fnGetData(trs[i]);
+			alert(data);
+			var dataArray = data.split(",");
+			var obj = new Object();
+			obj.stuName = data[0];
+			obj.parentName = data[1];
+			obj.contact1 = data[2];
+			obj.contact2 = data[3];
+			obj.needCls = data[4];
+			obj.management = data[5];
+			obj.channel = data[6];
+			obj.channelType = data[7];
+			obj.createDate = data[8];
+			obj.isValid = data[9];
+			obj.noValidReason = data[10];
+			obj.isAssign = data[11];
+			obj.assignEmployee = data[12];
+			paramArray.push(obj);
+		}
+		var param = JSON.stringify(paramArray);
+		alert(param);
+		/* var param = "beginDate=" + beginDate + "&endDate=" + endDate + "&stuContact=" + stuContact + "&username=" + username;
+		location.href = "exportExcel.action?" + param; */
+	});
 });
 </script>
 </head>
@@ -93,7 +130,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
   				<li role="presentation"><a href="KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation" class="active"><a href="#">查询数据</a></li>
-  				<li role="presentation"><a href="#">成单数据</a></li>
+  				<li role="presentation"><a href="KF/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
 		</div>
@@ -167,55 +204,5 @@ $(document).ready(function(){
   		</tfoot>
   	</table>
 </div>
-<!-- <div id="queryDataDiv">
-	<div id="searchDiv">
-		起始时间：<input name="beginDate" type="text" id="beginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
-		截止时间：<input name="endDate" type="text" id="endDate" onclick="WdatePicker()">
-		<button id="searchButton">查询</button>
-		<button id="exportExcel">导出</button>
-	</div>
-	<br>
-	
-	<div id="queryTable">
-		<table id="queryDataTable" cellpadding="0" cellspacing="0" border="0">
-			<thead>
-				<tr> 
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>需求课程</th>
-					<th>所属部门</th>
-					<th>渠道商</th>
-					<th>渠道商类型</th>
-					<th>创建日期</th>
-					<th>是否有效</th>
-					<th>无效原因</th>
-					<th>是否分配</th>
-					<th>分配员工</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>需求课程</th>
-					<th>所属部门</th>
-					<th>渠道商</th>
-					<th>渠道商类型</th>
-					<th>创建日期</th>
-					<th>是否有效</th>
-					<th>无效原因</th>
-					<th>是否分配</th>
-					<th>分配员工</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</div> -->
 </body>
 </html>
