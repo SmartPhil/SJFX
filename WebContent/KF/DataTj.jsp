@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>数据统计</title>
 <!-- css文件 -->
-<link rel="stylesheet" href="./css/DataTj.css" type="text/css"/>
+<link rel="stylesheet" href="../css/DataTj.css" type="text/css"/>
 
 </head>
 <body>

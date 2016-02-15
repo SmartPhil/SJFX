@@ -6,16 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商机分销系统</title>
-<link href="../css/channelMain.css" rel="stylesheet" type="text/css"/>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/channelMain.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 
-<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../js/channelDealInfo.js"></script>
-<script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/channelDealInfo.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
 <% 
@@ -29,13 +29,13 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="../image/logo.png">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
-  				<li role="presentation"><a href="channelMain.jsp">录入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/channelMain.jsp">录入商机</a></li>
   				<li role="presentation" class="active"><a href="#">查看成单情况</a></li>
 			</ul>
 		</div>

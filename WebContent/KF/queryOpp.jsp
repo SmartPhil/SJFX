@@ -1,21 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商机分销系统</title>
-<link href="bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="bootstrap-3.3.4-dist/js/bootstrap.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//获取当月商机数据
@@ -73,40 +68,13 @@ $(document).ready(function(){
 	});
 	
 	$("#exportOppInfo").click(function(){
-		/* var beginDate = $("#beginDate").val();
+		var beginDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		var stuContact = $("#stuContactTel").val();
-		var username = $("#usernameShow").text().split(":")[1]; */
-		var paramArray = new Array();
-		paramArray = $(t.node()).toArray();
-		alert(paramArray.length);
-		for (var i = 0; i < paramArray.length; i++) {
-			alert(paramArray[i]);
-		}
-		for (var i = 0; i < trs.length; i++) {
-			var data = t.fnGetData(trs[i]);
-			alert(data);
-			var dataArray = data.split(",");
-			var obj = new Object();
-			obj.stuName = data[0];
-			obj.parentName = data[1];
-			obj.contact1 = data[2];
-			obj.contact2 = data[3];
-			obj.needCls = data[4];
-			obj.management = data[5];
-			obj.channel = data[6];
-			obj.channelType = data[7];
-			obj.createDate = data[8];
-			obj.isValid = data[9];
-			obj.noValidReason = data[10];
-			obj.isAssign = data[11];
-			obj.assignEmployee = data[12];
-			paramArray.push(obj);
-		}
-		var param = JSON.stringify(paramArray);
-		alert(param);
-		/* var param = "beginDate=" + beginDate + "&endDate=" + endDate + "&stuContact=" + stuContact + "&username=" + username;
-		location.href = "exportExcel.action?" + param; */
+		var username = $("#usernameShow").text().split(":")[1];
+		
+		var param = "beginDate=" + beginDate + "&endDate=" + endDate + "&stuContact=" + stuContact + "&username=" + username;
+		location.href = "exportExcel.action?" + param;
 	});
 });
 </script>
@@ -120,17 +88,17 @@ $(document).ready(function(){
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="image/logo.png">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="toKF.action">未处理商机</a></li>
-  				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
-  				<li role="presentation"><a href="KF/adduser.jsp">添加用户</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">数据量统计</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation" class="active"><a href="#">查询数据</a></li>
-  				<li role="presentation"><a href="KF/dealInfo.jsp">成单数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
 		</div>

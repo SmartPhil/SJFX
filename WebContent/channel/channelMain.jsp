@@ -6,14 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商机分销系统</title>
-<link href="../css/channelMain.css" rel="stylesheet" type="text/css"/>
-<link href="../css/table.css" rel="stylesheet" type="text/css"/>
-<link href="../css/waiting.css" rel="stylesheet" type="text/css"/>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/channelMain.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/table.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/waiting.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="../js/channelMain.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/channelMain.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
 <% 
@@ -27,14 +27,14 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="../image/logo.png">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">录入商机</a></li>
-  				<li role="presentation"><a href="channelDealInfo.jsp">查看成单情况</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/channelDealInfo.jsp">查看成单情况</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>

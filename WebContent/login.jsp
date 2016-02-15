@@ -5,13 +5,13 @@
 <head>
 <title>上海新东方商机分销系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/loginCSS.css" rel="stylesheet" type="text/css"/>
-<link href="../css/waiting.css" rel="stylesheet" type="text/css"/>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/loginCSS.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/waiting.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="../js/loginJS.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/loginJS.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
 <s:form id="loginForm">

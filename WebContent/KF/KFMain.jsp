@@ -6,31 +6,26 @@
 <%@ page import="com.xdf.dto.User" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>上海新东方商机系统</title>
-<base href="<%=basePath%>"> 
-<link href="css/KFMain.css" rel="stylesheet" type="text/css"/>
-<link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-<link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<link href="uploadify/uploadify.css" rel="stylesheet"  type="text/css" media="screen"/>
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/KFMain.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/uploadify/uploadify.css" rel="stylesheet"  type="text/css" media="screen"/>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/KFMain.js"></script>
-<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="js/tableExport.js"></script>
-<script type="text/javascript" src="js/jquery.base64.js"></script>
-<script type="text/javascript" src="js/DateFormate.js"></script>
-<script type="text/javascript" src="uploadify/jquery.uploadify.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/KFMain.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/tableExport.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.base64.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/DateFormate.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/uploadify/jquery.uploadify.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 
 </head>
 <body>
@@ -44,40 +39,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//当前用户所管理的部门
 	List<String> managementArray = (List<String>)request.getAttribute("curtUserManagements");
 %>
-<%-- <div id="header">
-	<span id="title">商机分销系统</span>
-</div> --%>
-<%-- <div id="navigator">
-	<div id="userDiv">
-		
-		<p id="curtUser">当前用户:<%=username %></p>
-	</div>
-	<div id="barDiv">
-		<ul>
-			<li><a id="sjInput">未处理商机</a></li>
-			<li><a id="tjByChannel">数据量统计</a></li>
-			<li><a id="addKFUser">添加用户</a></li>
-			<li><a id="queryData">查询数据</a></li>
-			<li><a id="queryDealData">成单数据</a></li>
-			<li><a id="importOpp">导入商机</a></li>
-		</ul>
-	</div>
-</div> --%>
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="image/logo.png">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">未处理商机</a></li>
-  				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
-  				<li role="presentation"><a href="KF/adduser.jsp">添加用户</a></li>
-  				<li role="presentation"><a href="KF/queryOpp.jsp">查询数据</a></li>
-  				<li role="presentation"><a href="KF/dealInfo.jsp">成单数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">数据量统计</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
 		</div>

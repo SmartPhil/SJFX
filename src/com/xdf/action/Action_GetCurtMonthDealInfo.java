@@ -40,8 +40,15 @@ public class Action_GetCurtMonthDealInfo extends ActionSupport {
 			Opportunity opp = oppDao.getOppById(oppId);
 			map.put("id", deal.getId());
 			map.put("stuName", opp.getStuName());
+			map.put("parentName", opp.getParentName());
+			map.put("contactTel1", opp.getContactTel1());
+			map.put("contactTel2", opp.getContactTel2());
+			map.put("cardCode", deal.getCardCode());
 			map.put("clsName", deal.getClassName());
+			map.put("inDate", deal.getInDate());
 			map.put("pay", deal.getPay());
+			map.put("beginDate", deal.getBeginDate());
+			map.put("endDate", deal.getEndDate());
 			map.put("channelName", opp.getChannelName());
 			map.put("management", deal.getDeptName());
 			if(deal.getRebate() != 0){

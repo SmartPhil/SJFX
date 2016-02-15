@@ -2,19 +2,15 @@
 <%@page import="com.xdf.dto.Management"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>添加用户</title>
-<base href="<%=basePath%>">
-<link href="bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+<link href="<%=request.getContextPath()%>/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#submitAddKFUser").click(function(){
@@ -158,17 +154,17 @@ $(document).ready(function(){
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="image/logo.png">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="toKF.action">未处理商机</a></li>
-  				<li role="presentation"><a href="KF/tj.jsp">数据量统计</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">数据量统计</a></li>
   				<li role="presentation" class="active"><a href="#">添加用户</a></li>
-  				<li role="presentation"><a href="KF/queryOpp.jsp">查询数据</a></li>
-  				<li role="presentation"><a href="KF/dealInfo.jsp">成单数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation"><a href="#">导入商机</a></li>
 			</ul>
 		</div>

@@ -2,22 +2,21 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.xdf.dto.Channel"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商机分销系统</title>
 <!-- css文件 -->
-<link href="./css/SCMain.css" rel="stylesheet" type="text/css"/>
-<link href="./css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-<link href="./css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/SCMain.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <!-- js文件 -->
-<script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="./js/SCMain.js"></script>
-<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="./My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/SCMain.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
 

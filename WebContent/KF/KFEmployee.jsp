@@ -11,12 +11,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>上海新东方商机系统</title>
 
-<link href="css/KFEmployee.css" rel="stylesheet" type="text/css"/>
-<link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/KFEmployee.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/KFEmployee.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/KFEmployee.js"></script>
 
 </head>
 <body>
