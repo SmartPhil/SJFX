@@ -160,7 +160,7 @@ $(document).ready(function(){
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
-  				<li role="presentation"><a href="toKF.action">未处理商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/toKF.action">未处理商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">数据量统计</a></li>
   				<li role="presentation" class="active"><a href="#">添加用户</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
