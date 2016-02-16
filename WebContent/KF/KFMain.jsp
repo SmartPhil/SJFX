@@ -55,7 +55,7 @@
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/dealInfo.jsp">成单数据</a></li>
-  				<li role="presentation"><a href="#">导入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/importOpp.jsp">导入商机</a></li>
 			</ul>
 		</div>
 	</div>
@@ -469,10 +469,6 @@
 		</table>
 	</div>
 </div>
-<div id="importOppDiv">
-	<input type="file" name="file_upload" id="file_upload"/>
-	<div id="some_file_queue"></div>
-	<button id="importExcel">上传</button>
-</div>
+
 </body>
 </html>

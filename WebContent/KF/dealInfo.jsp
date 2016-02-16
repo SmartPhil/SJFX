@@ -13,8 +13,9 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-var t = $("#dealInfoTab").DataTable({});
 $(document).ready(function(){
+	var t = $("#dealInfoTab").DataTable({});
+	
 	$.ajax({
 		url : 'getCurtMonDealInfo.action',
 		type : 'post',
@@ -34,7 +35,36 @@ $(document).ready(function(){
 		error : function(e){
 			alert("网络出错！请联系管理员！");
 		}
-	})
+	});
+	
+	$("#dealSearchButton").click(function(){
+		$.ajax({
+			url : 'searchDeal.action',
+			type : 'post',
+			dataType : 'json',
+			data : {
+					'beginDate':$("#startDate").val(), 
+					'endDate':$("#endDate").val(), 
+					'stuContactTel':$("#stuContactTel").val(), 
+					'username':$("#usernameShow").text().split(":")[1]
+					},
+			success : function(e){
+				t.clear().draw(false);
+				var data = eval("(" + e + ")");
+				for (var i = 0; i < data.length; i++) {
+					var obj = [
+					           data[i].stuName,data[i].parentName,data[i].contactTel1,data[i].contactTel2,
+					           data[i].channelName,data[i].cardCode,data[i].clsName,data[i].inDate,
+					           data[i].management,data[i].pay,data[i].beginDate,data[i].endDate
+					          ];
+					t.row.add(obj).draw(false);
+				}
+			},
+			error : function(e){
+				alert("网络出错！请联系相关老师！");
+			}
+		})
+	});
 });
 </script>
 
@@ -59,7 +89,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
   				<li role="presentation" class="active"><a href="#">成单数据</a></li>
-  				<li role="presentation"><a href="#">导入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/importOpp.jsp">导入商机</a></li>
 			</ul>
 		</div>
 	</div>

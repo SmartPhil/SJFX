@@ -123,7 +123,7 @@
 		<action name="getCurtMonDealInfo" class="com.xdf.action.Action_GetCurtMonthDealInfo" method="getCurtMonthDealInfo">
 			<result name="success" type="json">
 				<param name="root">result</param>
-			</result>		
+			</result>
 		</action>
 		<action name="searchDeal" class="com.xdf.action.Action_SearchDeal" method="searchDeal">
 			<result name="success" type="json">

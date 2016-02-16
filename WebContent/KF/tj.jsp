@@ -217,7 +217,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">成单数据</a></li>
-  				<li role="presentation"><a href="#">导入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/importOpp.jsp">导入商机</a></li>
 			</ul>
 		</div>
 	</div>

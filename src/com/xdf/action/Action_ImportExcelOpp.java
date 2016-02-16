@@ -18,6 +18,7 @@ public class Action_ImportExcelOpp extends ActionSupport {
 	private String fileName;
 	
 	public String importExcel(){
+		System.out.println(fileName);
 		String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/UploadFiles");
 		File target = new File(path, "file_upload.xls");
 		System.out.println(target.getPath());
