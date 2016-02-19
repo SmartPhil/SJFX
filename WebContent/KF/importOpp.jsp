@@ -7,12 +7,16 @@
 <link href="<%=request.getContextPath()%>/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/uploadify/uploadify.css" rel="stylesheet"  type="text/css" media="screen"/>
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/uploadify/jquery.uploadify.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var t = $("#importBackInfoTab").DataTable({});
+	
 	$("#file_upload").uploadify({
 		'swf' : '<%=request.getContextPath()%>/uploadify/uploadify.swf',  
 	    'uploader' : '<%=request.getContextPath()%>/importExcelOpp.action',  
@@ -25,8 +29,23 @@ $(document).ready(function(){
 	    'fileObjName' : 'file_upload',
 	    'buttonText' : '选择数据文件',
 	    'onUploadStart' : function(file) {
-	        $("#file_upload").uploadify('settings','formData',{'fileName':file.name});
-	    }
+	        $("#file_upload").uploadify('settings','formData',{'fileName':file.name,'username':$("#usernameShow").text().split(":")[1]});
+	    },
+	    'onUploadSuccess' : function(file, data, response) {
+            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+           	alert(data);
+            t.clear().draw(false);
+			var data1 = eval("(" + data + ")");
+			alert(data1.length);
+			for (var i = 0; i < data1.length; i++) {
+				var obj = [
+                           data1[i].createTime,data1[i].stuName,data1[i].parentName,data1[i].contactTel1,data1[i].contactTel2,
+				           data1[i].channelName,data1[i].channelType,data1[i].management,data1[i].comment,data1[i].grade,data1[i].degree,
+				           data1[i].address,data1[i].keyword
+				          ];
+				t.row.add(obj).draw(false);
+			}
+        }
 	});	
 	$("#importExcel").click(function(){
 		$("#file_upload").uploadify("upload");
@@ -67,6 +86,49 @@ $(document).ready(function(){
 		<div id="some_file_queue"></div>
 		<button id="importExcel" class="btn btn-primary">上传</button>
   	</div>
+</div>
+<div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
+  <div class="panel-heading">成单数据</div>
+  <table id="importBackInfoTab" class="table table-striped table-bordered dataTable" style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%">
+  		<thead>
+  			<tr>
+  				<th>创建日期</th>
+  				<th>学员姓名</th>
+				<th>家长姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>渠道商</th>
+				<th>渠道类型</th>
+				<th>需求课程</th>
+				<th>管理部门</th>
+				<th>备注</th>
+				<th>年级</th>
+				<th>学位</th>
+				<th>地址</th>
+				<th>关键字</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  		</tbody>
+  		<tfoot>
+  			<tr>
+  				<th>创建日期</th>
+  				<th>学员姓名</th>
+				<th>家长姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>渠道商</th>
+				<th>渠道类型</th>
+				<th>需求课程</th>
+				<th>管理部门</th>
+				<th>备注</th>
+				<th>年级</th>
+				<th>学位</th>
+				<th>地址</th>
+				<th>关键字</th>
+  			</tr>
+  		</tfoot>
+  	</table>
 </div>
 </body>
 </html>

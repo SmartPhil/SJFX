@@ -23,6 +23,7 @@ $(document).ready(function(){
 		success : function(e){
 			t.clear().draw(false);
 			var data = eval("(" + e + ")");
+		
 			for (var i = 0; i < data.length; i++) {
 				var obj = [
 				           data[i].stuName,data[i].parentName,data[i].contactTel1,data[i].contactTel2,

@@ -23,5 +23,10 @@
 		<property name="followTime" column="dtFollowTime"></property>
 		<property name="nextFollowTime" column="dtNextFollowTime"></property>
 		<property name="state" column="nState"></property>
+		<property name="comment" column="sComment"></property>
+		<property name="grade" column="sGrade"></property>
+		<property name="degree" column="sDegree"></property>
+		<property name="address" column="sAddress"></property>
+		<property name="keyword" column="sKeyword"></property>
 	</class>
 </hibernate-mapping>

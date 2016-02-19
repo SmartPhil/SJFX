@@ -21,6 +21,11 @@ public class Opportunity {
 	private Date followTime;
 	private Date nextFollowTime;
 	private int state; // 0--待跟进；1--已成单
+	private String comment; //备注
+	private String grade; //就读年级
+	private String degree; //申请学历
+	private String address; //所住区域
+	private String keyword; //关键词
 	
 	public Date getFollowTime() {
 		return followTime;
@@ -123,5 +128,35 @@ public class Opportunity {
 	}
 	public void setChannelType(String channelType) {
 		this.channelType = channelType;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 }
