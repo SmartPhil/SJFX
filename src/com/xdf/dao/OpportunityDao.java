@@ -127,4 +127,11 @@ public interface OpportunityDao {
 	 * @return Opportunity
 	 */
 	public Opportunity getOppByContact(String stuContactTel);
+	
+	/**
+	 * get this opportunity is old opportunity in six month
+	 * @param opportunity
+	 * @return boolean
+	 */ 
+	public boolean isOldOpp(Opportunity opportunity);
 }

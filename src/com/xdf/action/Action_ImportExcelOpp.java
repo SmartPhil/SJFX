@@ -15,6 +15,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionSupport;
+import com.xdf.dao.OpportunityDao;
+import com.xdf.dao.impl.OpportunityDaoImpl;
 import com.xdf.dto.Opportunity;
 import com.xdf.util.ExcelReader;
 
@@ -22,7 +24,7 @@ import com.xdf.util.ExcelReader;
 public class Action_ImportExcelOpp extends ActionSupport {
 	private File file_upload;
 	private String fileName;
-	private List<HashMap<String, Object>> result;
+	private Object result;
 	private String username;
 	public String importExcel(){
 		String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/UploadFiles");
@@ -86,8 +88,20 @@ public class Action_ImportExcelOpp extends ActionSupport {
 				opportunity.setChannelType("内部渠道");
 				oppList.add(opportunity);
 			}
-			List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
+			//剔除不符合条件的商机(仅仅判断本系统内是否有此学员存在以及是否是本系统半年以内的老生)
+			List<Opportunity> canImportOpp = new ArrayList<Opportunity>();
+			List<Opportunity> notImportOpp = new ArrayList<Opportunity>();
+			OpportunityDao oppDao = new OpportunityDaoImpl();
 			for (Opportunity opp : oppList) {
+				if(!oppDao.isOldOpp(opp)){
+					canImportOpp.add(opp);
+				}else {
+					notImportOpp.add(opp);
+				}
+			}
+			
+			List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
+			for (Opportunity opp : notImportOpp) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				if(opp.getCreateDate() != null){
 					map.put("createTime", sdf.format(opp.getCreateDate()));
@@ -109,7 +123,8 @@ public class Action_ImportExcelOpp extends ActionSupport {
 				map.put("keyword", opp.getKeyword());
 				maps.add(map);
 			}
-			result = maps;
+			result = JSONArray.toJSON(maps);
+			System.out.println(result);
 		}else {
 			System.out.println("请不要上传空文件！");
 		}
@@ -129,24 +144,16 @@ public class Action_ImportExcelOpp extends ActionSupport {
 		this.fileName = fileName;
 	}
 
-/*	public String getResult() {
+	public Object getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
+	public void setResult(Object result) {
 		this.result = result;
-	}*/
+	}
 
 	public String getUsername() {
 		return username;
-	}
-
-	public List<HashMap<String, Object>> getResult() {
-		return result;
-	}
-
-	public void setResult(List<HashMap<String, Object>> result) {
-		this.result = result;
 	}
 
 	public void setUsername(String username) {

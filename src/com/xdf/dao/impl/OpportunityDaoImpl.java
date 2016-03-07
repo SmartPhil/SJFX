@@ -379,8 +379,6 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			return null;
 		}
 	}
-
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -452,6 +450,48 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			session.close();
 			System.out.println("按照联系方式查询商机出错：" + e.getMessage());
 			return null;
+		}
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isOldOpp(Opportunity opportunity) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where contactTel1 = ? or contactTel1 = ? or contactTel2 = ? or contactTel2 = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, opportunity.getContactTel1());
+			query.setString(1, opportunity.getContactTel2());
+			query.setString(2, opportunity.getContactTel1());
+			query.setString(3, opportunity.getContactTel2());
+			List<Opportunity> resultList = query.list();
+			ts.commit();
+			session.close();
+			if(resultList.size() == 0){
+				return false;
+			}else{
+				return true;
+				/*Opportunity opp = resultList.get(0);
+				Date createDate = opp.getCreateDate();
+				Calendar createCalendar = Calendar.getInstance();
+				createCalendar.setTime(createDate);
+				long createMillis = createCalendar.getTimeInMillis();
+				Calendar now = Calendar.getInstance();
+				now.add(Calendar.MONTH, -6);
+				long nowMillis = now.getTimeInMillis();
+				if(createMillis > nowMillis){
+					return true;
+				}else {
+					return false;
+				}*/
+			}
+		} catch (Exception e) {
+			ts.rollback();
+			session.close();
+			System.out.println("按照联系方式查询商机出错：" + e.getMessage());
+			return false;
 		}
 	}
 }

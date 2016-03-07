@@ -32,15 +32,12 @@ $(document).ready(function(){
 	        $("#file_upload").uploadify('settings','formData',{'fileName':file.name,'username':$("#usernameShow").text().split(":")[1]});
 	    },
 	    'onUploadSuccess' : function(file, data, response) {
-            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-           	alert(data);
-            t.clear().draw(false);
-			var data1 = eval("(" + data + ")");
-			alert(data1.length);
+            t.clear().draw();
+			var data1 = eval(data);
 			for (var i = 0; i < data1.length; i++) {
 				var obj = [
                            data1[i].createTime,data1[i].stuName,data1[i].parentName,data1[i].contactTel1,data1[i].contactTel2,
-				           data1[i].channelName,data1[i].channelType,data1[i].management,data1[i].comment,data1[i].grade,data1[i].degree,
+				           data1[i].channelName,data1[i].channelType,data1[i].needCls,data1[i].management,data1[i].comment,data1[i].grade,
 				           data1[i].address,data1[i].keyword
 				          ];
 				t.row.add(obj).draw(false);
@@ -88,7 +85,7 @@ $(document).ready(function(){
   	</div>
 </div>
 <div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
-  <div class="panel-heading">成单数据</div>
+  <div class="panel-heading">未上传数据</div>
   <table id="importBackInfoTab" class="table table-striped table-bordered dataTable" style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%">
   		<thead>
   			<tr>
@@ -103,7 +100,6 @@ $(document).ready(function(){
 				<th>管理部门</th>
 				<th>备注</th>
 				<th>年级</th>
-				<th>学位</th>
 				<th>地址</th>
 				<th>关键字</th>
   			</tr>
@@ -123,7 +119,6 @@ $(document).ready(function(){
 				<th>管理部门</th>
 				<th>备注</th>
 				<th>年级</th>
-				<th>学位</th>
 				<th>地址</th>
 				<th>关键字</th>
   			</tr>
