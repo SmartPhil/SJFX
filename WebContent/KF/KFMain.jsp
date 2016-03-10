@@ -61,7 +61,7 @@
 	</div>
 </nav>
 <br/>
-<div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
+<div id="dataShowDiv" class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
 	<div class="panel-heading">未处理商机</div>
 	<table style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%" class="table table-striped table-bordered dataTable" id="mainTable">
 		<thead>
@@ -415,60 +415,5 @@
 	<button id="btn_mark">标为无效</button>
 	<button id="btn_cancle_operation">取消</button>
 </div>
-
-
-<div id="tjByChannelDiv">
-	
-</div>
-<div id="queryDealDataDiv">
-	<div id="dealSearchDiv">
-		起始时间：<input name="beginDate" type="text" id="dealBeginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
-		截止时间：<input name="endDate" type="text" id="dealEndDate" onclick="WdatePicker()">
-		电话号码：<input name="contactTel" type="text" id="dealContactTel">
-		<button id="dealSearchButton">查询</button>
-		<button id="dealExportExcel">导出</button>
-	</div>
-	<br>
-	
-	<div id="dealData">
-		<table id="dealDataTable" cellpadding="0" cellspacing="0" border="0">
-			<thead>
-				<tr> 
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>渠道商</th>
-					<th>听课证号</th>
-					<th>班级名称</th>
-					<th>进班日期</th>
-					<th>管理部门</th>
-					<th>学费</th>
-					<th>开课日期</th>
-					<th>结课日期</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>学员姓名</th>
-					<th>家长姓名</th>
-					<th>联系方式1</th>
-					<th>联系方式2</th>
-					<th>渠道商</th>
-					<th>听课证号</th>
-					<th>班级名称</th>
-					<th>进班日期</th>
-					<th>管理部门</th>
-					<th>学费</th>
-					<th>开课日期</th>
-					<th>结课日期</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</div>
-
 </body>
 </html>

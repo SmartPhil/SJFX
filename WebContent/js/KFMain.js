@@ -10,6 +10,9 @@ $(document).ready(function(){
 	var t = $("#queryDataTable").DataTable();
 	var dealTable = $("#dealDataTable").DataTable();
 	
+	/*$('#myModal').on('shown.bs.modal', function () {
+		$('#myInput').focus();
+	});*/
 	
 	$("#mainTable tbody").on("click","tr",function(e){
 		var data = table.row( this ).data();
@@ -27,6 +30,21 @@ $(document).ready(function(){
         channelType = data[7];
         createDate = data[8];
 	});
+	
+	/*$("#mainTable").on("click","#selectAllOpp",function(){
+		if(this.checked){
+			$("input[name='oppCheck']").each(function(){
+				this.checked = true;
+			});
+		}else{
+			$("input[name='oppCheck']").each(function(){
+				this.checked = false;
+			});
+		}
+	});*/
+	/*$("#selectAllOpp").change(function(e){
+		
+	});*/
 	
 	$("#btn_cancle_operation").click(function(){
 		$("#operation_div").css("display","none");

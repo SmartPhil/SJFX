@@ -100,6 +100,11 @@ public class Action_ImportExcelOpp extends ActionSupport {
 				}
 			}
 			
+			//保存符合条件的商机
+			for (Opportunity opp : canImportOpp) {
+				oppDao.insertOpportunity(opp);
+			}
+			
 			List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
 			for (Opportunity opp : notImportOpp) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
