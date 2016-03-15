@@ -61,9 +61,9 @@
 	</div>
 </nav>
 <br/>
-<div id="dataShowDiv" class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
+<div id="dataShowDiv" class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;white-space:nowrap;">
 	<div class="panel-heading">未处理商机</div>
-	<table style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%" class="table table-striped table-bordered dataTable" id="mainTable">
+	<table style="width: 100%" aria-describedby="example_info" class="table table-striped table-bordered dataTable" id="mainTable">
 		<thead>
 			<tr>
 				<th>学员姓名</th>
@@ -75,6 +75,7 @@
 				<th>渠道商</th>
 				<th>渠道商类型</th>
 				<th>创建日期</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<% 
@@ -92,6 +93,13 @@
 				<td><%=oppList.get(i).getChannelName() %></td>
 				<td><%=oppList.get(i).getChannelType() %></td>
 				<td><%=oppList.get(i).getCreateDate() %></td>
+				<td>
+					<button name="btn_handle" class="btn btn-default">处理</button>
+					<button name="btn_assign" class="btn btn-default">分配</button>
+					<button name="btn_move" class="btn btn-default">流转</button>
+					<button name="btn_martToDeal" class="btn btn-default">标为已成单</button>
+					<button name="btn_mark" class="btn btn-default">标为无效</button>
+				</td>
 			</tr>
 			<% } %>
 		</tbody>
@@ -106,6 +114,7 @@
 				<th>渠道商</th>
 				<th>渠道商类型</th>
 				<th>创建日期</th>
+				<th>操作</th>
 			</tr>
 		</tfoot>
 	</table>

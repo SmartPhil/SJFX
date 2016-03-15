@@ -6,13 +6,16 @@ var stuName,parentName,contactTel1,contactTel2,needCls,management,channel,channe
 
 
 $(document).ready(function(){
-	var table = $("#mainTable").DataTable({});
+	var table = $("#mainTable").DataTable({
+		"scrollX": true
+	});
 	var t = $("#queryDataTable").DataTable();
 	var dealTable = $("#dealDataTable").DataTable();
 	
-	/*$('#myModal').on('shown.bs.modal', function () {
-		$('#myInput').focus();
-	});*/
+	$("#mainTable tbody").on("click","button[name='btn_handle']",function(e){
+		alert("123");
+		alert(this);
+	});
 	
 	$("#mainTable tbody").on("click","tr",function(e){
 		var data = table.row( this ).data();
