@@ -35,6 +35,7 @@
 				<li role="presentation"><a href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation" class="active"><a href="#">录入商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/channelDealInfo.jsp">查看成单情况</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/importOpp.jsp">批量导入</a></li>
 			</ul>
 		</div>
 		<div class="navbar-footer"></div>

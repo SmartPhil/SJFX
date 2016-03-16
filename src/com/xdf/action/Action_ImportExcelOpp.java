@@ -13,11 +13,15 @@ import java.util.Locale;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.xdf.dao.OpportunityDao;
+import com.xdf.dao.UserDao;
 import com.xdf.dao.impl.OpportunityDaoImpl;
+import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Opportunity;
+import com.xdf.dto.User;
 import com.xdf.util.ExcelReader;
 
 @SuppressWarnings("serial")
@@ -27,112 +31,98 @@ public class Action_ImportExcelOpp extends ActionSupport {
 	private Object result;
 	private String username;
 	public String importExcel(){
-		String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/UploadFiles");
-		File target = new File(path, "file_upload.xlsx");
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
-			FileUtils.copyFile(file_upload, target);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println(target.getPath());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
-		ExcelReader excelReader = new ExcelReader(target.getPath());
-		List<String[]> resultList = excelReader.readAllData();
-		List<Opportunity> oppList = new ArrayList<Opportunity>();
-		if(resultList.size() >= 2){
-			for (int i = 1; i < resultList.size(); i++) {
-				Opportunity opportunity = new Opportunity();
-				if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
-					opportunity.setCreateDate(new Date());
+			String path = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/UploadFiles");
+			File target = new File(path, "file_upload.xlsx");
+			try {
+				FileUtils.copyFile(file_upload, target);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println(target.getPath());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
+			ExcelReader excelReader = new ExcelReader(target.getPath());
+			List<String[]> resultList = excelReader.readAllData();
+			List<Opportunity> oppList = new ArrayList<Opportunity>();
+			if(resultList.size() >= 2){
+				//查询上传者信息
+				UserDao userDAO = new UserDaoImpl();
+				User user = userDAO.getUserByUserName(username).get(0);
+				String channelType = "";
+				if( "网络合作".equals(user.getChannelType()) ||
+					"数据合作".equals(user.getChannelType()) ||
+					"市场推荐".equals(user.getChannelType())){
+					username = user.getChannelName();
+					channelType = user.getChannelType();
 				}else {
-					try {
-						opportunity.setCreateDate(simpleDateFormat.parse(resultList.get(i)[0]));
-					} catch (ParseException e) {
-						e.printStackTrace();
+					channelType = "内部渠道";
+				}
+					
+				for (int i = 1; i < resultList.size(); i++) {
+					Opportunity opportunity = new Opportunity();
+					if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
+						opportunity.setCreateDate(new Date());
+					}else {
+						try {
+							opportunity.setCreateDate(simpleDateFormat.parse(resultList.get(i)[0]));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 					}
+					
+					String name = resultList.get(i)[1];
+					if("".equals(name) || name == null){
+						opportunity.setStuName("");
+						opportunity.setParentName("");
+					}else {
+						if(name.contains("/")){
+							String[] names = name.split("/");
+							opportunity.setParentName(names[0]);
+							opportunity.setStuName(names[1]);
+						}else {
+							opportunity.setParentName(name);
+						}
+					}
+					opportunity.setContactTel1(resultList.get(i)[2]);
+					opportunity.setContactTel2(resultList.get(i)[3]);
+					opportunity.setKeyword(resultList.get(i)[4]);
+					opportunity.setGrade(resultList.get(i)[5]);
+					opportunity.setAddress(resultList.get(i)[6]);
+					opportunity.setNeedCls(resultList.get(i)[7]);
+					opportunity.setManagement(resultList.get(i)[8]);
+					opportunity.setComment(resultList.get(i)[9]);
+					if("".equals(resultList.get(i)[10]) || resultList.get(i)[10] == null || "是".equals(resultList.get(i)[10])){
+						opportunity.setIsValid(1);
+					}else {
+						opportunity.setIsValid(0);
+					}
+					if(opportunity.getIsValid() == 0){
+						opportunity.setNoValidReason(resultList.get(i)[11]);
+					}else {
+						opportunity.setNoValidReason("");
+					}
+					opportunity.setChannelName(username);
+					opportunity.setChannelType(channelType);
+					oppList.add(opportunity);
 				}
 				
-				String name = resultList.get(i)[1];
-				if("".equals(name) || name == null){
-					opportunity.setStuName("");
-					opportunity.setParentName("");
-				}else {
-					if(name.contains("/")){
-						String[] names = name.split("/");
-						opportunity.setParentName(names[0]);
-						opportunity.setStuName(names[1]);
-					}else {
-						opportunity.setParentName(name);
-					}
+				OpportunityDao oppDao = new OpportunityDaoImpl();
+				//保存商机
+				for (Opportunity opp : oppList) {
+					oppDao.insertOpportunity(opp);
 				}
-				opportunity.setContactTel1(resultList.get(i)[2]);
-				opportunity.setContactTel2(resultList.get(i)[3]);
-				opportunity.setKeyword(resultList.get(i)[4]);
-				opportunity.setGrade(resultList.get(i)[5]);
-				opportunity.setAddress(resultList.get(i)[6]);
-				opportunity.setNeedCls(resultList.get(i)[7]);
-				opportunity.setManagement(resultList.get(i)[8]);
-				opportunity.setComment(resultList.get(i)[9]);
-				if("".equals(resultList.get(i)[10]) || resultList.get(i)[10] == null || "是".equals(resultList.get(i)[10])){
-					opportunity.setIsValid(1);
-				}else {
-					opportunity.setIsValid(0);
-				}
-				if(opportunity.getIsValid() == 0){
-					opportunity.setNoValidReason(resultList.get(i)[11]);
-				}else {
-					opportunity.setNoValidReason("");
-				}
-				opportunity.setChannelName(username);
-				opportunity.setChannelType("内部渠道");
-				oppList.add(opportunity);
+				map.put("result", "success");
+			}else {
+				System.out.println("上传的是空文件！");
+				map.put("result", "null");
 			}
-			//剔除不符合条件的商机(仅仅判断本系统内是否有此学员存在以及是否是本系统半年以内的老生)
-			List<Opportunity> canImportOpp = new ArrayList<Opportunity>();
-			List<Opportunity> notImportOpp = new ArrayList<Opportunity>();
-			OpportunityDao oppDao = new OpportunityDaoImpl();
-			for (Opportunity opp : oppList) {
-				if(!oppDao.isOldOpp(opp)){
-					canImportOpp.add(opp);
-				}else {
-					notImportOpp.add(opp);
-				}
-			}
-			
-			//保存符合条件的商机
-			for (Opportunity opp : canImportOpp) {
-				oppDao.insertOpportunity(opp);
-			}
-			
-			List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
-			for (Opportunity opp : notImportOpp) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				if(opp.getCreateDate() != null){
-					map.put("createTime", sdf.format(opp.getCreateDate()));
-				}else {
-					map.put("createTime", "");
-				}
-				map.put("stuName", opp.getStuName());
-				map.put("parentName", opp.getParentName());
-				map.put("contactTel1", opp.getContactTel1());
-				map.put("contactTel2", opp.getContactTel2());
-				map.put("channelName", opp.getChannelName());
-				map.put("channelType", opp.getChannelType());
-				map.put("needCls", opp.getNeedCls());
-				map.put("management", opp.getManagement());
-				map.put("comment", opp.getComment());
-				map.put("grade", opp.getGrade());
-				map.put("degree", opp.getDegree());
-				map.put("address", opp.getAddress());
-				map.put("keyword", opp.getKeyword());
-				maps.add(map);
-			}
-			result = JSONArray.toJSON(maps);
-			System.out.println(result);
-		}else {
-			System.out.println("请不要上传空文件！");
+		} catch (Exception e) {
+			System.out.println("批量上传商机失败：Action_ImportExcelOpp.java:" + e.getMessage());
+			map.put("result", "fail");
 		}
+		result = JSON.toJSON(map);
 		return SUCCESS;
 	}
 	
