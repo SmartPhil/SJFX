@@ -103,6 +103,7 @@ public class Action_ImportExcelOpp extends ActionSupport {
 					}
 					opportunity.setChannelName(username);
 					opportunity.setChannelType(channelType);
+					opportunity.setMark(0);
 					oppList.add(opportunity);
 				}
 				

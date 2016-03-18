@@ -28,5 +28,6 @@
 		<property name="degree" column="sDegree"></property>
 		<property name="address" column="sAddress"></property>
 		<property name="keyword" column="sKeyword"></property>
+		<property name="mark" column="nMark"></property>
 	</class>
 </hibernate-mapping>

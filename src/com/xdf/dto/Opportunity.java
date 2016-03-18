@@ -26,6 +26,7 @@ public class Opportunity {
 	private String degree; //申请学历
 	private String address; //所住区域
 	private String keyword; //关键词
+	private int mark; //是否已经验证过有效性  0--未验证； 1--已经验证；
 	
 	public Date getFollowTime() {
 		return followTime;
@@ -158,5 +159,11 @@ public class Opportunity {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public int getMark() {
+		return mark;
+	}
+	public void setMark(int mark) {
+		this.mark = mark;
 	}
 }
