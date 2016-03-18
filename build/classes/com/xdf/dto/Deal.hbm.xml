@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping>
+	<class name="com.xdf.dto.Deal" table="deal">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<!-- <property name="oppId" column="nOppId"></property> -->
+		<property name="cardCode" column="sCardCode"></property>
+		<property name="channel" column="nChannel"></property>
+		<property name="channelName" column="nChannelName"></property>
+		<property name="className" column="sClassName"></property>
+		<property name="inDate" column="dtInDate"></property>
+		<property name="deptName" column="sDeptName"></property>
+		<property name="pay" column="dPay"></property>
+		<property name="beginDate" column="dtBeginDate"></property>
+		<property name="endDate" column="dtEndDate"></property>
+		<property name="rebate" column="fRebate"></property>
+		<property name="commission" column="dCommission"></property>
+		<many-to-one name="opportunity" column="nOppId" class="com.xdf.dto.Opportunity" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

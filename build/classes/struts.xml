@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" 
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="loginPackage" extends="json-default">
+		<action name="login" class="com.xdf.action.Action_LoginAction" method="login">
+			<result name="success" type="json">
+				<param name="root">returnInfo</param>
+			</result>
+		</action>
+	</package>
+	<package name="channel" extends="json-default">
+		<action name="addOpp" class="com.xdf.action.Action_AddOpportunity" method="addOpportunity">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getOppDealInfoByChannel" class="com.xdf.action.Action_GetOppDealInfoByChannel" method="getOppDealInfoByChannel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+	<package name="kf" extends="json-default">
+		<action name="toKF" class="com.xdf.action.Action_ToKF" method="toKf">
+			<result name="success">KF/KFMain.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<action name="assignEmployee" class="com.xdf.action.Action_AssignEmployee" method="assignEmployee">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="error"></result>
+		</action>
+		<action name="moveManagement" class="com.xdf.action.Action_MoveManagement" method="moveManagement">
+			<result name="success" type="json">
+				<param name="root">updateResult</param>
+			</result>
+		</action>
+		<action name="addFCon" class="com.xdf.action.Action_AddHandle" method="addHandle">
+			<result name="success" type="json">
+				<param name="root">addResult</param>
+			</result>
+		</action>
+		<action name="toKFEmployee" class="com.xdf.action.Action_ToKFEmployee" method="toKFEmployee">
+			<result name="success">KF/KFEmployee.jsp</result>
+		</action>
+		<action name="getOppCount" class="com.xdf.action.Action_OppCountByChannel" method="getOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getFollowContent" class="com.xdf.action.Action_GetFollowContent" method="getFollowCon">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="userNameIsExist" class="com.xdf.action.Action_UserNameIsExist" method="getUserNameIsExist">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="addKFEmployeeUser" class="com.xdf.action.Action_AddKFEmployeeUser" method="addKFEmployeeUser">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getFollowContentKFEmployee" class="com.xdf.action.Action_GetFollowContentKFEmployee" method="getFollowContent">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="searchOpp" class="com.xdf.action.Action_SearchOpp" method="searchOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCurrentMonthOpp" class="com.xdf.action.Action_GetCurrentMonthOpp" method="getCurrentMonthOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="exportExcel" class="com.xdf.action.Action_ExportExcel" method="export">
+		</action>
+		<action name="markToInvalid" class="com.xdf.action.Action_MarkToInValid" method="mark">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="exportTjData" class="com.xdf.action.Action_ExportTJByChannel" method="exportTj">
+		</action>
+		<action name="markToDeal" class="com.xdf.action.Action_MarkToDeal" method="markToDeal">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCurtMonSpcDeptDealData" class="com.xdf.action.Action_GetCurtMonSpcDeptDealData" method="getSpcDeal">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getSpcDeptDealByParam" class="com.xdf.action.Action_GetSpcDeptDealByParam" method="getDealByParam">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="exportDealInfoByUser" class="com.xdf.action.Action_ExportDealInfoByUser" method="exportDealInfo">
+		</action>
+		<action name="importExcelOpp" class="com.xdf.action.Action_ImportExcelOpp" method="importExcel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+	<package name="sc" extends="json-default">
+		<action name="toSC" class="com.xdf.action.Action_ToSC" method="toSC">
+			<result name="success">SC/SCMain.jsp</result>
+		</action>
+		<action name="addChannelUser" class="com.xdf.action.Action_AddChannelUser" method="addChannelUser">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCurtMonDealInfo" class="com.xdf.action.Action_GetCurtMonthDealInfo" method="getCurtMonthDealInfo">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="searchDeal" class="com.xdf.action.Action_SearchDeal" method="searchDeal">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="exportDealInfo" class="com.xdf.action.Action_ExportDealInfo" method="export">
+		</action>
+	</package>
+	<package name="testpackage" extends="json-default">
+		<action name="test" class="com.xdf.action.Action_Test" method="test">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+</struts>

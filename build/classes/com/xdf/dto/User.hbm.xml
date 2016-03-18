@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping>
+	<class name="com.xdf.dto.User" table="[user]">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="username" column="sUserName"></property>
+		<property name="password" column="sPassword"></property>
+		<property name="name" column="sName"></property>
+		<property name="management" column="sManagement"></property>
+		<property name="managementCode" column="sManagementCode"></property>
+		<property name="role" column="nRole"></property>
+		<property name="channelName" column="sChannelName"></property>
+		<property name="channelType" column="sChannelType"></property>
+	</class>
+</hibernate-mapping>
