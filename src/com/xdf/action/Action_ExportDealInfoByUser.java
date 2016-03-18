@@ -26,6 +26,11 @@ import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Deal;
 import com.xdf.dto.User;
 
+/**
+ * @description export deal information by date and contactTel and user name
+ * @author Phil
+ *
+ */
 @SuppressWarnings("serial")
 public class Action_ExportDealInfoByUser extends ActionSupport{
 	private String userName;

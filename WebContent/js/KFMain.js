@@ -738,7 +738,7 @@ $(document).ready(function(){
 		})
 	});
 	
-	$("#queryDealData").click(function(){
+	/*$("#queryDealData").click(function(){
 		//默认显示当前月的成单数据
 		$("#mainBox").css("display","none");
 		$("#addKFUserDiv").css("display","none");
@@ -774,9 +774,9 @@ $(document).ready(function(){
 				alert("失败！");
 			}
 		});
-	});
+	});*/
 	
-	$("#dealSearchButton").click(function(){
+	/*$("#dealSearchButton").click(function(){
 		$.ajax({
 			url : 'getSpcDeptDealByParam.action',
 			type : 'post',
@@ -803,7 +803,7 @@ $(document).ready(function(){
 				alert("失败！");
 			}
 		});
-	});
+	});*/
 	
 	$("#dealExportExcel").click(function(){
 		var userName = $("#curtUser").text().split(":")[1];

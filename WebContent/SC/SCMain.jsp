@@ -1,6 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.xdf.dto.Channel"%>
+<%@page import="com.xdf.dto.Management" %>
+<%@page import="com.xdf.dto.User" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,35 +14,38 @@
 <link href="<%=request.getContextPath()%>/css/SCMain.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <!-- js文件 -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/SCMain.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
-
-<div id="header">
-	<span id="title">商机分销系统</span>
-</div>
-<br/>
-<div id="navigator">
-	<div id="userDiv">
-		<% 
-			HttpSession sessions = request.getSession();
-			Object username = sessions.getAttribute("username");
-		%>
-		<p>当前用户：<%=username %></p>
+<% 
+	HttpSession sessions = request.getSession();
+	Object username = sessions.getAttribute("username");
+%>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
+      		</a>
+		</div>
+		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
+  				<li role="presentation" class="active"><a href="#">数据量统计</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/importOpp.jsp">导入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/addChannel.jsp">添加渠道商</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/dealInfo.jsp">成单数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/custom.jsp">自定义返点</a></li>
+			</ul>
+		</div>
 	</div>
-	<div id="barDiv">
-		<ul>
-			<li><a id="tjByChannel">数据量统计</a></li>
-			<li><a id="addChannelUser">添加渠道商</a></li>
-			<li><a id="dealInformation">详细成单数据</a></li>
-			<li><a id="customRebate">自定义返点</a></li>
-		</ul>
-	</div>
-</div>
+</nav>
 <br/>
 <% 
 	List<Channel> channelList = (List<Channel>) request.getAttribute("channelList");
@@ -300,87 +305,10 @@
 			</tr>
 	</table>
 </div>
-<div id="addChannelUserDiv">
-	<form id="addChannelUserForm" action="">
-	<table>
-		<tr>
-			<td>用户名：</td>
-			<td><input type="text" id="username" name="username"/></td>
-		</tr>
-		<tr>
-			<td>密码：</td>
-			<td><input type="password" id="password" name="password"/></td>
-		</tr>
-		<tr>
-			<td>确认密码：</td>
-			<td><input type="password" id="confirmPassword" name="confirmPassword"/></td>
-		</tr>
-		<tr>
-			<td>渠道商名：</td>
-			<td><input type="text" id="channelName" name="channelName"/></td>
-		</tr>
-		<tr>
-			<td>合作类型：</td>
-			<td>
-				<select name="collaType">
-					<option value="1" selected="selected">数据合作</option>
-					<option value="2">网络合作</option>
-					<option value="3">市场推荐</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td><button id="submitAdd">确认添加</button></td>
-		</tr>
-	</table>
-	</form>
-</div>
-<div id="dealInformationDiv">
-	<div id="searchDiv">
-		起始时间：<input name="beginDate" type="text" id="beginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
-		截止时间：<input name="endDate" type="text" id="endDate" onclick="WdatePicker()"> &nbsp;&nbsp;
-		渠道商:<select name="channel" id="channel">
-			<% for(int i = 0; i < channelList.size(); i++){ %>
-				<option><%=channelList.get(i).getName() %></option>
-			<%} %>
-		</select>&nbsp;&nbsp;
-		学生电话：<input name="stuContactTel" id="stuContactTel"/>&nbsp;&nbsp;
-		<button id="searchButton">查询</button>
-		<button id="exportExcel">导出</button>
-	</div>
-	<hr width="1500" color="black"/>	
-	<br/>
-	<div id="dealDiv">
-		<table id="dealTable" style="text-align: center;">
-			<thead>
-				<tr> 
-					<th>姓名</th>
-					<th>班级名称</th>
-					<th>学费</th>
-					<th>渠道商</th>
-					<th>所属部门</th>
-					<th>返点比例</th>
-					<th>佣金</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>姓名</th>
-					<th>班级名称</th>
-					<th>学费</th>
-					<th>渠道商</th>
-					<th>所属部门</th>
-					<th>返点比例</th>
-					<th>佣金</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</div>
+<br/>
 
-<div id="customRebateDiv">
+
+<%-- <div id="customRebateDiv">
 	<div id="customSearchDiv" style="border: 1px solid black">
 		起始时间：<input name="beginDate" type="text" id="customBeginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
 		截止时间：<input name="endDate" type="text" id="customEndDate" onclick="WdatePicker()"> &nbsp;&nbsp;
@@ -421,6 +349,6 @@
 			</tr>
 		</tfoot>
 	</table>
-</div>
+</div> --%>
 </body>
 </html>

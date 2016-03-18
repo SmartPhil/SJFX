@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,7 +27,7 @@ public class Action_Test extends ActionSupport {
 		try {
 			//OPCPackage opcPackage = OPCPackage.open(target);
 			//InputStream is = new FileInputStream(target.getPath());
-			Workbook wb = new XSSFWorkbook();
+			//Workbook wb = new XSSFWorkbook();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

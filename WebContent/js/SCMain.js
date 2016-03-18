@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-	var table = $("#dealTable").DataTable({});
+	/*var table = $("#dealTable").DataTable({});
 	
 	$("#addChannelUser").click(function(){
 		$("#tjByChannelDiv").css("display","none");
@@ -73,9 +73,9 @@ $(document).ready(function(){
 				alert("添加失败！");
 			}
 		});
-	});
+	});*/
 	
-	$("#dealInformation").click(function(){
+	/*$("#dealInformation").click(function(){
 		$("#tjByChannelDiv").css("display","none");
 		$("#addChannelUserDiv").css("display","none");
 		$("#dealInformationDiv").css("display","block");
@@ -107,9 +107,9 @@ $(document).ready(function(){
 				alert("查询当月成单数据失败：");
 			}
 		});
-	});
+	});*/
 	
-	$("#searchButton").click(function(){
+	/*$("#searchButton").click(function(){
 		$.ajax({
 			url : 'searchDeal.action',
 			type : 'post',
@@ -136,14 +136,14 @@ $(document).ready(function(){
 				alert("按条件查询成单数据失败！");
 			}
 		})
-	});
+	});*/
 	
-	$("#exportExcel").click(function(){
+	/*$("#exportExcel").click(function(){
 		var channel = $("#channel option:selected").text();
 		channel = encodeURI(encodeURI(channel));
 		var param = "begin=" + $("#beginDate").val() + "&end=" + $("#endDate").val() + "&channel=" + channel + "&stuContactTel=" + $("#stuContactTel").val();
 		location.href = "exportDealInfo.action?" + param;
-	});
+	});*/
 	
 	$("#customRebate").click(function(){
 		$("#customRebateDiv").css("display","block");
@@ -210,10 +210,6 @@ $(document).ready(function(){
 				alert("按条件查询成单数据失败！");
 			}
 		})
-	});
-	
-	$("#submitModifyRebate").click(function(){
-		
 	});
 });
 

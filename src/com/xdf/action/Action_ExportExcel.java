@@ -26,6 +26,11 @@ import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Opportunity;
 import com.xdf.dto.User;
 
+/**
+ * export opportunity by date and contact and user name
+ * @author Phil
+ * @ KF reference this action
+ */
 public class Action_ExportExcel extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String beginDate;

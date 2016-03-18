@@ -14,7 +14,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.xdf.dao.OpportunityDao;
 import com.xdf.dao.UserDao;
@@ -41,7 +40,6 @@ public class Action_ImportExcelOpp extends ActionSupport {
 				e.printStackTrace();
 			}
 			System.out.println(target.getPath());
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
 			ExcelReader excelReader = new ExcelReader(target.getPath());
 			List<String[]> resultList = excelReader.readAllData();

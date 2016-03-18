@@ -27,7 +27,7 @@ public class Action_SearchDeal extends ActionSupport {
 	private String result;
 	
 	public String searchDeal(){
-		System.out.println(username);
+		/*System.out.println(username);
 		UserDao userDao = new UserDaoImpl();
 		User user = userDao.getUserByUserName(username).get(0);
 		String managementString = user.getManagement();
@@ -35,7 +35,7 @@ public class Action_SearchDeal extends ActionSupport {
 		List<String> managementList = new ArrayList<String>();
 		for (int i = 0; i < managements.length; i++) {
 			managementList.add(managements[i]);
-		}
+		}*/
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date begin = new Date();
@@ -60,15 +60,9 @@ public class Action_SearchDeal extends ActionSupport {
 		}
 		DealDao dealDao = new DealDaoImpl();
 		List<Deal> deals = dealDao.getAllDeal(begin, end, stuContactTel);
-		List<Deal> dealsByManagement = new ArrayList<Deal>();
-		for (Deal deal : deals) {
-			if(managementList.contains(deal.getOpportunity().getManagement())){
-				dealsByManagement.add(deal);
-			}
-		}
 		List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		for (Deal deal : dealsByManagement) {
+		for (Deal deal : deals) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("id", deal.getId());
 			map.put("stuName", deal.getOpportunity().getStuName());
@@ -83,6 +77,7 @@ public class Action_SearchDeal extends ActionSupport {
 			map.put("endDate", sdf1.format(deal.getEndDate()));
 			map.put("channelName", deal.getOpportunity().getChannelName());
 			map.put("management", deal.getDeptName());
+			map.put("commission", deal.getCommission());
 			if(deal.getRebate() != 0){
 				map.put("rebate", deal.getRebate());
 			}else {

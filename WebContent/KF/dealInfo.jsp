@@ -12,14 +12,16 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/DateFormate.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var t = $("#dealInfoTab").DataTable({});
 	
 	$.ajax({
-		url : 'getCurtMonDealInfo.action',
+		url : 'getCurtMonSpcDeptDealData.action',
 		type : 'post',
 		dataType : 'json',
+		data : {"userName" : $("#usernameShow").text().split(':')[1]},
 		success : function(e){
 			t.clear().draw(false);
 			var data = eval("(" + e + ")");
@@ -40,14 +42,14 @@ $(document).ready(function(){
 	
 	$("#dealSearchButton").click(function(){
 		$.ajax({
-			url : 'searchDeal.action',
+			url : 'getSpcDeptDealByParam.action',
 			type : 'post',
 			dataType : 'json',
 			data : {
-					'beginDate':$("#startDate").val(), 
-					'endDate':$("#endDate").val(), 
-					'stuContactTel':$("#stuContactTel").val(), 
-					'username':$("#usernameShow").text().split(":")[1]
+					'begin':$("#startDate").val(), 
+					'end':$("#endDate").val(), 
+					'contactTel':$("#stuContactTel").val(), 
+					'userName':$("#usernameShow").text().split(":")[1]
 					},
 			success : function(e){
 				t.clear().draw(false);
@@ -55,8 +57,11 @@ $(document).ready(function(){
 				for (var i = 0; i < data.length; i++) {
 					var obj = [
 					           data[i].stuName,data[i].parentName,data[i].contactTel1,data[i].contactTel2,
-					           data[i].channelName,data[i].cardCode,data[i].clsName,data[i].inDate,
-					           data[i].management,data[i].pay,data[i].beginDate,data[i].endDate
+					           data[i].channelName,data[i].cardCode,data[i].clsName,
+					           getSmpFormatDateByLong(data[i].inDate,"yyyy-MM-dd"),
+					           data[i].management,data[i].pay,
+					           getSmpFormatDateByLong(data[i].beginDate,"yyyy-MM-dd"),
+					           getSmpFormatDateByLong(data[i].endDate,"yyyy-MM-dd")
 					          ];
 					t.row.add(obj).draw(false);
 				}
@@ -111,7 +116,7 @@ $(document).ready(function(){
       			<input type="text" class="form-control" id="endDate" placeholder="截止时间" onclick="WdatePicker()">
     		</div>
   		</div>
-  		&nbsp;&nbsp;&nbsp;&nbsp;
+  		&nbsp;&nbsp;&nbsp;&nbsp; 
   		<div class="form-group">
     		<div class="input-group">
       			<div class="input-group-addon">学员电话</div>

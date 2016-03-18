@@ -16,6 +16,11 @@ import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Deal;
 import com.xdf.dto.User;
 
+/**
+ * kf get the deal info belong to kf's management
+ * @author Phil
+ *
+ */
 @SuppressWarnings("serial")
 public class Action_GetSpcDeptDealByParam extends ActionSupport {
 	private String begin;

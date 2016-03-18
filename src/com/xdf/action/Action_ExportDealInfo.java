@@ -3,7 +3,6 @@ package com.xdf.action;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,16 +25,20 @@ import com.xdf.dao.impl.OpportunityDaoImpl;
 import com.xdf.dto.Deal;
 import com.xdf.dto.Opportunity;
 
+/**
+ * export deal information by sc
+ * @author phil
+ * @issue don't kown how sc want to export deal information
+ */
 @SuppressWarnings("serial")
 public class Action_ExportDealInfo extends ActionSupport {
 	private String begin;
 	private String end;
-	private String channel;
 	private String stuContactTel;
+	private String username;
 	private String result;
 	
-	public String export() throws UnsupportedEncodingException{
-		//System.out.println(stuContactTel);
+	public String export(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if("".equals(begin) || begin == null){
 			begin = "1949-10-01";
@@ -43,14 +46,13 @@ public class Action_ExportDealInfo extends ActionSupport {
 		if("".equals(end) || end == null){
 			end = sdf.format(new Date());
 		}
-		channel = URLDecoder.decode(channel, "utf-8");
 		HSSFWorkbook hw = new HSSFWorkbook();
 		HSSFSheet sheet = hw.createSheet("成单数据");
 		HSSFRow row = sheet.createRow(0);
 		HSSFCellStyle style = hw.createCellStyle();
 		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		HSSFCell header = row.createCell(0);
-		String title = begin + "至" + end + channel + "数据";
+		String title = begin + "至" + end + username + "数据";
 		header.setCellValue(title);
 		header.setCellStyle(style);
 		CellRangeAddress address = new CellRangeAddress(0, 0, 0, 6);
@@ -76,37 +78,11 @@ public class Action_ExportDealInfo extends ActionSupport {
 		List<Deal> deals = dealDao.getDealByDate(beginDate, endDate);
 		int mark = 2;
 		for (Deal deal : deals) {
-			int oppId = deal.getOppId();
+			int oppId = deal.getOpportunity().getId();
 			Opportunity opportunity = oppDao.getOppById(oppId);
-			if(channel.equals(opportunity.getChannelName())){
-				if(!"".equals(stuContactTel) && stuContactTel != null){
-					System.out.println(stuContactTel + "/n" + opportunity.getContactTel1());
-					if(stuContactTel.equals(opportunity.getContactTel1()) || stuContactTel.equals(opportunity.getContactTel2())){
-						HSSFRow dataRow = sheet.createRow(mark);
-						HSSFCell cell1 = dataRow.createCell(0);
-						cell1.setCellValue(opportunity.getStuName());
-						cell1.setCellStyle(style);
-						HSSFCell cell2 = dataRow.createCell(1);
-						cell2.setCellValue(deal.getClassName());
-						cell2.setCellStyle(style);
-						HSSFCell cell3 = dataRow.createCell(2);
-						cell3.setCellValue(deal.getPay());
-						cell3.setCellStyle(style);
-						HSSFCell cell4 = dataRow.createCell(3);
-						cell4.setCellValue(opportunity.getChannelName());
-						cell4.setCellStyle(style);
-						HSSFCell cell5 = dataRow.createCell(4);
-						cell5.setCellValue(deal.getDeptName());
-						cell5.setCellStyle(style);
-						HSSFCell cell6 = dataRow.createCell(5);
-						cell6.setCellValue(deal.getRebate());
-						cell6.setCellStyle(style);
-						HSSFCell cell7 = dataRow.createCell(6);
-						cell7.setCellValue(deal.getCommission());
-						cell7.setCellStyle(style);
-						mark++;
-					}
-				}else {
+			if(!"".equals(stuContactTel) && stuContactTel != null){
+				System.out.println(stuContactTel + "/n" + opportunity.getContactTel1());
+				if(stuContactTel.equals(opportunity.getContactTel1()) || stuContactTel.equals(opportunity.getContactTel2())){
 					HSSFRow dataRow = sheet.createRow(mark);
 					HSSFCell cell1 = dataRow.createCell(0);
 					cell1.setCellValue(opportunity.getStuName());
@@ -131,6 +107,30 @@ public class Action_ExportDealInfo extends ActionSupport {
 					cell7.setCellStyle(style);
 					mark++;
 				}
+			}else {
+				HSSFRow dataRow = sheet.createRow(mark);
+				HSSFCell cell1 = dataRow.createCell(0);
+				cell1.setCellValue(opportunity.getStuName());
+				cell1.setCellStyle(style);
+				HSSFCell cell2 = dataRow.createCell(1);
+				cell2.setCellValue(deal.getClassName());
+				cell2.setCellStyle(style);
+				HSSFCell cell3 = dataRow.createCell(2);
+				cell3.setCellValue(deal.getPay());
+				cell3.setCellStyle(style);
+				HSSFCell cell4 = dataRow.createCell(3);
+				cell4.setCellValue(opportunity.getChannelName());
+				cell4.setCellStyle(style);
+				HSSFCell cell5 = dataRow.createCell(4);
+				cell5.setCellValue(deal.getDeptName());
+				cell5.setCellStyle(style);
+				HSSFCell cell6 = dataRow.createCell(5);
+				cell6.setCellValue(deal.getRebate());
+				cell6.setCellStyle(style);
+				HSSFCell cell7 = dataRow.createCell(6);
+				cell7.setCellValue(deal.getCommission());
+				cell7.setCellStyle(style);
+				mark++;
 			}
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -147,44 +147,34 @@ public class Action_ExportDealInfo extends ActionSupport {
 		}
 		return null;
 	}
-
 	public String getBegin() {
 		return begin;
 	}
-
 	public void setBegin(String begin) {
 		this.begin = begin;
 	}
-
 	public String getEnd() {
 		return end;
 	}
-
 	public void setEnd(String end) {
 		this.end = end;
 	}
-
-	public String getChannel() {
-		return channel;
-	}
-
-	public void setChannel(String channel) {
-		this.channel = channel;
-	}
-
 	public String getResult() {
 		return result;
 	}
-
 	public void setResult(String result) {
 		this.result = result;
 	}
-
 	public String getStuContactTel() {
 		return stuContactTel;
 	}
-
 	public void setStuContactTel(String stuContactTel) {
 		this.stuContactTel = stuContactTel;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
