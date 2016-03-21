@@ -4,15 +4,33 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+		<!-- sql server database JDBC driver class -->
 		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		
+		<!-- mysql database JDBC driver class -->
+		<!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
+		
+		<!-- sql server 200 database -->
 		<!-- <property name="connection.url">jdbc:sqlserver://10.101.13.200:1433;databaseName=sj</property>
 		<property name="connection.username">app_kpi</property>
 		<property name="connection.password">3efh89!df</property> -->
+		
+		<!-- sql server 55.12 database -->
 		<property name="connection.url">jdbc:sqlserver://192.168.55.12:1433;databaseName=SJFX</property> 
 		<property name="connection.username">sa</property>
 		<property name="connection.password">tuny1r_123</property>
+		
+		<!-- mysql localhost database -->
+		<!-- <property name="connection.url">jdbc:mysql://localhost:3306/sjfx</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">phil</property> -->
+		
 		<property name="connection.pool_size">5</property>
+		<!-- SQL server dialect -->
 		<property name="dialect">org.hibernate.dialect.SQLServer2008Dialect</property>
+		
+		<!-- mysql dialect -->
+		<!-- <property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
 		<property name="show_sql">true</property>
 		
 		<mapping resource="com/xdf/dto/User.hbm.xml"/>

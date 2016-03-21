@@ -13,62 +13,97 @@ $(document).ready(function(){
 	var dealTable = $("#dealDataTable").DataTable();
 	
 	$("#mainTable tbody").on("click","button[name='btn_handle']",function(e){
-		alert("123");
-		alert(this);
-	});
-	
-	$("#mainTable tbody").on("click","tr",function(e){
-		var data = table.row( this ).data();
-        var x = e.pageX;
-        var y = e.pageY;
-        $("#operation_div").css("display","block");
-        $("#operation_div").css({'left':x + 'px','top':y + 'px'});
-        stuName = data[0];
-        parentName = data[1];
-        contactTel1 = data[2];
-        contactTel2 = data[3];
-        needCls = data[4];
-        management = data[5];
-        channel = data[6];
-        channelType = data[7];
-        createDate = data[8];
-	});
-	
-	/*$("#mainTable").on("click","#selectAllOpp",function(){
-		if(this.checked){
-			$("input[name='oppCheck']").each(function(){
-				this.checked = true;
-			});
-		}else{
-			$("input[name='oppCheck']").each(function(){
-				this.checked = false;
-			});
-		}
-	});*/
-	/*$("#selectAllOpp").change(function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		$("#handle_stuNameTd").text($(tds[0]).text());
+		$("#handle_parentNameTd").text($(tds[1]).text());
+		$("#handle_contactTel1Td").text($(tds[2]).text());
+		$("#handle_contactTel2Td").text($(tds[3]).text());
+		$("#handle_needClsTd").text($(tds[4]).text());
+		$("#handle_managementTd").text($(tds[5]).text());
+		$("#handle_channelNameTd").text($(tds[6]).text());
+		$("#handle_channelTypeTd").text($(tds[7]).text());
+		$("#handle_createDateTd").text($(tds[8]).text());
+		$("#handle_isValidTd").text("有效");
+		$("#handle_noValidReason").text("无");
+		$("#handle_isAssign").text("未分配");
+		$("#handle_assignEmployee").text("无");
 		
-	});*/
-	
-	$("#btn_cancle_operation").click(function(){
-		$("#operation_div").css("display","none");
+		$.ajax({
+			url : "getFollowContent.action",
+			type : "post",
+			dataType : "json",
+			data : {
+				contactTel1 : $("#handle_contactTel1Td").text(),
+				contactTel2 : $("#handle_contactTel2Td").text()
+			},
+			success : function(data){
+				$("#handleContentTable tbody").html("");
+				var result = eval("(" + data + ")");
+				for(var i = 0; i < result.length; i++){
+					$("#handleContentTable tbody").append("<tr>"
+							+ "<td>" + result[i].followTime + "</td>"
+							+ "<td>" + result[i].followContent + "</td>"
+							+ "<td>" + result[i].followEmployee + "</td>"
+							+ "</tr>")
+				}
+			},
+			error : function(data){
+				
+			}
+		});
+		
+		$("#handleOppModal").modal({
+			keyboard : true
+		});
 	});
 	
-	$("#btn_assign").click(function(){
-		$("#dataShowDiv").css("display","none");
-		$("#assignDiv").css("display","block");
-		$("#operation_div").css("display","none");
-		$("#stuNameTd").text(stuName);
-		$("#parentNameTd").text(parentName);
-		$("#contactTel1Td").text(contactTel1);
-		$("#contactTel2Td").text(contactTel2);
-		$("#needClsTd").text(needCls);
-		$("#managementTd").text(management);
-		$("#channelNameTd").text(channel);
-		$("#channelTypeTd").text(channelType);
-		$("#createDateTd").text(createDate);
+	$("#btn_submitHandle").click(function(){
+		$.ajax({
+			url : "addFCon.action",
+			type : "post",
+			dataType : "json",
+			data : {
+				contactTel1 : $("#handle_contactTel1Td").text(),
+				contactTel2 : $("#handle_contactTel2Td").text(),
+				followTime : $("#followTime").text(),
+				followContent : $("#followContent").val(),
+				followEmployee : $("#usernameShow").text().split(":")[1]
+			},
+			success : function(data){
+				var info = eval("(" + data + ")");
+				var result = info.result;
+				if(result == "success"){
+					alert("跟进成功！");
+					window.location.reload();
+				}else{
+					alert("跟进失败！");
+				}
+			}
+		});
+	});
+	
+	$("#mainTable tbody").on("click","button[name='btn_assign']",function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		$("#stuNameTd").text($(tds[0]).text());
+		$("#parentNameTd").text($(tds[1]).text());
+		$("#contactTel1Td").text($(tds[2]).text());
+		$("#contactTel2Td").text($(tds[3]).text());
+		$("#needClsTd").text($(tds[4]).text());
+		$("#managementTd").text($(tds[5]).text());
+		$("#channelNameTd").text($(tds[6]).text());
+		$("#channelTypeTd").text($(tds[7]).text());
+		$("#createDateTd").text($(tds[8]).text());
 		$("#isValidTd").text("有效");
 		$("#noValidReason").text("无");
 		$("#isAssign").text("未分配");
+		
+		$("#assignOppModal").modal({
+			keyboard : true
+		});
 	});
 	
 	$("#btn_submitAssign").click(function(){
@@ -97,24 +132,27 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#btn_move").click(function(){
-		$("#moveDiv").css("display","block");
-		$("#dataShowDiv").css("display","none");
-		$("#operation_div").css("display","none");
-		$("#move_stuNameTd").text(stuName);
-		$("#move_parentNameTd").text(parentName);
-		$("#move_contactTel1Td").text(contactTel1);
-		$("#move_contactTel2Td").text(contactTel2);
-		$("#move_needClsTd").text(needCls);
-		$("#move_channelNameTd").text(channel);
-		$("#move_channelTypeTd").text(channelType);
-		$("#move_createDateTd").text(createDate);
+	$("#mainTable tbody").on("click","button[name='btn_move']",function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		$("#move_stuNameTd").text($(tds[0]).text());
+		$("#move_parentNameTd").text($(tds[1]).text());
+		$("#move_contactTel1Td").text($(tds[2]).text());
+		$("#move_contactTel2Td").text($(tds[3]).text());
+		$("#move_needClsTd").text($(tds[4]).text());
+		$("#move_channelNameTd").text($(tds[5]).text());
+		$("#move_channelTypeTd").text($(tds[6]).text());
+		$("#move_createDateTd").text($(tds[7]).text());
 		$("#move_isValidTd").text("有效");
 		$("#move_noValidReason").text("无");
 		$("#move_isAssign").text("未分配");
 		$("#move_assignEmployee").text("无");
+		
+		$("#moveOppModal").modal({
+			keyboard : true
+		});
 	});
-	
 	
 	$("#btn_submitMove").click(function(){
 		$.ajax({
@@ -142,110 +180,85 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#btn_handle").click(function(){
-		$("#handleDiv").css("display","block");
-		$("#dataShowDiv").css("display","none");
-		$("#operation_div").css("display","none");
+	$("#mainTable tbody").on("click","button[name='btn_martToDeal']",function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
 		
-		$("#handle_stuNameTd").text(stuName);
-		$("#handle_parentNameTd").text(parentName);
-		$("#handle_contactTel1Td").text(contactTel1);
-		$("#handle_contactTel2Td").text(contactTel2);
-		$("#handle_needClsTd").text(needCls);
-		$("#handle_managementTd").text(management);
-		$("#handle_channelNameTd").text(channel);
-		$("#handle_channelTypeTd").text(channelType);
-		$("#handle_createDateTd").text(createDate);
-		$("#handle_isValidTd").text("有效");
-		$("#handle_noValidReason").text("无");
-		$("#handle_isAssign").text("未分配");
-		$("#handle_assignEmployee").text("无");
-
 		$.ajax({
-			url : "getFollowContent.action",
+			url : "markToDeal.action",
 			type : "post",
-			dataType : "json",
 			data : {
-				contactTel1 : $("#handle_contactTel1Td").text(),
-				contactTel2 : $("#handle_contactTel2Td").text()
-			},
-			success : function(data){
-				var table = document.getElementById("handleContentTable");
-				
-				var result = eval("(" + data + ")");
-				for(var i = 0; i < result.length; i++){
-					var tr = document.createElement("tr");
-					var tdTime = document.createElement("td");
-					tdTime.appendChild(document.createTextNode(result[i].followTime));
-					var tdContent = document.createElement("td");
-					tdContent.appendChild(document.createTextNode(result[i].followContent));
-					var tdEmployee = document.createElement("td");
-					tdEmployee.appendChild(document.createTextNode(result[i].followEmployee));
-					tr.appendChild(tdTime);
-					tr.appendChild(tdContent);
-					tr.appendChild(tdEmployee);
-					table.appendChild(tr);
-				}
-			},
-			error : function(data){
-				
-			}
-		});
-	});
-	
-	$("#btn_submitHandle").click(function(){
-		$.ajax({
-			url : "addFCon.action",
-			type : "post",
+					contactTel1 : $(tds[2]).text(),
+					contactTel2 : $(tds[3]).text()
+					},
 			dataType : "json",
-			data : {
-				contactTel1 : $("#handle_contactTel1Td").text(),
-				contactTel2 : $("#handle_contactTel2Td").text(),
-				followTime : $("#followTime").text(),
-				followContent : $("#followContent").val(),
-				followEmployee : $("#curtUser").text().split(":")[1]
-			},
-			success : function(data){
-				var info = eval("(" + data + ")");
-				var result = info.result;
-				if(result == "success"){
-					alert("跟进成功！");
-					window.location.reload();
+			success : function(e){
+				var data = eval("(" + e + ")");
+				alert(data.markResult);
+				if(data.markResult == "success"){
+					alert("成功！");
 				}else{
-					alert("跟进失败！");
+					alert("失败：" + data.failReason);
 				}
-			}
+				window.location.reload();
+			},
+			error : function(e){
+				alert("发生错误！");
+				window.location.reload();
+			}	
+		})
+	});
+	
+	$("#mainTable tbody").on("click","button[name='btn_mark']",function(e){
+		var td = $(this).parent();
+		var tr = $(td).parent();
+		var tds = $(tr).children("td");
+		$("#mark_stuNameTd").text($(tds[0]).text());
+		$("#mark_parentNameTd").text($(tds[1]).text());
+		$("#mark_contactTel1Td").text($(tds[2]).text());
+		$("#mark_contactTel2Td").text($(tds[3]).text());
+		$("#mark_needClsTd").text($(tds[4]).text());
+		$("#mark_managementTd").text($(tds[5]).text());
+		$("#mark_channelNameTd").text($(tds[6]).text());
+		$("#mark_channelTypeTd").text($(tds[7]).text());
+		$("#mark_createDateTd").text($(tds[8]).text());
+		$("#mark_isValidTd").text("无效");
+		$("#mark_isAssign").text("未分配");
+		$("#mark_assignEmployee").text("无");
+		
+		$("#markOppModal").modal({
+			keyboard : true
 		});
 	});
 	
-	$("#btn_back1").click(function(){
-		$("#assignDiv").css("display","none");
-		$("#dataShowDiv").css("display","block");
-	});
-	
-	$("#btn_back2").click(function(){
-		$("#moveDiv").css("display","none");
-		$("#dataShowDiv").css("display","block");
-	});
-	
-	$("#btn_back3").click(function(){
-		$("#handleDiv").css("display","none");
-		$("#dataShowDiv").css("display","block");
-		$("#handleContentTable tr:not(:first)").html("");
-	});
-	
-	$("#btn_back4").click(function(){
-		$("#markToInValidDiv").css("display","none");
-		$("#dataShowDiv").css("display","block");
-	});
-	
-	$("#btn_back5").click(function(){
-		$("#dealDiv").css("display","none");
-		$("#dataShowDiv").css("display","block");
+	$("#btn_submitMark").click(function(){
+		$.ajax({
+			url : "markToInvalid.action",
+			type : "post",
+			dataType : "json",
+			data : {
+						contactTel1 : $("#mark_contactTel1Td").text(),
+						contactTel2 : $("#mark_contactTel2Td").text(),
+						invalidReason : $("#inValidReason").val()
+					},
+		    success : function(result){
+		    	var data = eval("(" + result + ")");
+		    	if(data.result == "success"){
+		    		alert("标记成功！");
+		    		window.location.reload();
+		    	}else{
+		    		alert("标记失败！");
+		    	}
+		    },
+		    error : function(){
+		    	alert("网络出错！请联系管理员！");
+		    }
+		})
 	});
 	
 	//show the statistics view
-	$("#tjByChannel").click(function(){
+	/*$("#tjByChannel").click(function(){
 		$("#tjByChannel").css("background-color","blue");
 		$("#addKFUser").css("background-color","#808080");
 		$("#queryData").css("background-color","#808080");
@@ -441,10 +454,10 @@ $(document).ready(function(){
 				alert("网络出错！请检查网络！");
 			}
 		})
-	});
+	});*/
 	
 	//show the unhandle's opportunities
-	$("#sjInput").click(function(){
+	/*$("#sjInput").click(function(){
 		$("#mainBox").css("display","block");
 		$("#addKFUserDiv").css("display","none");
 		$("#queryDataDiv").css("display","none");
@@ -458,26 +471,9 @@ $(document).ready(function(){
 		$("#queryDealData").css("background-color","#808080");
 		$("#importOpp").css("background-color","#808080");
 		$("#sjInput").css("background-color","blue");
-	});
+	});*/
 	
-	//show the add user view
-	$("#addKFUser").click(function(){
-		$("#mainBox").css("display","none");
-		$("#queryDataDiv").css("display","none");
-		$("#tjByChannelDiv").css("display","none");
-		$("#addKFUserDiv").css("display","block");
-		$("#queryDealDataDiv").css("display","none");
-		$("#importOppDiv").css("display","none");
-		
-		$("#addKFUser").css("background-color","blue");
-		$("#sjInput").css("background-color","#808080");
-		$("#queryData").css("background-color","#808080");
-		$("#tjByChannel").css("background-color","#808080");
-		$("#queryDealData").css("background-color","#808080");
-		$("#importOpp").css("background-color","#808080");
-	});
-	
-	//show the query opportunity view
+	/*//show the query opportunity view
 	$("#queryData").click(function(){
 		$("#mainBox").css("display","none");
 		$("#addKFUserDiv").css("display","none");
@@ -518,16 +514,15 @@ $(document).ready(function(){
 				alert("Net Error!");
 			}
 		});
-	});
+	});*/
 	
 	//提交添加客服用户的请求
-	$("#submitAddKFUser").click(function(){
+	/*$("#submitAddKFUser").click(function(){
 		var username = $("#kfUsername").val();
 		var password = $("#kfPassword").val();
 		var confirmPassword = $("#kfConfirmPassword").val();
 		var name = $("#kfName").val();
 		var management = $("#kfManagement").val();
-		alert(management);
 		if(username == null || username == ""){
 			alert("用户名不能为空！");
 			return;
@@ -560,9 +555,9 @@ $(document).ready(function(){
 				alert("添加失败！");
 			}
 		})
-	});
+	});*/
 	
-	$("#kfUsername").blur(function(){
+	/*$("#kfUsername").blur(function(){
 		$("#isExistP").text("");
 		var username = $("#kfUsername").val();
 		if(username == null || username == ""){
@@ -591,9 +586,9 @@ $(document).ready(function(){
 				
 			}
 		});
-	});
+	});*/
 	
-	$("#kfConfirmPassword").blur(function(){
+	/*$("#kfConfirmPassword").blur(function(){
 		var psw = $("#kfPassword").val();
 		var confirmPsw = $("#kfConfirmPassword").val();
 		$("#confirmPswP").text("");
@@ -602,9 +597,9 @@ $(document).ready(function(){
 			$("#confirmPswP").append("两次密码输入不一致！");
 			$("#confirmPswP").css("background-color","red");
 		}
-	});
+	});*/
 	
-	$("#searchButton").click(function(){
+	/*$("#searchButton").click(function(){
 		var beginDate = $("#beginDate").val();
 		var endDate = $("#endDate").val();
 		
@@ -630,9 +625,9 @@ $(document).ready(function(){
 				alert("查询出错！ 请检查网络！");
 			}
 		})
-	});
+	});*/
 	
-	$("#exportExcel").click(function(){
+	/*$("#exportExcel").click(function(){
 		var beginDate = $("#beginDate").val();
 		var endDate = $("#endDate").val();
 		if(beginDate == null || beginDate == ""){
@@ -645,9 +640,9 @@ $(document).ready(function(){
 		}
 		var param = "beginDate=" + beginDate + "&endDate=" + endDate;
 		location.href = "exportExcel.action?" + param;
-	});
+	});*/
 	
-	$("#btn_mark").click(function(){
+	/*$("#btn_mark").click(function(){
 		$("#markToInValidDiv").css("display","block");
 		$("#dataShowDiv").css("display","none");
 		$("#operation_div").css("display","none");
@@ -664,36 +659,13 @@ $(document).ready(function(){
 		$("#mark_isValidTd").text("无效");
 		$("#mark_isAssign").text("未分配");
 		$("#mark_assignEmployee").text("无");
-	});
-	
-	$("#btn_submitMark").click(function(){
-		$.ajax({
-			url : "markToInvalid.action",
-			type : "post",
-			dataType : "json",
-			data : {
-						contactTel1 : $("#mark_contactTel1Td").text(),
-						contactTel2 : $("#mark_contactTel2Td").text(),
-						invalidReason : $("#inValidReason").val()
-					},
-		    success : function(result){
-		    	var data = eval("(" + result + ")");
-		    	if(data.result == "success"){
-		    		alert("标记成功！");
-		    		window.location.reload();
-		    	}else{
-		    		alert("标记失败！");
-		    	}
-		    },
-		    error : function(){
-		    	alert("网络出错！请联系管理员！");
-		    }
-		})
-	});
+	});*/
 	
 	
 	
-	$("#btn_martToDeal").click(function(){
+	
+	
+	/*$("#btn_martToDeal").click(function(){
 		$("#dataShowDiv").css("display","none");
 		$("#dealDiv").css("display","block");
 		$("#operation_div").css("display","none");
@@ -710,110 +682,17 @@ $(document).ready(function(){
 		$("#deal_isValidTd").text("无效");
 		$("#deal_isAssign").text("未分配");
 		$("#deal_assignEmployee").text("无");
-	});
-	
-	$("#btn_submitDeal").click(function(){
-		$.ajax({
-			url : "markToDeal.action",
-			type : "post",
-			data : {
-					contactTel1 : $("#deal_contactTel1Td").text(),
-					contactTel2 : $("#deal_contactTel2Td").text()
-					},
-			dataType : "json",
-			success : function(e){
-				var data = eval("(" + e + ")");
-				alert(data.markResult);
-				if(data.markResult == "success"){
-					alert("成功！");
-				}else{
-					alert("失败：" + data.failReason);
-				}
-				window.location.reload();
-			},
-			error : function(e){
-				alert("发生错误！");
-				window.location.reload();
-			}	
-		})
-	});
-	
-	/*$("#queryDealData").click(function(){
-		//默认显示当前月的成单数据
-		$("#mainBox").css("display","none");
-		$("#addKFUserDiv").css("display","none");
-		$("#tjByChannelDiv").css("display","none");
-		$("#queryDataDiv").css("display","none");
-		$("#importOppDiv").css("display","none");
-		$("#queryDealDataDiv").css("display","block");
-		
-		$("#addKFUser").css("background-color","#808080");
-		$("#sjInput").css("background-color","#808080");
-		$("#tjByChannel").css("background-color","#808080");
-		$("#queryData").css("background-color","#808080");
-		$("#importOpp").css("background-color","#808080");
-		$("#queryDealData").css("background-color","blue");
-		dealTable.clear().draw(false);
-		$.ajax({
-			url : 'getCurtMonSpcDeptDealData.action',
-			type : 'post',
-			dataType : 'json',
-			data : {'userName' : $("#curtUser").text().split(':')[1]},
-			success : function(e){
-				var data = eval("(" + e + ")");
-				for (var i = 0; i < data.length; i++) {
-					var obj = [
-					           data[i].stuName,data[i].parentName,data[i].contactTel1,data[i].contactTel2,data[i].channelName,
-					           data[i].cardCode,data[i].clsName,data[i].inDate,
-					           data[i].management,data[i].pay,data[i].beginDate,data[i].endDate
-					           ];
-					dealTable.row.add(obj).draw(false);
-				}
-			},
-			error : function(e){
-				alert("失败！");
-			}
-		});
 	});*/
 	
-	/*$("#dealSearchButton").click(function(){
-		$.ajax({
-			url : 'getSpcDeptDealByParam.action',
-			type : 'post',
-			data : {
-					'begin' : $("#dealBeginDate").val(), 'end' : $("#dealEndDate").val(),
-					'contactTel' : $("#dealContactTel").val(), 'userName' : $("#curtUser").text().split(":")[1]
-					},
-			dataType : 'json',
-			success : function(e){
-				dealTable.clear().draw(false);
-				var data = eval("(" + e + ")");
-				for (var i = 0; i < data.length; i++) {
-					//var opp = eval("(" + data[i].opportunity + ")");
-					var obj = [
-					           data[i].stuName,data[i].parentName,data[i].contactTel1,
-					           data[i].contactTel2,data[i].channelName,data[i].cardCode,data[i].clsName,
-					           getSmpFormatDateByLong(data[i].inDate,"yyyy-MM-dd"),data[i].management,data[i].pay,
-					           getSmpFormatDateByLong(data[i].beginDate,"yyyy-MM-dd"),
-					           getSmpFormatDateByLong(data[i].endDate,"yyyy-MM-dd")];
-					dealTable.row.add(obj).draw(false);
-				}
-			},
-			error : function(e){
-				alert("失败！");
-			}
-		});
-	});*/
-	
-	$("#dealExportExcel").click(function(){
+	/*$("#dealExportExcel").click(function(){
 		var userName = $("#curtUser").text().split(":")[1];
 		var begin = $("#dealBeginDate").val();
 		var end = $("#dealEndDate").val();
 		var contactTel = $("#dealContactTel").val();
 		window.location.href = "exportDealInfoByUser.action?userName=" + userName + "&begin=" + begin + "&end=" + end + "&contactTel=" + contactTel;
-	});
+	});*/
 	
-	$("#importOpp").click(function(){
+	/*$("#importOpp").click(function(){
 		$("#mainBox").css("display","none");
 		$("#addKFUserDiv").css("display","none");
 		$("#tjByChannelDiv").css("display","none");
@@ -827,9 +706,9 @@ $(document).ready(function(){
 		$("#queryData").css("background-color","#808080");
 		$("#queryDealData").css("background-color","#808080");
 		$("#importOpp").css("background-color","blue");
-	});
+	});*/
 	
-	$("#file_upload").uploadify({
+	/*$("#file_upload").uploadify({
 		'swf' : 'uploadify/uploadify.swf',  
         'uploader' : 'importExcelOpp.action',  
         'cancelImg'      : 'img/uploadify-cancel.png',  
@@ -847,6 +726,6 @@ $(document).ready(function(){
 	
 	$("#importExcel").click(function(){
 		$("#file_upload").uploadify("upload");
-	});
+	});*/
 });
 

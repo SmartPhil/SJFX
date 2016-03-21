@@ -120,121 +120,16 @@
 	</table>
 </div>
 
-<div id="assignDiv">
-	<table id="assignTable">
-		<tr>
-			<td>学员姓名</td>
-			<td id="stuNameTd"></td>
-			<td>家长姓名</td>
-			<td id="parentNameTd"></td>
-		</tr>
-		<tr>
-			<td>联系方式1</td>
-			<td id="contactTel1Td"></td>
-			<td>联系方式2</td>
-			<td id="contactTel2Td"></td>
-		</tr>
-		<tr>
-			<td>需求课程</td>
-			<td id="needClsTd"></td>
-			<td>所属部门</td>
-			<td id="managementTd"></td>
-		</tr>
-		<tr>
-			<td>渠道商</td>
-			<td id="channelNameTd"></td>
-			<td>渠道商类型</td>
-			<td id="channelTypeTd"></td>
-		</tr>
-		<tr>
-			<td>创建日期</td>
-			<td id="createDateTd"></td>
-			<td>是否有效</td>
-			<td id="isValidTd">有效</td>
-		</tr>
-		<tr>
-			<td>无效原因</td>
-			<td id="noValidReason">无</td>
-			<td>是否分配</td>
-			<td id="isAssign">未分配</td>
-		</tr>
-		<tr>
-			<td>分配员工</td>
-			<td id="assignEmployee">
-				<select id="assignEmployeeSelect" name="assignEmployee">
-					<% List<User> userList = (List<User>)request.getAttribute("userList"); %>
-					<% for(int i = 0; i < userList.size(); i++){ %>
-					<option value="<%=userList.get(i).getUsername() %>"><%=userList.get(i).getName() %></option>
-					<%} %>
-				</select>
-			</td>
-			<td>操作</td>
-			<td>
-				<button id="btn_submitAssign">提交</button>
-				<button id="btn_back1">返回</button>
-			</td>
-		</tr>
-	</table>
-</div>
-<div id="moveDiv">
-	<table id="moveTable">
-		<tr>
-			<td>学员姓名</td>
-			<td id="move_stuNameTd"></td>
-			<td>家长姓名</td>
-			<td id="move_parentNameTd"></td>
-		</tr>
-		<tr>
-			<td>联系方式1</td>
-			<td id="move_contactTel1Td"></td>
-			<td>联系方式2</td>
-			<td id="move_contactTel2Td"></td>
-		</tr>
-		<tr>
-			<td>需求课程</td>
-			<td id="move_needClsTd"></td>
-			<td>所属部门</td>
-			<td id="move_managementTd">
-				<select id="move_management" name="management">
-					<% for(int i = 0; i < managementList.size(); i++){ %>
-					<option value="<%=managementList.get(i).getManagementName() %>"><%=managementList.get(i).getManagementName() %></option>
-					<%} %>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>渠道商</td>
-			<td id="move_channelNameTd"></td>
-			<td>渠道商类型</td>
-			<td id="move_channelTypeTd"></td>
-		</tr>
-		<tr>
-			<td>创建日期</td>
-			<td id="move_createDateTd"></td>
-			<td>是否有效</td>
-			<td id="move_isValidTd">有效</td>
-		</tr>
-		<tr>
-			<td>无效原因</td>
-			<td id="move_noValidReason">无</td>
-			<td>是否分配</td>
-			<td id="move_isAssign">未分配</td>
-		</tr>
-		<tr>
-			<td>分配员工</td>
-			<td id="move_assignEmployee">无</td>
-			<td>操作</td>
-			<td>
-				<button id="btn_submitMove">流转</button>
-				<button id="btn_back2">返回</button>
-			</td>
-		</tr>
-	</table>
-</div>
-<div id="handleDiv">
-	<div id="followContentDiv">
-		<p>历史跟进记录</p>
-		<table id="handleContentTable" border="1">
+<!-- Handle Modal -->
+<div class="modal fade" id="handleOppModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">处理商机</h4>
+      </div>
+      <div class="modal-body"> 
+      	<table id="handleContentTable" border="1" class="table table-bordered">
 			<thead>
 				<tr>
 					<td>跟进时间</td>
@@ -242,187 +137,277 @@
 					<td>跟进人</td>
 				</tr>
 			</thead>
+			<tbody></tbody>
 		</table>
-	</div>
-	<br/>
-	<table id="handleTable">
-		<tr>
-			<td>学员姓名</td>
-			<td id="handle_stuNameTd"></td>
-			<td>家长姓名</td>
-			<td id="handle_parentNameTd"></td>
-		</tr>
-		<tr>
-			<td>联系方式1</td>
-			<td id="handle_contactTel1Td"></td>
-			<td>联系方式2</td>
-			<td id="handle_contactTel2Td"></td>
-		</tr>
-		<tr>
-			<td>需求课程</td>
-			<td id="handle_needClsTd"></td>
-			<td>所属部门</td>
-			<td id="handle_managementTd"></td>
-		</tr>
-		<tr>
-			<td>渠道商</td>
-			<td id="handle_channelNameTd"></td>
-			<td>渠道商类型</td>
-			<td id="handle_channelTypeTd"></td>
-		</tr>
-		<tr>
-			<td>创建日期</td>
-			<td id="handle_createDateTd"></td>
-			<td>是否有效</td>
-			<td id="handle_isValidTd">有效</td>
-		</tr>
-		<tr>
-			<td>无效原因</td>
-			<td id="handle_noValidReason">无</td>
-			<td>是否分配</td>
-			<td id="handle_isAssign">未分配</td>
-		</tr>
-		<tr>
-			<td colspan="2">分配员工</td>
-			<td id="handle_assignEmployee" colspan="2">无</td>
-		</tr>
-		<tr>
-			<td>处理时间</td>
-			<% Date now = new Date();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String nowString = sdf.format(now);
-			%>
-			<td id="followTime" colspan="3"><%=nowString %></td>
-		</tr>
-		<tr>
-			<td>内容</td>
-			<td colspan="3">
-				<textarea id="followContent" rows="4" cols="20"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4">
-				<button id="btn_submitHandle">提交</button>
-				<button id="btn_back3">返回</button>
-			</td>
-		</tr>
-	</table>
+        <table class="table table-bordered"> 
+        	<tr>
+				<td>学员姓名</td>
+				<td id="handle_stuNameTd"></td>
+				<td>家长姓名</td>
+				<td id="handle_parentNameTd"></td>
+			</tr>
+			<tr>
+				<td>联系方式1</td>
+				<td id="handle_contactTel1Td"></td>
+				<td>联系方式2</td>
+				<td id="handle_contactTel2Td"></td>
+			</tr>
+			<tr>
+				<td>需求课程</td>
+				<td id="handle_needClsTd"></td>
+				<td>所属部门</td>
+				<td id="handle_managementTd"></td>
+			</tr>
+			<tr>
+				<td>渠道商</td>
+				<td id="handle_channelNameTd"></td>
+				<td>渠道商类型</td>
+				<td id="handle_channelTypeTd"></td>
+			</tr>
+			<tr>
+				<td>创建日期</td>
+				<td id="handle_createDateTd"></td>
+				<td>是否有效</td>
+				<td id="handle_isValidTd">有效</td>
+			</tr>
+			<tr>
+				<td>无效原因</td>
+				<td id="handle_noValidReason">无</td>
+				<td>是否分配</td>
+				<td id="handle_isAssign">未分配</td>
+			</tr>
+			<tr>
+				<td colspan="2">分配员工</td>
+				<td id="handle_assignEmployee" colspan="2">无</td>
+			</tr>
+			<tr>
+				<td>处理时间</td>
+				<% Date now = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String nowString = sdf.format(now);
+				%>
+				<td id="followTime" colspan="3"><%=nowString %></td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td colspan="3">
+					<textarea id="followContent" rows="4" cols="65"></textarea>
+				</td>
+			</tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitHandle" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="dealDiv">
-	<table id="dealTable" class="tablecss">
-		<tr>
-			<td>学员姓名</td>
-			<td id="deal_stuNameTd"></td>
-			<td>家长姓名</td>
-			<td id="deal_parentNameTd"></td>
-		</tr>
-		<tr>
-			<td>联系方式1</td>
-			<td id="deal_contactTel1Td"></td>
-			<td>联系方式2</td>
-			<td id="deal_contactTel2Td"></td>
-		</tr>
-		<tr>
-			<td>需求课程</td>
-			<td id="deal_needClsTd"></td>
-			<td>所属部门</td>
-			<td id="deal_managementTd"></td>
-		</tr>
-		<tr>
-			<td>渠道商</td>
-			<td id="deal_channelNameTd"></td>
-			<td>渠道商类型</td>
-			<td id="deal_channelTypeTd"></td>
-		</tr>
-		<tr>
-			<td>创建日期</td>
-			<td id="deal_createDateTd"></td>
-			<td>是否有效</td>
-			<td id="deal_isValidTd">有效</td>
-		</tr>
-		<tr>
-			<td>是否分配</td>
-			<td id="deal_isAssign">未分配</td>
-			<td>分配员工</td>
-			<td id="deal_assignEmployee">无</td>
-		</tr>
-		<tr>
-			<td>无效原因</td>
-			<td colspan="3" id="deal_noValidReason">无</td>
-		</tr>
-		<tr>
-			<td colspan="4">
-				<button id="btn_submitDeal">标为已成单</button>
-				<button id="btn_back5">返回</button>
-			</td>
-		</tr>
-	</table>
+
+<!-- Assign Modal -->
+<div class="modal fade" id="assignOppModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">分配商机</h4>
+      </div>
+      <div class="modal-body"> 
+       	<table id="assignTable" class="table table-bordered">
+			<tr>
+				<td>学员姓名</td>
+				<td id="stuNameTd"></td>
+				<td>家长姓名</td>
+				<td id="parentNameTd"></td>
+			</tr>
+			<tr>
+				<td>联系方式1</td>
+				<td id="contactTel1Td"></td>
+				<td>联系方式2</td>
+				<td id="contactTel2Td"></td>
+			</tr>
+			<tr>
+				<td>需求课程</td>
+				<td id="needClsTd"></td>
+				<td>所属部门</td>
+				<td id="managementTd"></td>
+			</tr>
+			<tr>
+				<td>渠道商</td>
+				<td id="channelNameTd"></td>
+				<td>渠道商类型</td>
+				<td id="channelTypeTd"></td>
+			</tr>
+			<tr>
+				<td>创建日期</td>
+				<td id="createDateTd"></td>
+				<td>是否有效</td>
+				<td id="isValidTd">有效</td>
+			</tr>
+			<tr>
+				<td>无效原因</td>
+				<td id="noValidReason">无</td>
+				<td>是否分配</td>
+				<td id="isAssign">未分配</td>
+			</tr>
+			<tr>
+				<td>分配员工</td>
+				<td id="assignEmployee">
+					<select id="assignEmployeeSelect" name="assignEmployee">
+						<% List<User> userList = (List<User>)request.getAttribute("userList"); %>
+						<% for(int i = 0; i < userList.size(); i++){ %>
+							<option value="<%=userList.get(i).getUsername() %>"><%=userList.get(i).getName() %></option>
+						<%} %>
+					</select>
+				</td>
+			</tr>
+	 	</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitAssign" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="markToInValidDiv">
-	<table id="markTable" class="tablecss">
-		<tr>
-			<td>学员姓名</td>
-			<td id="mark_stuNameTd"></td>
-			<td>家长姓名</td>
-			<td id="mark_parentNameTd"></td>
-		</tr>
-		<tr>
-			<td>联系方式1</td>
-			<td id="mark_contactTel1Td"></td>
-			<td>联系方式2</td>
-			<td id="mark_contactTel2Td"></td>
-		</tr>
-		<tr>
-			<td>需求课程</td>
-			<td id="mark_needClsTd"></td>
-			<td>所属部门</td>
-			<td id="mark_managementTd"></td>
-		</tr>
-		<tr>
-			<td>渠道商</td>
-			<td id="mark_channelNameTd"></td>
-			<td>渠道商类型</td>
-			<td id="mark_channelTypeTd"></td>
-		</tr>
-		<tr>
-			<td>创建日期</td>
-			<td id="mark_createDateTd"></td>
-			<td>是否有效</td>
-			<td id="mark_isValidTd">有效</td>
-		</tr>
-		<tr>
-			<td>是否分配</td>
-			<td id="mark_isAssign">未分配</td>
-			<td>分配员工</td>
-			<td id="mark_assignEmployee">无</td>
-		</tr>
-		<tr>
-			<td>无效原因</td>
-			<td colspan="3" id="mark_noValidReason">
-				<select id="inValidReason">
-					<option value="0">新东方学员</option>
-					<option value="1">地区不符合</option>
-					<option value="2">年龄不符合</option>
-					<option value="3">无学习意向</option>
-					<option value="4">空号错号</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4">
-				<button id="btn_submitMark">提交</button>
-				<button id="btn_back4">返回</button>
-			</td>
-		</tr>
-	</table>
+
+<!-- Move Modal -->
+<div class="modal fade" id="moveOppModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">流转商机</h4>
+      </div>
+      <div class="modal-body"> 
+       	<table id="moveTable" class="table table-bordered">
+			<tr>
+				<td>学员姓名</td>
+				<td id="move_stuNameTd"></td>
+				<td>家长姓名</td>
+				<td id="move_parentNameTd"></td>
+			</tr>
+			<tr>
+				<td>联系方式1</td>
+				<td id="move_contactTel1Td"></td>
+				<td>联系方式2</td>
+				<td id="move_contactTel2Td"></td>
+			</tr>
+			<tr>
+				<td>需求课程</td>
+				<td id="move_needClsTd"></td>
+				<td>所属部门</td>
+				<td id="move_managementTd">
+					<select id="move_management" name="management">
+						<% for(int i = 0; i < managementList.size(); i++){ %>
+							<option value="<%=managementList.get(i).getManagementName() %>"><%=managementList.get(i).getManagementName() %></option>
+						<%} %>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>渠道商</td>
+				<td id="move_channelNameTd"></td>
+				<td>渠道商类型</td>
+				<td id="move_channelTypeTd"></td>
+			</tr>
+			<tr>
+				<td>创建日期</td>
+				<td id="move_createDateTd"></td>
+				<td>是否有效</td>
+				<td id="move_isValidTd">有效</td>
+			</tr>
+			<tr>
+				<td>无效原因</td>
+				<td id="move_noValidReason">无</td>
+				<td>是否分配</td>
+				<td id="move_isAssign">未分配</td>
+			</tr>
+			<tr>
+				<td>分配员工</td>
+				<td id="move_assignEmployee">无</td>
+				<!-- <td>操作</td>
+				<td>
+					<button id="btn_submitMove">流转</button>
+					<button id="btn_back2">返回</button>
+				</td> -->
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitMove" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="operation_div">
-	<button id="btn_assign">分配</button>
-	<button id="btn_move">流转</button>
-	<button id="btn_handle">处理</button>
-	<button id="btn_martToDeal">标为已成单</button>
-	<button id="btn_mark">标为无效</button>
-	<button id="btn_cancle_operation">取消</button>
+
+<!-- MarkInvalid Modal -->
+<div class="modal fade" id="markOppModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">标记无效商机</h4>
+      </div>
+      <div class="modal-body"> 
+       	<table id="markTable" class="table table-bordered">
+			<tr>
+				<td>学员姓名</td>
+				<td id="mark_stuNameTd"></td>
+				<td>家长姓名</td>
+				<td id="mark_parentNameTd"></td>
+			</tr>
+			<tr>
+				<td>联系方式1</td>
+				<td id="mark_contactTel1Td"></td>
+				<td>联系方式2</td>
+				<td id="mark_contactTel2Td"></td>
+			</tr>
+			<tr>
+				<td>需求课程</td>
+				<td id="mark_needClsTd"></td>
+				<td>所属部门</td>
+				<td id="mark_managementTd"></td>
+			</tr>
+			<tr>
+				<td>渠道商</td>
+				<td id="mark_channelNameTd"></td>
+				<td>渠道商类型</td>
+				<td id="mark_channelTypeTd"></td>
+			</tr>
+			<tr>
+				<td>创建日期</td>
+				<td id="mark_createDateTd"></td>
+				<td>是否有效</td>
+				<td id="mark_isValidTd">有效</td>
+			</tr>
+			<tr>
+				<td>是否分配</td>
+				<td id="mark_isAssign">未分配</td>
+				<td>分配员工</td>
+				<td id="mark_assignEmployee">无</td>
+			</tr>
+			<tr>
+				<td>无效原因</td>
+				<td colspan="3" id="mark_noValidReason">
+					<select id="inValidReason">
+						<option value="0">新东方学员</option>
+						<option value="1">地区不符合</option>
+						<option value="2">年龄不符合</option>
+						<option value="3">无学习意向</option>
+						<option value="4">空号错号</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" id="btn_submitMark" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
