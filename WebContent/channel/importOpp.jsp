@@ -73,12 +73,19 @@ $(document).ready(function(){
 		</div>
 	</div>
 </nav>
-<div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
+<div class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;">
 	<div class="panel-heading">上传商机</div>
   	<div class="panel-body">
     	<input type="file" name="file_upload" id="file_upload"/>
 		<div id="some_file_queue"></div>
 		<button id="importExcel" class="btn btn-primary">上传</button>
+  	</div>
+</div>
+
+<div class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;">
+	<div class="panel-heading">下载模板</div>
+  	<div class="panel-body">
+    	<a href="downloadModal.action" class="btn btn-primary">下载模板</a>
   	</div>
 </div>
 </body>

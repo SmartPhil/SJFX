@@ -22,6 +22,13 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="downloadModal" class="com.xdf.action.Action_DownLoadModal">
+			<result name="success" type="stream">
+				<param name="contentType">${mimeType}</param>
+				<param name="inputName">inStream</param>
+				<param name="contentDisposition">attachment;filename="uploadModal.xlsx"</param>
+			</result>
+		</action>
 	</package>
 	<package name="kf" extends="json-default">
 		<action name="toKF" class="com.xdf.action.Action_ToKF" method="toKf">
