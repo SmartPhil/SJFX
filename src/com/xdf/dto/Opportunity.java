@@ -17,16 +17,17 @@ public class Opportunity {
 	private int isValid;  // 0-无效；1-有效；新增商机默认有效
 	private String noValidReason;
 	private int isAssign; // 0-未分配；1-已分配；新增商机默认未分配
-	private String assignEmployee;
-	private Date followTime;
-	private Date nextFollowTime;
+	private String assignEmployee; //分配员工
+	private Date followTime; //跟进时间
+	private Date nextFollowTime; //下次跟进时间
 	private int state; // 0--待跟进；1--已成单
 	private String comment; //备注
 	private String grade; //就读年级
-	private String degree; //申请学历
-	private String address; //所住区域
+	private String address; //所住地址
 	private String keyword; //关键词
 	private int mark; //是否已经验证过有效性  0--未验证； 1--已经验证；
+	private String area; //所在行政区
+	private String school; //学校
 	
 	public Date getFollowTime() {
 		return followTime;
@@ -142,12 +143,6 @@ public class Opportunity {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public String getDegree() {
-		return degree;
-	}
-	public void setDegree(String degree) {
-		this.degree = degree;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -165,5 +160,17 @@ public class Opportunity {
 	}
 	public void setMark(int mark) {
 		this.mark = mark;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
 	}
 }

@@ -10,6 +10,7 @@ public class User {
 	private int role;
 	private String channelName;
 	private String channelType;
+	private String creator;
 	
 	public int getId() {
 		return id;
@@ -64,6 +65,12 @@ public class User {
 	}
 	public void setChannelType(String channelType) {
 		this.channelType = channelType;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 	@Override
 	public String toString(){

@@ -16,5 +16,6 @@
 		<property name="role" column="nRole"></property>
 		<property name="channelName" column="sChannelName"></property>
 		<property name="channelType" column="sChannelType"></property>
+		<property name="creator" column="sCreator"></property>
 	</class>
 </hibernate-mapping>

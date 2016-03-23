@@ -25,9 +25,10 @@
 		<property name="state" column="nState"></property>
 		<property name="comment" column="sComment"></property>
 		<property name="grade" column="sGrade"></property>
-		<property name="degree" column="sDegree"></property>
 		<property name="address" column="sAddress"></property>
 		<property name="keyword" column="sKeyword"></property>
 		<property name="mark" column="nMark"></property>
+		<property name="area" column="sArea"></property>
+		<property name="school" column="sSchool"></property>
 	</class>
 </hibernate-mapping>

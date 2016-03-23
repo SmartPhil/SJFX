@@ -15,7 +15,8 @@ public class Action_AddChannelUser extends ActionSupport {
 	private String username;
 	private String password;
 	private String channelName;
-	private String collaType;
+	private String channelType;
+	private String creator;
 	private String result;
 	
 	public String addChannelUser(){
@@ -23,15 +24,15 @@ public class Action_AddChannelUser extends ActionSupport {
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setChannelName(channelName);
-		String channelType = "";
-		if(Integer.valueOf(collaType) == 1){
+		if(Integer.valueOf(channelType) == 1){
 			channelType = "数据合作";
-		}else if(Integer.valueOf(collaType) == 2){
+		}else if(Integer.valueOf(channelType) == 2){
 			channelType = "网络合作";
-		}else if(Integer.valueOf(collaType) == 3){
+		}else if(Integer.valueOf(channelType) == 3){
 			channelType = "市场推荐";
 		}
 		user.setChannelType(channelType);
+		user.setCreator(creator);
 		user.setRole(4);
 		UserDao userDao = new UserDaoImpl();
 		boolean addResult = userDao.addUser(user);
@@ -62,16 +63,22 @@ public class Action_AddChannelUser extends ActionSupport {
 	public void setChannelName(String channelName) {
 		this.channelName = channelName;
 	}
-	public String getCollaType() {
-		return collaType;
-	}
-	public void setCollaType(String collaType) {
-		this.collaType = collaType;
-	}
 	public String getResult() {
 		return result;
 	}
 	public void setResult(String result) {
 		this.result = result;
+	}
+	public String getChannelType() {
+		return channelType;
+	}
+	public void setChannelType(String channelType) {
+		this.channelType = channelType;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 }

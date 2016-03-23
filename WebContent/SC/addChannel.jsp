@@ -18,6 +18,8 @@ $(document).ready(function(){
 		var password = $("#password").val();
 		var confirmPassword = $("#confirmPassword").val();
 		var channelName = $("#channelName").val();
+		var channelType = $("#collaType").val();
+		var creator = $("#usernameShow").text().split(":")[1];
 		
 		if(username == "" || username == null){
 			alert("请输入用户名！");
@@ -43,7 +45,11 @@ $(document).ready(function(){
 		$.ajax({
 			url : "addChannelUser.action",
 			type : "post",
-			data : $("#addChannelUserForm").serialize(),
+			data : {"username" : username,
+					"password" : password,
+					"channelName" : channelName,
+					"channelType" : channelType,
+					"creator" : creator},
 			success : function(e){
 				var result = eval("(" + e + ")");
 				var addResult = result.result;
