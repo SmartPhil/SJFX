@@ -85,7 +85,7 @@ $(document).ready(function(){
 <div class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;">
 	<div class="panel-heading">下载模板</div>
   	<div class="panel-body">
-    	<a href="downloadModal.action" class="btn btn-primary">下载模板</a>
+    	<a href="downloadModal.action?num=0" class="btn btn-primary">下载模板</a>
   	</div>
 </div>
 </body>

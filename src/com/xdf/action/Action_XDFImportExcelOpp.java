@@ -13,15 +13,12 @@ import org.apache.struts2.ServletActionContext;
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.xdf.dao.OpportunityDao;
-import com.xdf.dao.UserDao;
 import com.xdf.dao.impl.OpportunityDaoImpl;
-import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Opportunity;
-import com.xdf.dto.User;
 import com.xdf.util.ExcelReader;
 
-@SuppressWarnings("serial")
-public class Action_ImportExcelOpp extends ActionSupport {
+public class Action_XDFImportExcelOpp extends ActionSupport {
+	private static final long serialVersionUID = 1L;
 	private File file_upload;
 	private String fileName;
 	private Object result;
@@ -38,33 +35,11 @@ public class Action_ImportExcelOpp extends ActionSupport {
 			}
 			System.out.println(target.getPath());
 			ExcelReader excelReader = new ExcelReader(target.getPath());
-			List<String[]> resultList = excelReader.readAllData();
+			List<String[]> resultList = excelReader.readAllDataXdf();
 			List<Opportunity> oppList = new ArrayList<Opportunity>();
 			if(resultList.size() >= 1){
-				//查询上传者信息
-				UserDao userDAO = new UserDaoImpl();
-				User user = userDAO.getUserByUserName(username).get(0);
-				String channelType = "";
-				if( "网络合作".equals(user.getChannelType()) ||
-					"数据合作".equals(user.getChannelType()) ||
-					"市场推荐".equals(user.getChannelType())){
-					username = user.getChannelName();
-					channelType = user.getChannelType();
-				}else {
-					channelType = "内部渠道";
-				}
-					
 				for (int i = 0; i < resultList.size(); i++) {
 					Opportunity opportunity = new Opportunity();
-					/*if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
-						opportunity.setCreateDate(new Date());
-					}else {
-						try {
-							opportunity.setCreateDate(simpleDateFormat.parse(resultList.get(i)[0]));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-					}*/
 					opportunity.setCreateDate(new Date());
 					opportunity.setStuName(resultList.get(i)[0]);
 					opportunity.setParentName(resultList.get(i)[1]);
@@ -76,9 +51,11 @@ public class Action_ImportExcelOpp extends ActionSupport {
 					opportunity.setAddress(resultList.get(i)[7]);
 					opportunity.setSchool(resultList.get(i)[8]);
 					opportunity.setGrade(resultList.get(i)[9]);
+					opportunity.setKeyword(resultList.get(i)[10]);
+					opportunity.setChannelType(resultList.get(i)[11]);
+					opportunity.setComment(resultList.get(i)[12]);
 					opportunity.setIsValid(1);
 					opportunity.setChannelName(username);
-					opportunity.setChannelType(channelType);
 					opportunity.setMark(0);
 					oppList.add(opportunity);
 				}

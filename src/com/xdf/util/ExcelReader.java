@@ -67,16 +67,10 @@ public class ExcelReader {
         }  
     }   
     
-    //读取excel数据
+    //读取渠道商的excel数据
     public List<String[]> readAllData(){
     	//结果列表
     	List<String[]> result = new ArrayList<String[]>();
-    	int columnNum = 0;
-    	if(sheet.getRow(0) != null){
-    		columnNum = sheet.getRow(0).getLastCellNum() - sheet.getRow(0).getFirstCellNum();
-    	}
-    	
-    	//List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
     	//得到文件最后一行的num值
     	int rowNum = sheet.getLastRowNum() + 1;
     	if(rowNum > 1){
@@ -92,6 +86,72 @@ public class ExcelReader {
         				//若电话号码1不为空，则开始读取此行数据。
         				String[] onelineString = new String[10];
         				for (int j = 0; j < 10; j++) {
+        					String cellvalue = "";
+        					Cell cell = row.getCell(j);
+        					if(cell != null){
+        						switch (cell.getCellType()) {
+        							case Cell.CELL_TYPE_BLANK:
+        								cellvalue = "";
+        								break;
+        							case Cell.CELL_TYPE_BOOLEAN:
+        								cellvalue = Boolean.toString(cell.getBooleanCellValue());
+        								break;
+        							case Cell.CELL_TYPE_NUMERIC:
+        								if(org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)){
+        									cellvalue = String.valueOf(cell.getDateCellValue());
+        								}else {
+        									cell.setCellType(Cell.CELL_TYPE_STRING);
+        									cellvalue = cell.getStringCellValue();
+        								}
+        								break;
+        							case Cell.CELL_TYPE_STRING:
+        								cellvalue = cell.getStringCellValue();
+        								break;
+        							case Cell.CELL_TYPE_ERROR:
+        								cellvalue = "";
+        								break;
+        							case Cell.CELL_TYPE_FORMULA:
+        								cell.setCellType(Cell.CELL_TYPE_STRING);
+        								cellvalue = cell.getStringCellValue();
+        								break;
+        							default:
+        								cellvalue = "";
+        								break;
+        						}
+        					}else {
+        						cellvalue = "";
+        					}
+        					onelineString[j] = cellvalue;
+        				}
+        				result.add(onelineString);
+					}
+    			}else {
+					continue;
+				}
+			}
+    	}
+    	return result;
+    }
+
+    //读取内部渠道的excel数据
+    public List<String[]> readAllDataXdf(){
+    	//结果列表
+    	List<String[]> result = new ArrayList<String[]>();
+    	//得到文件最后一行的num值
+    	int rowNum = sheet.getLastRowNum() + 1;
+    	if(rowNum > 1){
+    		for (int i = 2; i < rowNum; i++) {
+    			Row row = sheet.getRow(i);
+    			//判断电话号码1是否为空，若为空则忽略此行。
+    			Cell cell2 = row.getCell(2);
+    			if(cell2 != null){
+    				cell2.setCellType(Cell.CELL_TYPE_STRING);
+        			if("".equals(cell2.getStringCellValue().trim()) || cell2.getStringCellValue() == null){
+        				continue;
+        			}else {
+        				//若电话号码1不为空，则开始读取此行数据。
+        				String[] onelineString = new String[13];
+        				for (int j = 0; j < 13; j++) {
         					String cellvalue = "";
         					Cell cell = row.getCell(j);
         					if(cell != null){

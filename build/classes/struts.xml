@@ -29,6 +29,11 @@
 				<param name="contentDisposition">attachment;filename="uploadModal.xlsx"</param>
 			</result>
 		</action>
+		<action name="importExcelOpp" class="com.xdf.action.Action_ImportExcelOpp" method="importExcel">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="kf" extends="json-default">
 		<action name="toKF" class="com.xdf.action.Action_ToKF" method="toKf">
@@ -115,7 +120,7 @@
 		</action>
 		<action name="exportDealInfoByUser" class="com.xdf.action.Action_ExportDealInfoByUser" method="exportDealInfo">
 		</action>
-		<action name="importExcelOpp" class="com.xdf.action.Action_ImportExcelOpp" method="importExcel">
+		<action name="xdfImportExcelOpp" class="com.xdf.action.Action_XDFImportExcelOpp" method="importExcel">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>

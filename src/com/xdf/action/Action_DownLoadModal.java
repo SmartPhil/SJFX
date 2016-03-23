@@ -13,15 +13,24 @@ public class Action_DownLoadModal extends ActionSupport implements ServletContex
 	private ServletContext context;
 	private InputStream inStream;
 	private String mimeType;
+	private String num;
 	
 	@Override
 	public String execute(){
-		this.mimeType = context.getMimeType("download/channelModal.xlsx");
+		if("0".equals(num)){
+			this.mimeType = context.getMimeType("download/channelModal.xlsx");
+		}else if("1".equals(num)){
+			this.mimeType = context.getMimeType("download/modal.xlsx");
+		}
 		return SUCCESS;
 	}
 	
 	public InputStream getInStream(){
-		this.inStream = context.getResourceAsStream("download/channelModal.xlsx");
+		if("0".equals(num)){
+			this.inStream = context.getResourceAsStream("download/channelModal.xlsx");
+		}else if("1".equals(num)){
+			this.inStream = context.getResourceAsStream("download/modal.xlsx");
+		}
 		return this.inStream;
 	}
 	
@@ -33,5 +42,13 @@ public class Action_DownLoadModal extends ActionSupport implements ServletContex
 	public void setServletContext(ServletContext context) {
 		// TODO Auto-generated method stub
 		this.context = context;
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
 	}
 }

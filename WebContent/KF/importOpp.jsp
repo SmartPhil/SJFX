@@ -19,7 +19,7 @@ $(document).ready(function(){
 	
 	$("#file_upload").uploadify({
 		'swf' : '<%=request.getContextPath()%>/uploadify/uploadify.swf',  
-	    'uploader' : '<%=request.getContextPath()%>/importExcelOpp.action',  
+	    'uploader' : '<%=request.getContextPath()%>/xdfImportExcelOpp.action',  
 	    'cancelImg'      : '<%=request.getContextPath()%>/img/uploadify-cancel.png',  
 	    'folder'         : 'UploadFiles',  
 	    'queueID'        : 'some_file_queue',  
@@ -74,12 +74,18 @@ $(document).ready(function(){
 		</div>
 	</div>
 </nav>
-<div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
+<div class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;">
 	<div class="panel-heading">上传商机</div>
   	<div class="panel-body">
     	<input type="file" name="file_upload" id="file_upload"/>
 		<div id="some_file_queue"></div>
 		<button id="importExcel" class="btn btn-primary">上传</button>
+  	</div>
+</div>
+<div class="panel panel-primary" style="width: 80%;margin-left: auto;margin-right: auto;">
+	<div class="panel-heading">下载模板</div>
+  	<div class="panel-body">
+    	<a href="downloadModal.action?num=1" class="btn btn-primary">下载模板</a>
   	</div>
 </div>
 </body>
