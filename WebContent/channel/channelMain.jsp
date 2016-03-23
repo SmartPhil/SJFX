@@ -69,12 +69,15 @@
     		<textarea rows="3" cols="10" class="form-control" id="consultCls" name="consultCls" placeholder="请输入学员咨询的课程"></textarea>
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">所属客服部门</label>
+    		<label for="exampleInputFile">所属部门</label>
     		<select class="form-control" id="kfManagement" name="kfManagement">
     			<% for(int i = 0; i < managementList.size(); i++){ %>
 						<option value="<%=managementList.get(i).getManagementName() %>"><%=managementList.get(i).getManagementName() %></option>
 				<%	} %>
     		</select>
+  		</div>
+  		<div class="form-group">
+    		<label id="showManagementExplain" class="btn btn-primary">查看部门说明</label>
   		</div>
   		<div class="form-group">
     		<label for="exampleInputFile">提供机构</label>
@@ -88,8 +91,59 @@
 	</form>
 </div>
 </div>
-<div id="foot">
-	
+<div class="modal fade" id="managementExplain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">所属部门说明</h4>
+      </div>
+      <div class="modal-body"> 
+       	<table class="table table-bordered">
+       		<tr>
+       			<td>部门名称</td>
+       			<td>部门说明</td>
+       		</tr>
+       		<tr>
+       			<td>优能中学部</td>
+       			<td>12-18岁中学25人全科、冬夏令营</td>
+       		</tr>
+       		<tr>
+       			<td>中学个性化</td>
+       			<td>12-18岁中学1对1和6人及以下全科</td>
+       		</tr>
+       		<tr>
+       			<td>英联邦项目部</td>
+       			<td>IELTS</td>
+       		</tr>
+       		<tr>
+       			<td>北美项目部</td>
+       			<td>TOEFL、SAT、SSAT、GRE、GMAT、LSAT、AP</td>
+       		</tr>
+       		<tr>
+       			<td>国内考试部</td>
+       			<td>四六级，专四专八、考研、大学预科</td>
+       		</tr>
+       		<tr>
+       			<td>英语学习部</td>
+       			<td>新概念、口译、BEC、TOEIC、口语、冬夏令营</td>
+       		</tr>
+       		<tr>
+       			<td>多语种部</td>
+       			<td>德、法、日、韩、西班牙</td>
+       		</tr>
+       		<tr>
+       			<td>泡泡少儿部</td>
+       			<td>3-12岁少儿综合、冬夏令营</td>
+       		</tr>
+       		<tr>
+       			<td>国际游学部门</td>
+       			<td>全线路</td>
+       		</tr>
+       	</table>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

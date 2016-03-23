@@ -58,4 +58,10 @@ $(document).ready(function(){
 			},
 		});
 	});
+	
+	$("#showManagementExplain").click(function(e){
+		$("#managementExplain").modal({
+			keyboard : true
+		});
+	});
 });

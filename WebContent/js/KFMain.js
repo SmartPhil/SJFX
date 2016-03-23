@@ -257,6 +257,7 @@ $(document).ready(function(){
 		})
 	});
 	
+	
 	//show the statistics view
 	/*$("#tjByChannel").click(function(){
 		$("#tjByChannel").css("background-color","blue");
