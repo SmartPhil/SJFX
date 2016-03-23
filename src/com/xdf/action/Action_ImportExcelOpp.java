@@ -44,7 +44,7 @@ public class Action_ImportExcelOpp extends ActionSupport {
 			ExcelReader excelReader = new ExcelReader(target.getPath());
 			List<String[]> resultList = excelReader.readAllData();
 			List<Opportunity> oppList = new ArrayList<Opportunity>();
-			if(resultList.size() >= 2){
+			if(resultList.size() >= 1){
 				//查询上传者信息
 				UserDao userDAO = new UserDaoImpl();
 				User user = userDAO.getUserByUserName(username).get(0);
@@ -58,9 +58,9 @@ public class Action_ImportExcelOpp extends ActionSupport {
 					channelType = "内部渠道";
 				}
 					
-				for (int i = 1; i < resultList.size(); i++) {
+				for (int i = 0; i < resultList.size(); i++) {
 					Opportunity opportunity = new Opportunity();
-					if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
+					/*if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
 						opportunity.setCreateDate(new Date());
 					}else {
 						try {
@@ -68,39 +68,19 @@ public class Action_ImportExcelOpp extends ActionSupport {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-					}
-					
-					String name = resultList.get(i)[1];
-					if("".equals(name) || name == null){
-						opportunity.setStuName("");
-						opportunity.setParentName("");
-					}else {
-						if(name.contains("/")){
-							String[] names = name.split("/");
-							opportunity.setParentName(names[0]);
-							opportunity.setStuName(names[1]);
-						}else {
-							opportunity.setParentName(name);
-						}
-					}
+					}*/
+					opportunity.setCreateDate(new Date());
+					opportunity.setStuName(resultList.get(i)[0]);
+					opportunity.setParentName(resultList.get(i)[1]);
 					opportunity.setContactTel1(resultList.get(i)[2]);
 					opportunity.setContactTel2(resultList.get(i)[3]);
-					opportunity.setKeyword(resultList.get(i)[4]);
-					opportunity.setGrade(resultList.get(i)[5]);
-					opportunity.setAddress(resultList.get(i)[6]);
-					opportunity.setNeedCls(resultList.get(i)[7]);
-					opportunity.setManagement(resultList.get(i)[8]);
-					opportunity.setComment(resultList.get(i)[9]);
-					if("".equals(resultList.get(i)[10]) || resultList.get(i)[10] == null || "是".equals(resultList.get(i)[10])){
-						opportunity.setIsValid(1);
-					}else {
-						opportunity.setIsValid(0);
-					}
-					if(opportunity.getIsValid() == 0){
-						opportunity.setNoValidReason(resultList.get(i)[11]);
-					}else {
-						opportunity.setNoValidReason("");
-					}
+					opportunity.setNeedCls(resultList.get(i)[4]);
+					opportunity.setManagement(resultList.get(i)[5]);
+					opportunity.setArea(resultList.get(i)[6]);
+					opportunity.setAddress(resultList.get(i)[7]);
+					opportunity.setSchool(resultList.get(i)[8]);
+					opportunity.setGrade(resultList.get(i)[9]);
+					opportunity.setIsValid(1);
 					opportunity.setChannelName(username);
 					opportunity.setChannelType(channelType);
 					opportunity.setMark(0);
