@@ -16,12 +16,12 @@ public class Action_DownLoadModal extends ActionSupport implements ServletContex
 	
 	@Override
 	public String execute(){
-		this.mimeType = context.getMimeType("download/modal.xlsx");
+		this.mimeType = context.getMimeType("download/channelModal.xlsx");
 		return SUCCESS;
 	}
 	
 	public InputStream getInStream(){
-		this.inStream = context.getResourceAsStream("download/modal.xlsx");
+		this.inStream = context.getResourceAsStream("download/channelModal.xlsx");
 		return this.inStream;
 	}
 	
