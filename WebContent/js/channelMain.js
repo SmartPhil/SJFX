@@ -17,24 +17,12 @@ $(document).ready(function(){
 	$("#submitSJ").click(function(){
 		var $btn = $(this).button('loading');
 		
-		/*var stuName = $("#stuName").val();
-		if(stuName == ""){
-			alert("请输入学员姓名！");
-			$("#stuName").focus();
-			return;
-		}*/
 		var contactTel1 = $("#contactTel1").val();
 		if(contactTel1 == ""){
 			alert("请输入联系电话1");
 			$("#contactTel1").focus();
 			return;
 		}
-		/*var consultCls = $("#consultCls").val();
-		if(consultCls == ""){
-			alert("请输入咨询课程！");
-			$("#consultCls").focus();
-			return;
-		}*/
 		
 		$.ajax({
 			url : "addOpp.action",

@@ -65,7 +65,7 @@
     		<input type="text" class="form-control" id="contactTel2" name="contactTel2" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">咨询课程</label>
+    		<label for="exampleInputFile">需求课程</label>
     		<textarea rows="3" cols="10" class="form-control" id="consultCls" name="consultCls" placeholder="请输入学员咨询的课程"></textarea>
   		</div>
   		<div class="form-group">
@@ -79,13 +79,64 @@
   		<div class="form-group">
     		<label id="showManagementExplain" class="btn btn-primary">查看部门说明</label>
   		</div>
+  		<input type="hidden" value="<%=channelname %>" id="giveOrg" name="giveOrg"/>
+  		<input type="hidden" value="<%=channeltype %>" id="channelType" name="channelType"/>
   		<div class="form-group">
-    		<label for="exampleInputFile">提供机构</label>
-    		<input type="text" class="form-control" value="<%=channelname %>" id="giveOrg" name="giveOrg" readonly="readonly"/>
+    		<label for="exampleInputFile">所在区域</label>
+    		<select class="form-control" id="area" name="area">
+    			<option value="1">杨浦区</option>
+    			<option value="2">徐汇区</option>
+    			<option value="3">浦东区</option>
+    			<option value="4">普陀区</option>
+    			<option value="5">黄浦区</option>
+    			<option value="6">长宁区</option>
+    			<option value="7">静安区</option>
+    			<option value="8">虹口区</option>
+    			<option value="9">闸北区</option>
+    			<option value="10">闵行区</option>
+    			<option value="11">宝山区</option>
+    			<option value="12">嘉定区</option>
+    			<option value="13">松江区</option>
+    			<option value="14">青浦区</option>
+    			<option value="15">奉贤区</option>
+    			<option value="16">金山区</option>
+    			<option value="17">崇明区</option>
+    			<option value="18">非上海</option>
+    		</select>
   		</div>
 		<div class="form-group">
-    		<label for="exampleInputFile">渠道类型</label>
-    		<input type="text" class="form-control" value="<%=channeltype %>" id="channelType" name="channelType" readonly="readonly"/>
+    		<label for="exampleInputFile">联系地址</label>
+    		<input type="text" class="form-control" id="address" name="address" placeholder="请输入学员地址">
+  		</div>
+  		<div class="form-group">
+    		<label for="exampleInputFile">学校</label>
+    		<input type="text" class="form-control" id="school" name="school" placeholder="请输入学员就读学校">
+  		</div>
+  		<div class="form-group">
+    		<label for="exampleInputFile">年级</label>
+    		<select class="form-control" id="grade" name="grade">
+    			<option value="1">幼儿</option>
+    			<option value="2">小班</option>
+    			<option value="3">中班</option>
+    			<option value="4">大班</option>
+    			<option value="5">一年级</option>
+    			<option value="6">二年级</option>
+    			<option value="7">三年级</option>
+    			<option value="8">四年级</option>
+    			<option value="9">五年级</option>
+    			<option value="10">六年级</option>
+    			<option value="11">初一</option>
+    			<option value="12">初二</option>
+    			<option value="13">初三</option>
+    			<option value="14">高一</option>
+    			<option value="15">高二</option>
+    			<option value="16">高三</option>
+    			<option value="17">大一</option>
+    			<option value="18">大二</option>
+    			<option value="19">大三</option>
+    			<option value="20">大四</option>
+    			<option value="21">成人</option>
+    		</select>
   		</div>
   		<input type="button" data-loading-text="提交中……" class="btn btn-primary" id="submitSJ" value="提交"/>
 	</form>

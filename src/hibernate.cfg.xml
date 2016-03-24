@@ -41,5 +41,7 @@
 		<mapping resource="com/xdf/dto/Client.hbm.xml"/>
 		<mapping resource="com/xdf/dto/FollowContent.hbm.xml"/>
 		<mapping resource="com/xdf/dto/Deal.hbm.xml"/>
+		<mapping resource="com/xdf/dto/Area.hbm.xml"/>
+		<mapping resource="com/xdf/dto/Grade.hbm.xml"/>
 	</session-factory> 
 </hibernate-configuration>

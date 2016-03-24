@@ -8,7 +8,11 @@ import java.util.HashMap;
 
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import com.xdf.dao.AreaDao;
+import com.xdf.dao.GradeDao;
 import com.xdf.dao.OpportunityDao;
+import com.xdf.dao.impl.AreaDaoImpl;
+import com.xdf.dao.impl.GradeDaoImpl;
 import com.xdf.dao.impl.OpportunityDaoImpl;
 import com.xdf.dto.Opportunity;
 import com.xdf.util.HttpPostUtil;
@@ -24,6 +28,10 @@ public class Action_AddOpportunity extends ActionSupport {
 	private String kfManagement;
 	private String giveOrg;
 	private String channelType;
+	private String area;
+	private String address;
+	private String school;
+	private String grade;
 	
 	private String result;
 	
@@ -102,7 +110,23 @@ public class Action_AddOpportunity extends ActionSupport {
 			opp.setIsValid(1);
 			opp.setIsAssign(0);
 			opp.setState(0);
-			
+			opp.setMark(1);
+			AreaDao areaDao = new AreaDaoImpl();
+			if("".equals(area) || area == null){
+				area = "";
+			} else {
+				area = areaDao.getAreaByNum(area);
+			}
+			opp.setArea(area);
+			opp.setAddress(address);
+			opp.setSchool(school);
+			GradeDao gradeDao = new GradeDaoImpl();
+			if("".equals(grade) || grade == null){
+				grade = "";
+			}else {
+				grade = gradeDao.getGradeByNum(grade);
+			}
+			opp.setGrade(grade);
 			boolean saveResult = opportunityDao.insertOpportunity(opp);
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			if(saveResult){
@@ -185,5 +209,37 @@ public class Action_AddOpportunity extends ActionSupport {
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 }
