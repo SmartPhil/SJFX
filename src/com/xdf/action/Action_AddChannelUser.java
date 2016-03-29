@@ -25,12 +25,23 @@ public class Action_AddChannelUser extends ActionSupport {
 		user.setPassword(password);
 		user.setChannelName(channelName);
 		if(Integer.valueOf(channelType) == 1){
-			channelType = "数据合作";
+			channelType = "网络渠道";
 		}else if(Integer.valueOf(channelType) == 2){
-			channelType = "网络合作";
+			channelType = "数据营销";
 		}else if(Integer.valueOf(channelType) == 3){
-			channelType = "市场推荐";
+			channelType = "资源置换";
+		}else if(Integer.valueOf(channelType) == 4){
+			channelType = "线下渠道";
+		}else if(Integer.valueOf(channelType) == 5){
+			channelType = "线上预约";
+		}else if(Integer.valueOf(channelType) == 6){
+			channelType = "地推收集";
+		}else if(Integer.valueOf(channelType) == 7){
+			channelType = "活动收集";
+		}else if(Integer.valueOf(channelType) == 8){
+			channelType = "校园代理";
 		}
+		
 		user.setChannelType(channelType);
 		user.setCreator(creator);
 		user.setRole(4);

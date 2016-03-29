@@ -15,22 +15,39 @@ $.ajax({
 	dataType : "json",
 	success : function(e){
 		var data = eval("(" + e + ")");
-		var dataCollaList = new Array();
-		var netCollaList = new Array();
-		var marketCollaList = new Array();
-		for(var i = 0; i < data.length; i++){
-			if(data[i].type == "数据合作"){
-				dataCollaList.push(data[i]);
-			}else if(data[i].type == "网络合作"){
-				netCollaList.push(data[i]);
-			}else if(data[i].type == "市场推荐"){
-				marketCollaList.push(data[i]);
-			}
-		}
 		
 		var table = document.getElementById("tjByChannelTBody");
-		
-		for(var i = 0; i < dataCollaList.length; i++){
+		for (var i = 0; i < data.length; i++) {
+			var tr = document.createElement("tr");
+			var td1 = document.createElement("td");
+			td1.appendChild(document.createTextNode(data[i].name))
+			var td2 = document.createElement("td");
+			td2.appendChild(document.createTextNode(data[i].curtWeekCount));
+			var td3 = document.createElement("td");
+			td3.appendChild(document.createTextNode(data[i].lastWeekCount));
+			var td4 = document.createElement("td");
+			td4.appendChild(document.createTextNode(data[i].weekRisePercent));
+			if(Number(data[i].weekRisePercent.split("%")[0]) < 0){
+				td4.style.color = "red";
+			}
+			var td5 = document.createElement("td");
+			td5.appendChild(document.createTextNode(data[i].curtMonthCount));
+			var td6 = document.createElement("td");
+			td6.appendChild(document.createTextNode(data[i].lastMonthCount));
+			var td7 = document.createElement("td");
+			td7.appendChild(document.createTextNode(data[i].curtQuarter));
+			
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tr.appendChild(td3);
+			tr.appendChild(td4);
+			tr.appendChild(td5);
+			tr.appendChild(td6);
+			tr.appendChild(td7);
+			
+			table.appendChild(tr);
+		}
+		/* for(var i = 0; i < dataCollaList.length; i++){
 			var tr = document.createElement("tr");
 			if(i == 0){
 				var td = document.createElement("td");
@@ -139,12 +156,11 @@ $.ajax({
 			tr.appendChild(td7);
 			
 			table.appendChild(tr);
-		}
+		} */
 		
 		var totalTr = document.createElement("tr");
 		var tTd1 = document.createElement("td");
 		tTd1.appendChild(document.createTextNode("合计"));
-		tTd1.setAttribute("colspan","2");
 		var curtWeekTotal = 0;
 		var lastWeekTotal = 0;
 		var weekRisePerTotal = "";
@@ -216,7 +232,7 @@ $(document).ready(function(){
   				<li role="presentation" class="active"><a href="#">数据量统计</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/adduser.jsp">添加用户</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/queryOpp.jsp">查询数据</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/tj.jsp">成单数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/KF/importOpp.jsp">导入商机</a></li>
 			</ul>
 		</div>
@@ -228,8 +244,7 @@ $(document).ready(function(){
 	<table id="tjByChannelTable" class="table" border="1">
 		<thead>
 			<tr>
-				<th rowspan="2">结算模式</th>
-				<th rowspan="2">咨询渠道</th>
+				<th rowspan="2">渠道</th>
 				<th colspan="3">当周数据</th>
 				<th colspan="3">累计数据</th>
 			</tr>

@@ -134,11 +134,16 @@ $(document).ready(function(){
     		<input type="text" class="form-control" id="channelName" name="channelName" placeholder="请输入渠道商名字">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">合作类型</label>
+    		<label for="exampleInputFile">渠道类型</label>
     		<select class="form-control" name="collaType">
-    			<option value="1" selected="selected">数据合作</option>
-				<option value="2">网络合作</option>
-				<option value="3">市场推荐</option>
+    			<option value="1" selected="selected">网络渠道</option>
+				<option value="2">数据营销</option>
+				<option value="3">资源置换</option>
+				<option value="4">线下渠道</option>
+				<option value="5">线上预约</option>
+				<option value="6">地推收集</option>
+				<option value="7">活动收集</option>
+				<option value="8">校园代理</option>
     		</select>
   		</div>
   		<input type="button" data-loading-text="添加中……" class="btn btn-primary" id="submitAdd" value="添加"/>

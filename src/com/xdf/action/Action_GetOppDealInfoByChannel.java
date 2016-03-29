@@ -105,8 +105,20 @@ public class Action_GetOppDealInfoByChannel extends ActionSupport {
 					}else {
 						map.put("contactTel2", opportunity.getContactTel2());
 					}
-					map.put("channelName", opportunity.getChannelName());
-					map.put("channelType", opportunity.getChannelType());
+					
+					if(opportunity.getMark() == 0){
+						map.put("isValid", "有效性验证中");
+						map.put("noValidReason", "无");
+					}else if(opportunity.getMark() == 1){
+						if(opportunity.getIsValid() == 0){
+							map.put("isValid", "无效");
+							map.put("noValidReason", opportunity.getNoValidReason());
+						}else if(opportunity.getIsValid() == 1){
+							map.put("isValid", "有效");
+							map.put("noValidReason", "无");
+						}
+					}
+					
 					if("".equals(opportunity.getNeedCls()) || opportunity.getNeedCls() == null){
 						map.put("needCls", "无");
 					}else {
@@ -147,8 +159,18 @@ public class Action_GetOppDealInfoByChannel extends ActionSupport {
 				}else {
 					map.put("contactTel2", opportunity.getContactTel2());
 				}
-				map.put("channelName", opportunity.getChannelName());
-				map.put("channelType", opportunity.getChannelType());
+				if(opportunity.getMark() == 0){
+					map.put("isValid", "有效性验证中");
+					map.put("noValidReason", "无");
+				}else if(opportunity.getMark() == 1){
+					if(opportunity.getIsValid() == 0){
+						map.put("isValid", "无效");
+						map.put("noValidReason", opportunity.getNoValidReason());
+					}else if(opportunity.getIsValid() == 1){
+						map.put("isValid", "有效");
+						map.put("noValidReason", "无");
+					}
+				}
 				if("".equals(opportunity.getNeedCls()) || opportunity.getNeedCls() == null){
 					map.put("needCls", "无");
 				}else {

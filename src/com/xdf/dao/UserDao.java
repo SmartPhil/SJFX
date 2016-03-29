@@ -39,4 +39,10 @@ public interface UserDao {
 	 * @return List<User>
 	 */
 	public List<User> getUserByUserName(String username);
+	
+	/**
+	 * 获取所有用户
+	 * @return List<User>
+	 */
+	public List<User> getAllUser();
 }

@@ -37,7 +37,7 @@
 				<li role="presentation"><a id="usernameShow" href="#">欢迎您:<%=username %></a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/channelMain.jsp">录入商机</a></li>
   				<li role="presentation" class="active"><a href="#">查看成单情况</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/importOpp.jsp">录入商机</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/channel/importOpp.jsp">批量导入</a></li>
 			</ul>
 		</div>
 	</div>
@@ -82,14 +82,13 @@
   				<th>联系方式1</th>
   				<th>联系方式2</th>
   				<th>需求课程</th>
-  				<th>管理部门</th>
-  				<th>渠道名称</th>
-  				<th>渠道类型</th>
+  				<th>所属部门</th>
+  				<th>是否有效</th>
+  				<th>无效原因</th>
   				<th>成单情况</th>
   			</tr>
   		</thead>
   		<tbody>
-  			
   		</tbody>
   		<tfoot>
   			<tr>
@@ -99,9 +98,9 @@
   				<th>联系方式1</th>
   				<th>联系方式2</th>
   				<th>需求课程</th>
-  				<th>管理部门</th>
-  				<th>渠道名称</th>
-  				<th>渠道类型</th>
+  				<th>所属部门</th>
+  				<th>是否有效</th>
+  				<th>无效原因</th>
   				<th>成单情况</th>
   			</tr>
   		</tfoot>

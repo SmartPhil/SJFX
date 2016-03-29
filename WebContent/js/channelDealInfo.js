@@ -21,7 +21,7 @@ $(document).ready(function(){
 				for (var i = 0; i < oppInfo.length; i++) {
 					var obj = [
 					           oppInfo[i].createTime, oppInfo[i].stuName, oppInfo[i].parentName, oppInfo[i].contactTel1, oppInfo[i].contactTel2,
-					           oppInfo[i].needCls, oppInfo[i].management, oppInfo[i].channelName, oppInfo[i].channelType, oppInfo[i].state
+					           oppInfo[i].needCls, oppInfo[i].management, oppInfo[i].isValid, oppInfo[i].noValidReason, oppInfo[i].state
 					           ]
 					table.row.add(obj).draw(false);
 				}
@@ -57,7 +57,7 @@ $(document).ready(function(){
 					for (var i = 0; i < oppInfo.length; i++) {
 						var obj = [
 						           oppInfo[i].createTime, oppInfo[i].stuName, oppInfo[i].parentName, oppInfo[i].contactTel1, oppInfo[i].contactTel2,
-						           oppInfo[i].needCls, oppInfo[i].management, oppInfo[i].channelName, oppInfo[i].channelType, oppInfo[i].state
+						           oppInfo[i].needCls, oppInfo[i].management, oppInfo[i].isValid, oppInfo[i].noValidReason, oppInfo[i].state
 						           ]
 						table.row.add(obj).draw(false);
 					}

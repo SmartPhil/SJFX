@@ -8,13 +8,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionSupport;
+import com.xdf.dao.ChannelTypeDao;
 import com.xdf.dao.OpportunityDao;
 import com.xdf.dao.UserDao;
+import com.xdf.dao.impl.ChannelTypeDaoImpl;
 import com.xdf.dao.impl.OpportunityDaoImpl;
 import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Channel;
+import com.xdf.dto.ChannelType;
 import com.xdf.dto.User;
 
 public class Action_OppCountByChannel extends ActionSupport {
@@ -25,12 +29,17 @@ public class Action_OppCountByChannel extends ActionSupport {
 	
 	public String getOpp() throws ParseException{
 		OpportunityDao oppDao = new OpportunityDaoImpl();
+		//获取系统所有用户
 		UserDao userDao = new UserDaoImpl();
-		List<User> channelUser = userDao.getChannelUser();
-		for (User user : channelUser) {
+		List<User> userList = userDao.getAllUser();
+		for (User user : userList) {
 			Channel channel = new Channel();
-			channel.setName(user.getChannelName());
-			channel.setType(user.getChannelType());
+			if(user.getRole() == 4){
+				channel.setName(user.getChannelName());
+			}else {
+				channel.setName(user.getUsername());
+			}
+			
 			
 			Calendar begin1 = Calendar.getInstance();
 			if(begin1.get(Calendar.DAY_OF_WEEK) == 1){
@@ -103,6 +112,7 @@ public class Action_OppCountByChannel extends ActionSupport {
 			channelList.add(channel);
 		}
 		
+		// 统计商机的数据结果channel转化为json数据
 		List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
 		for (Channel channel : channelList) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -117,6 +127,24 @@ public class Action_OppCountByChannel extends ActionSupport {
 			maps.add(map);
 		}
 		result = JSONArray.toJSONString(maps);
+		
+		//渠道商类型列表转化为json数据
+		/*ChannelTypeDao channelTypeDao = new ChannelTypeDaoImpl();
+		List<ChannelType> typeList = channelTypeDao.getAllChannelType();
+		List<HashMap<String, Object>> typemaps = new ArrayList<HashMap<String,Object>>();
+		for (ChannelType channelType : typeList) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("typeId", channelType.getTypeId());
+			map.put("typeName", channelType.getTypeName());
+			typemaps.add(map);
+		}
+		String typeJson = JSONArray.toJSONString(typemaps);
+		
+		//生成结果json集并赋值给result
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("channel", channelJson);
+		resultMap.put("type", typeJson);
+		result = JSON.toJSONString(resultMap);*/
 		return SUCCESS;
 	}
 

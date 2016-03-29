@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping>
+	<class name="com.xdf.dto.ChannelType" table="channeltype">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="typeId" column="sTypeId"></property>
+		<property name="typeName" column="sTypeName"></property>
+	</class>
+</hibernate-mapping>
