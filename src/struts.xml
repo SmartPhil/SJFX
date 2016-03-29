@@ -34,6 +34,8 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="exportOppDealInfo" class="com.xdf.action.Action_ExportOppDealInfo" method="exportOppDealInfo">
+		</action>
 	</package>
 	<package name="kf" extends="json-default">
 		<action name="toKF" class="com.xdf.action.Action_ToKF" method="toKf">

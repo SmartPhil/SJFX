@@ -72,4 +72,14 @@ $(document).ready(function(){
 			}
 		})
 	});
+	
+	$("#exportOppDealInfo").click(function(){
+		var begin = $("#startDate").val();
+		var end = $("#endDate").val();
+		var stuContactTel = $("#stuContactTel").val();
+		var username = $("#usernameShow").html().split(":")[1];
+		alert(username);
+		var param = "begin=" + begin + "&end=" + end + "&stuContactTel=" + stuContactTel + "&username=" + username;
+		window.location.href = "exportOppDealInfo.action?" + param;
+	});
 });

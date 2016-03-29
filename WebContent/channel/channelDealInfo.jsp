@@ -69,6 +69,7 @@
     		</div>
   		</div>
   		<input type="button" class="btn btn-primary" id="searchOppByChannel" value="查询" data-loading-text="查询中">
+  		<input type="button" class="btn btn-success" id="exportOppDealInfo" value="导出">
 	</form>
 </div>
 <div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
