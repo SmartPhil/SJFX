@@ -149,6 +149,11 @@
 		</action>
 		<action name="exportDealInfo" class="com.xdf.action.Action_ExportDealInfo" method="export">
 		</action>
+		<action name="searchOppBySC" class="com.xdf.action.Action_SearchOppBySC" method="searchOpp">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="testpackage" extends="json-default">
 		<action name="test" class="com.xdf.action.Action_Test" method="test">

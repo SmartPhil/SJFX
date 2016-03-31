@@ -494,4 +494,37 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			return false;
 		}
 	}
+
+	@Override
+	public List<Opportunity> getOppByChannelListAndDate(List<String> channelList, Date begin, Date end) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where channelName in (:channelList)";
+			if(begin != null){
+				hql += " and createDate >= :begin";
+			}
+			if(end != null){
+				hql += " and createDate <= :end";
+			}
+			Query query = session.createQuery(hql);
+			query.setParameterList("channelList", channelList.toArray());
+			if(begin != null){
+				query.setDate("begin", begin);
+			}
+			if(end != null){
+				query.setDate("end", end);
+			}
+			List<Opportunity> resultList = query.list();
+			ts.commit();
+			session.close();
+			return resultList;
+		} catch (Exception e) {
+			ts.rollback();
+			session.close();
+			System.out.println("按照商机列表与时间查询商机出错：" + e.getMessage());
+			return null;
+		}
+	}
 }

@@ -21,7 +21,6 @@ import com.xdf.dto.User;
 public class Action_SearchDeal extends ActionSupport {
 	private String beginDate;
 	private String endDate;
-	private String channelName;
 	private String stuContactTel;
 	private String username;
 	private String result;
@@ -64,27 +63,36 @@ public class Action_SearchDeal extends ActionSupport {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		for (Deal deal : deals) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", deal.getId());
-			map.put("stuName", deal.getOpportunity().getStuName());
-			map.put("parentName", deal.getOpportunity().getParentName());
-			map.put("contactTel1", deal.getOpportunity().getContactTel1());
-			map.put("contactTel2", deal.getOpportunity().getContactTel2());
-			map.put("cardCode", deal.getCardCode());
-			map.put("clsName", deal.getClassName());
-			map.put("inDate", sdf1.format(deal.getInDate()));
-			map.put("pay", deal.getPay());
-			map.put("beginDate", sdf1.format(deal.getBeginDate()));
-			map.put("endDate", sdf1.format(deal.getEndDate()));
-			map.put("channelName", deal.getOpportunity().getChannelName());
-			map.put("management", deal.getDeptName());
-			map.put("commission", deal.getCommission());
-			if(deal.getRebate() != 0){
-				map.put("rebate", deal.getRebate());
-			}else {
-				map.put("rebate", "0.1");
+			UserDao userDao = new UserDaoImpl();
+			List<User> userList = userDao.getUserByCreator(username);
+			List<String> byCreatChannel = new ArrayList<String>();
+			for (User user : userList) {
+				byCreatChannel.add(user.getChannelName());
 			}
-			map.put("commission", deal.getCommission());
-			maps.add(map);
+			if(username.equals(deal.getOpportunity().getChannelName()) || byCreatChannel.contains(deal.getOpportunity().getChannelName())){
+				map.put("id", deal.getId());
+				map.put("createTime", sdf1.format(deal.getOpportunity().getCreateDate()));
+				map.put("stuName", deal.getOpportunity().getStuName());
+				map.put("parentName", deal.getOpportunity().getParentName());
+				map.put("contactTel1", deal.getOpportunity().getContactTel1());
+				map.put("contactTel2", deal.getOpportunity().getContactTel2());
+				map.put("cardCode", deal.getCardCode());
+				map.put("clsName", deal.getClassName());
+				map.put("inDate", sdf1.format(deal.getInDate()));
+				map.put("pay", deal.getPay());
+				map.put("beginDate", sdf1.format(deal.getBeginDate()));
+				map.put("endDate", sdf1.format(deal.getEndDate()));
+				map.put("channelName", deal.getOpportunity().getChannelName());
+				map.put("management", deal.getDeptName());
+				map.put("commission", deal.getCommission());
+				if(deal.getRebate() != 0){
+					map.put("rebate", deal.getRebate());
+				}else {
+					map.put("rebate", "0.1");
+				}
+				map.put("commission", deal.getCommission());
+				maps.add(map);
+			}
 		}
 		result = JSONArray.toJSONString(maps);
 		System.out.println(result);
@@ -107,12 +115,6 @@ public class Action_SearchDeal extends ActionSupport {
 	}
 	public void setResult(String result) {
 		this.result = result;
-	}
-	public String getChannelName() {
-		return channelName;
-	}
-	public void setChannelName(String channelName) {
-		this.channelName = channelName;
 	}
 	public String getStuContactTel() {
 		return stuContactTel;

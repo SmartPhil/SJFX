@@ -11,14 +11,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.opensymphony.xwork2.ActionSupport;
 import com.xdf.dao.DealDao;
 import com.xdf.dao.OpportunityDao;
+import com.xdf.dao.UserDao;
 import com.xdf.dao.impl.DealDaoImpl;
 import com.xdf.dao.impl.OpportunityDaoImpl;
+import com.xdf.dao.impl.UserDaoImpl;
 import com.xdf.dto.Deal;
 import com.xdf.dto.Opportunity;
+import com.xdf.dto.User;
 
 @SuppressWarnings("serial")
 public class Action_GetCurtMonthDealInfo extends ActionSupport {
 	private String result;
+	private String username;
 	
 	public String getCurtMonthDealInfo(){
 		Calendar beginCal = Calendar.getInstance();
@@ -38,26 +42,35 @@ public class Action_GetCurtMonthDealInfo extends ActionSupport {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			int oppId = deal.getOppId();
 			Opportunity opp = oppDao.getOppById(oppId);
-			map.put("id", deal.getId());
-			map.put("stuName", opp.getStuName());
-			map.put("parentName", opp.getParentName());
-			map.put("contactTel1", opp.getContactTel1());
-			map.put("contactTel2", opp.getContactTel2());
-			map.put("cardCode", deal.getCardCode());
-			map.put("clsName", deal.getClassName());
-			map.put("inDate", deal.getInDate());
-			map.put("pay", deal.getPay());
-			map.put("beginDate", deal.getBeginDate());
-			map.put("endDate", deal.getEndDate());
-			map.put("channelName", opp.getChannelName());
-			map.put("management", deal.getDeptName());
-			if(deal.getRebate() != 0){
-				map.put("rebate", deal.getRebate());
-			}else {
-				map.put("rebate", "0.1");
+			UserDao userDao = new UserDaoImpl();
+			List<User> userList = userDao.getUserByCreator(username);
+			List<String> byCreatChannel = new ArrayList<String>();
+			for (User user : userList) {
+				byCreatChannel.add(user.getChannelName());
 			}
-			map.put("commission", deal.getCommission());
-			maps.add(map);
+			if(username.equals(opp.getChannelName()) || byCreatChannel.contains(opp.getChannelName())){
+				map.put("id", deal.getId());
+				map.put("createTime", sdf.format(opp.getCreateDate()));
+				map.put("stuName", opp.getStuName());
+				map.put("parentName", opp.getParentName());
+				map.put("contactTel1", opp.getContactTel1());
+				map.put("contactTel2", opp.getContactTel2());
+				map.put("cardCode", deal.getCardCode());
+				map.put("clsName", deal.getClassName());
+				map.put("inDate", deal.getInDate());
+				map.put("pay", deal.getPay());
+				map.put("beginDate", deal.getBeginDate());
+				map.put("endDate", deal.getEndDate());
+				map.put("channelName", opp.getChannelName());
+				map.put("management", deal.getDeptName());
+				if(deal.getRebate() != 0){
+					map.put("rebate", deal.getRebate());
+				}else {
+					map.put("rebate", "0.1");
+				}
+				map.put("commission", deal.getCommission());
+				maps.add(map);
+			}
 		}
 		result = JSONArray.toJSONString(maps);
 		return SUCCESS;
@@ -67,5 +80,11 @@ public class Action_GetCurtMonthDealInfo extends ActionSupport {
 	}
 	public void setResult(String result) {
 		this.result = result;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

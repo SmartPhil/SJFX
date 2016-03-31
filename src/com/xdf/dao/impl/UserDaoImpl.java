@@ -140,4 +140,25 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 	}
+
+	@Override
+	public List<User> getUserByCreator(String creator) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from User where creator = ?";
+			Query query = session.createQuery(hql);
+			query.setString(0, creator);
+			List<User> userList = query.list();
+			ts.commit();
+			session.close();
+			return userList;
+		} catch (Exception e) {
+			System.out.println("获取所有用户出错：" + e.getMessage());
+			ts.rollback();
+			session.close();
+			return null;
+		}
+	}
 }

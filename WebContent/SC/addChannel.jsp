@@ -107,7 +107,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/importOpp.jsp">导入商机</a></li>
   				<li role="presentation" class="active"><a href="#">添加渠道商</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/dealInfo.jsp">成单数据</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/custom.jsp">自定义返点</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/searchopp.jsp">自定义返点</a></li>
 			</ul>
 		</div>
 	</div>

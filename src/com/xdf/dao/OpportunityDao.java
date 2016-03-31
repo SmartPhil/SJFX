@@ -134,4 +134,13 @@ public interface OpportunityDao {
 	 * @return boolean
 	 */ 
 	public boolean isOldOpp(Opportunity opportunity);
+	
+	/**
+	 * 通过渠道商列表与起截止时间查询商机
+	 * @param channelList
+	 * @param begin
+	 * @param end 
+	 * @return List<Opportunity>
+	 */
+	public List<Opportunity> getOppByChannelListAndDate(List<String> channelList,Date begin,Date end);
 }

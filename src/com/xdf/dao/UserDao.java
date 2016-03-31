@@ -45,4 +45,10 @@ public interface UserDao {
 	 * @return List<User>
 	 */
 	public List<User> getAllUser();
+	
+	/**
+	 * 通过渠道商创建者查询渠道商
+	 * @return List<User>
+	 */
+	public List<User> getUserByCreator(String creator);
 }

@@ -1,96 +1,66 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="com.xdf.dto.Channel"%>
+<%@page import="com.xdf.dto.Management" %>
+<%@page import="com.xdf.dto.User" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>成单数据</title>
-<link href="<%=request.getContextPath()%>/css/KFMain.css" rel="stylesheet" type="text/css"/>
+<title>查询数据</title>
+<!-- css文件 -->
+<link href="<%=request.getContextPath()%>/css/SCMain.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<link href="<%=request.getContextPath()%>/uploadify/uploadify.css" rel="stylesheet"  type="text/css" media="screen"/>
 <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
+<!-- js文件 -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/SCMain.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/tableExport.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/uploadify/jquery.uploadify.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
-	var t = $("#dealTable").DataTable({});
-	
-	$.ajax({
-		url : 'getCurtMonDealInfo.action',
-		type : 'post',
-		data : {"username" : $("#usernameShow").html().split(":")[1]},
-		dataType : 'json',
-		success : function(e){
-			t.clear().draw(false);
-			var data = eval("(" + e + ")");
-		
-			for (var i = 0; i < data.length; i++) {
-				var rebatePer = data[i].rebate*1*100 + "%";
-				var obj = [
-				           data[i].createTime,
-				           data[i].stuName,
-				           data[i].contactTel1,
-				           data[i].clsName,
-				           data[i].inDate,
-				           data[i].beginDate,
-				           data[i].pay,
-				           data[i].channelName,
-				           data[i].management
-				           ];
-				t.row.add(obj).draw(false);
-			}
-		},
-		error : function(e){
-			alert("查询当月成单数据失败！");
-		}
-	});
+	var table = $("#oppTable").DataTable({});
 	
 	$("#searchButton").click(function(){
 		$.ajax({
-			url : 'searchDeal.action',
+			url : 'searchOppBySC.action',
 			type : 'post',
 			dataType : 'json',
-			data : {	
-				'beginDate' : $("#beginDate").val(),
-				'endDate' : $("#endDate").val(), 
-				'stuContactTel' : $("#stuContactTel").val(),
-				'username' : $("#usernameShow").html().split(":")[1]
-			},
+			data : {'user' : $("#usernameShow").html().split(":")[1],
+					'beginDate' : $("#beginDate").val(),
+					'endDate' : $("#endDate").val(),
+					'stuContact' : $("#stuContactTel").val()},
 			success : function(e){
-				t.clear().draw(false);
+				table.clear().draw(false);
 				var data = eval("(" + e + ")");
 				for (var i = 0; i < data.length; i++) {
-					var rebatePer = data[i].rebate*1*100 + "%";
 					var obj = [
-								data[i].createTime,
 								data[i].stuName,
+								data[i].parentName,
 								data[i].contactTel1,
-								data[i].clsName,
-								data[i].inDate,
-								data[i].beginDate,
-								data[i].pay,
+								data[i].contactTel2,
+								data[i].needCls,
+								data[i].management,
 								data[i].channelName,
-								data[i].management
+								data[i].channelType,
+					           	data[i].createDate,
+					           	data[i].isValid,
+					           	data[i].noValidReason,
+					           	data[i].isAssign,
+					           	data[i].assignEmployee
 					           ];
-					t.row.add(obj).draw(false);
+					table.row.add(obj).draw(false);
 				}
 			},
 			error : function(e){
-				alert("按条件查询成单数据失败！");
+				alert("网络出错！请联系管理员！")
 			}
-		});
-	});
-	$("#exportExcel").click(function(){
-		var param = "begin=" + $("#beginDate").val()
-					+ "&end=" + $("#endDate").val()
-					+ "&stuContactTel=" + $("#stuContactTel").val()
-					+ "&username=" + $("#usernameShow").html().split(":")[1];
-		location.href = "exportDealInfo.action?" + param;
+		})
 	});
 });
 </script>
@@ -113,8 +83,8 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/toSC.action">数据量统计</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/importOpp.jsp">导入商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/addChannel.jsp">添加渠道商</a></li>
-  				<li role="presentation"  class="active"><a href="#">成单数据</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/searchopp.jsp">自定义返点</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/dealInfo.jsp">成单数据</a></li>
+  				<li role="presentation" class="active"><a href="#">查询数据</a></li>
 			</ul>
 		</div>
 	</div>
@@ -143,39 +113,47 @@ $(document).ready(function(){
     		</div>
   		</div>
   		<input type="button" class="btn btn-primary" id="searchButton" value="查询" data-loading-text="查询中">
-  		<input type="button" class="btn btn-primary" id="exportExcel" value="导出" data-loading-text="查询中">
+  		<!-- <input type="button" class="btn btn-primary" id="exportExcel" value="导出" data-loading-text="导出中"> -->
 	</form>
 </div>
 <br/>
 <div class="panel panel-primary" style="width: 90%;margin-left: auto;margin-right: auto;">
-	<div class="panel-heading">成单数据</div>
-	<table id="dealTable" class="table table-striped table-bordered dataTable" style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%">
+	<div class="panel-heading">商机数据</div>
+	<table id="oppTable" class="table table-striped table-bordered dataTable" style="width: 100%" aria-describedby="example_info" role="grid" cellspacing="0" width="100%">
 		<thead>
 			<tr> 
-				<th>接收时间</th>
-				<th>姓名</th>
-				<th>联系电话</th>
-				<th>班级名称</th>
-				<th>进班日期</th>
-				<th>开班日期</th>
-				<th>学费</th>
-				<th>渠道商</th>
+				<th>学员姓名</th>
+				<th>家长姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>需求课程</th>
 				<th>所属部门</th>
+				<th>渠道商</th>
+				<th>渠道商类型</th>
+				<th>创建日期</th>
+				<th>是否有效</th>
+				<th>无效原因</th>
+				<th>是否分配</th>
+				<th>分配员工</th>
 			</tr>
 		</thead>
 		<tbody>
 		</tbody>
 		<tfoot>
 			<tr>
-				<th>接收时间</th>
-				<th>姓名</th>
-				<th>联系电话</th>
-				<th>班级名称</th>
-				<th>进班日期</th>
-				<th>开班日期</th>
-				<th>学费</th>
-				<th>渠道商</th>
+				<th>学员姓名</th>
+				<th>家长姓名</th>
+				<th>联系方式1</th>
+				<th>联系方式2</th>
+				<th>需求课程</th>
 				<th>所属部门</th>
+				<th>渠道商</th>
+				<th>渠道商类型</th>
+				<th>创建日期</th>
+				<th>是否有效</th>
+				<th>无效原因</th>
+				<th>是否分配</th>
+				<th>分配员工</th>
 			</tr>
 		</tfoot>
 	</table>
