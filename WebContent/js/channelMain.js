@@ -21,6 +21,14 @@ $(document).ready(function(){
 		if(contactTel1 == ""){
 			alert("请输入联系电话1");
 			$("#contactTel1").focus();
+			$btn.button('reset');
+			return;
+		}
+		
+		var kfManagement = $("#kfManagement").val();
+		if(kfManagement == ""){
+			alert("请选择所属部门");
+			$btn.button('reset');
 			return;
 		}
 		

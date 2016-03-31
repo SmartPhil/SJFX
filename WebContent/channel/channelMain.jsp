@@ -69,8 +69,9 @@
     		<textarea rows="3" cols="10" class="form-control" id="consultCls" name="consultCls" placeholder="请输入学员咨询的课程"></textarea>
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">所属部门</label>
+    		<label for="exampleInputFile">所属部门<span class="badge">*</span></label>
     		<select class="form-control" id="kfManagement" name="kfManagement">
+    			<option value="" selected="selected"></option>
     			<% for(int i = 0; i < managementList.size(); i++){ %>
 						<option value="<%=managementList.get(i).getManagementName() %>"><%=managementList.get(i).getManagementName() %></option>
 				<%	} %>
@@ -84,6 +85,7 @@
   		<div class="form-group">
     		<label for="exampleInputFile">所在区域</label>
     		<select class="form-control" id="area" name="area">
+    			<option value="" selected="selected"></option>
     			<option value="1">杨浦区</option>
     			<option value="2">徐汇区</option>
     			<option value="3">浦东区</option>
@@ -115,6 +117,7 @@
   		<div class="form-group">
     		<label for="exampleInputFile">年级</label>
     		<select class="form-control" id="grade" name="grade">
+    			<option value="" selected="selected"></option>
     			<option value="1">幼儿</option>
     			<option value="2">小班</option>
     			<option value="3">中班</option>
