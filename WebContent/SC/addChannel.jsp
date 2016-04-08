@@ -20,7 +20,6 @@ $(document).ready(function(){
 		var channelName = $("#channelName").val();
 		var channelType = $("#collaType").val();
 		var creator = $("#usernameShow").text().split(":")[1];
-		
 		if(username == "" || username == null){
 			alert("请输入用户名！");
 			return;
@@ -135,7 +134,7 @@ $(document).ready(function(){
   		</div>
   		<div class="form-group">
     		<label for="exampleInputFile">渠道类型</label>
-    		<select class="form-control" name="collaType">
+    		<select class="form-control" id="collaType" name="collaType">
     			<option value="1" selected="selected">网络渠道</option>
 				<option value="2">数据营销</option>
 				<option value="3">资源置换</option>
