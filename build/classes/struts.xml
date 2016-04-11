@@ -154,6 +154,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="scValidOpp" class="com.xdf.action.Action_SCValidOpp" method="valid">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 	<package name="testpackage" extends="json-default">
 		<action name="test" class="com.xdf.action.Action_Test" method="test">

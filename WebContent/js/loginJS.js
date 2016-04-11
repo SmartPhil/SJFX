@@ -57,7 +57,7 @@ $(document).ready(function(){
 			error : function(){
 				alert("登陆失败！网络出错！请联系管理员！");
 				$btn.button('reset');
-			},
+			}
 		});
 	});
 });

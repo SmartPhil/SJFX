@@ -85,6 +85,7 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/addChannel.jsp">添加渠道商</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/dealInfo.jsp">成单数据</a></li>
   				<li role="presentation" class="active"><a href="#">查询数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/valid.jsp">有效性验证</a></li>
 			</ul>
 		</div>
 	</div>

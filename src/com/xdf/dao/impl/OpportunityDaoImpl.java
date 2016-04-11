@@ -426,7 +426,6 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		}
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Opportunity getOppByContact(String stuContactTel) {
@@ -453,10 +452,9 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		}
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean isOldOpp(Opportunity opportunity) {
+	public List<Opportunity> isOldOpp(Opportunity opportunity) {
 		Session session = HibernateUtil.getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		try {
@@ -469,29 +467,12 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			List<Opportunity> resultList = query.list();
 			ts.commit();
 			session.close();
-			if(resultList.size() == 0){
-				return false;
-			}else{
-				return true;
-				/*Opportunity opp = resultList.get(0);
-				Date createDate = opp.getCreateDate();
-				Calendar createCalendar = Calendar.getInstance();
-				createCalendar.setTime(createDate);
-				long createMillis = createCalendar.getTimeInMillis();
-				Calendar now = Calendar.getInstance();
-				now.add(Calendar.MONTH, -6);
-				long nowMillis = now.getTimeInMillis();
-				if(createMillis > nowMillis){
-					return true;
-				}else {
-					return false;
-				}*/
-			}
+			return resultList;
 		} catch (Exception e) {
 			ts.rollback();
 			session.close();
 			System.out.println("按照联系方式查询商机出错：" + e.getMessage());
-			return false;
+			return null;
 		}
 	}
 
@@ -524,6 +505,26 @@ public class OpportunityDaoImpl implements OpportunityDao {
 			ts.rollback();
 			session.close();
 			System.out.println("按照商机列表与时间查询商机出错：" + e.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public List<Opportunity> getOppByChannelAndMark(List<String> channelList) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		try {
+			String hql = "from Opportunity where channelName in (:channelList) and mark = 0";
+			Query query = session.createQuery(hql);
+			query.setParameterList("channelList", channelList.toArray());
+			List<Opportunity> resultList = query.list();
+			ts.commit();
+			session.close();
+			return resultList;
+		} catch (Exception e) {
+			ts.rollback();
+			session.close();
+			System.out.println("查询未验证有效性商机出错：" + e.getMessage());
 			return null;
 		}
 	}

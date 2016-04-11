@@ -114,7 +114,8 @@ $(document).ready(function(){
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/importOpp.jsp">导入商机</a></li>
   				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/addChannel.jsp">添加渠道商</a></li>
   				<li role="presentation"  class="active"><a href="#">成单数据</a></li>
-  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/searchopp.jsp">自定义返点</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/searchopp.jsp">查询数据</a></li>
+  				<li role="presentation"><a href="<%=request.getContextPath()%>/SC/valid.jsp">有效性验证</a></li>
 			</ul>
 		</div>
 	</div>

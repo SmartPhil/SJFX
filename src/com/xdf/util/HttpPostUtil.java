@@ -85,7 +85,6 @@ public class HttpPostUtil {
 			System.out.println(result);
 			System.out.println("ÎÒµÄdataÊÇ" + data);
 		}*/
-		
 		return result;
 	}
 }

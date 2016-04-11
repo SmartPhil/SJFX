@@ -71,7 +71,7 @@ public class Action_XDFImportExcelOpp extends ActionSupport {
 				map.put("result", "null");
 			}
 		} catch (Exception e) {
-			System.out.println("批量上传商机失败：Action_ImportExcelOpp.java:" + e.getMessage());
+			System.out.println("批量上传商机失败：Action_XDFImportExcelOpp.java:" + e.getMessage());
 			map.put("result", "fail");
 		}
 		result = JSON.toJSON(map);

@@ -51,7 +51,7 @@ $(document).ready(function(){
 			error : function(XMLResponse){
 				$btn.button('reset');
 				alert("提交失败！请联系系统管理员！");
-			},
+			}
 		});
 	});
 	

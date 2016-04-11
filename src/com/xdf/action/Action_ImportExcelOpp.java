@@ -44,27 +44,11 @@ public class Action_ImportExcelOpp extends ActionSupport {
 				//查询上传者信息
 				UserDao userDAO = new UserDaoImpl();
 				User user = userDAO.getUserByUserName(username).get(0);
-				String channelType = "";
-				if( "网络合作".equals(user.getChannelType()) ||
-					"数据合作".equals(user.getChannelType()) ||
-					"市场推荐".equals(user.getChannelType())){
-					username = user.getChannelName();
-					channelType = user.getChannelType();
-				}else {
-					channelType = "内部渠道";
-				}
+				username = user.getChannelName();
+				String channelType = user.getChannelType();
 					
 				for (int i = 0; i < resultList.size(); i++) {
 					Opportunity opportunity = new Opportunity();
-					/*if("".equals(resultList.get(i)[0]) || resultList.get(i)[0] == null){
-						opportunity.setCreateDate(new Date());
-					}else {
-						try {
-							opportunity.setCreateDate(simpleDateFormat.parse(resultList.get(i)[0]));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-					}*/
 					opportunity.setCreateDate(new Date());
 					opportunity.setStuName(resultList.get(i)[0]);
 					opportunity.setParentName(resultList.get(i)[1]);
