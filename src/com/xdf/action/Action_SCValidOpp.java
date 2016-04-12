@@ -113,12 +113,9 @@ public class Action_SCValidOpp extends ActionSupport {
 		}
 		
 		//有效性验证完毕，回存数据库
-		/*for (Opportunity opp : oppList) {
-			//只回存无效数据
-			if(opp.getIsValid() == 0){
-				oppDao.update(opp);
-			}
-		}*/
+		for (Opportunity opp : oppList) {
+			oppDao.update(opp);
+		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("result", "success");
 		result = JSONObject.toJSONString(map);

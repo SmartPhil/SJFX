@@ -22,11 +22,12 @@ $(document).ready(function(){
 			type : 'post',
 			data : {'username' : $("#usernameShow").html().split(':')[1]},
 			datatype : 'json',
+			timeout : 120*1000,
 			success : function(e){
 				var data = eval("(" + e + ")");
 				var result = data.result;
 				if(result == "success"){
-					alert("验证成功！");	
+					alert("验证成功！");
 				}else{
 					alert("验证失败！");
 				}

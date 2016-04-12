@@ -458,12 +458,21 @@ public class OpportunityDaoImpl implements OpportunityDao {
 		Session session = HibernateUtil.getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		try {
-			String hql = "from Opportunity where contactTel1 = ? or contactTel1 = ? or contactTel2 = ? or contactTel2 = ?";
+			//String hql = "from Opportunity where contactTel1 = ? or contactTel1 = ? or contactTel2 = ? or contactTel2 = ?";
+			String hql = "from Opportunity where 1!=1";
+			if(!"".equals(opportunity.getContactTel1()) && opportunity.getContactTel1() != null){
+				hql += " or contactTel1 = :contact1 or contactTel2 = :contact1";
+			}
+			if(!"".equals(opportunity.getContactTel2()) && opportunity.getContactTel2() != null){
+				hql += " or contactTel1 = :contact2 or contactTel2 = :contact2";
+			}
 			Query query = session.createQuery(hql);
-			query.setString(0, opportunity.getContactTel1());
-			query.setString(1, opportunity.getContactTel2());
-			query.setString(2, opportunity.getContactTel1());
-			query.setString(3, opportunity.getContactTel2());
+			if(!"".equals(opportunity.getContactTel1()) && opportunity.getContactTel2() != null){
+				query.setString("contact1", opportunity.getContactTel1());
+			}
+			if(!"".equals(opportunity.getContactTel2()) && opportunity.getContactTel2() != null){
+				query.setString("contact2", opportunity.getContactTel2());
+			}
 			List<Opportunity> resultList = query.list();
 			ts.commit();
 			session.close();
