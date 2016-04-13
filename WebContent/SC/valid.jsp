@@ -25,7 +25,7 @@ $(document).ready(function(){
 			timeout : 120*1000,
 			success : function(e){
 				var data = eval("(" + e + ")");
-				var result = data.result;
+				var result = data.result;ssss
 				if(result == "success"){
 					alert("验证成功！");
 				}else{
