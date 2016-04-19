@@ -8,6 +8,7 @@ public class FollowContent {
 	private Date time;
 	private String content;
 	private String employee;
+	private String answer;
 	
 	public int getId() {
 		return id;
@@ -38,5 +39,11 @@ public class FollowContent {
 	}
 	public void setEmployee(String employee) {
 		this.employee = employee;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 }

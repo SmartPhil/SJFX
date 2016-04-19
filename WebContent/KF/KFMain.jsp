@@ -135,6 +135,7 @@
 					<td>跟进时间</td>
 					<td>跟进内容</td>
 					<td>跟进人</td>
+					<td>接听情况</td>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -187,6 +188,17 @@
 					String nowString = sdf.format(now);
 				%>
 				<td id="followTime" colspan="3"><%=nowString %></td>
+			</tr>
+			<tr>
+				<td>接听情况</td>
+				<td colspan="2">
+					<select id="answer" name="answer">
+						<option value="1">正常接听</option>
+						<option value="2">无法接通</option>
+						<option value="3">无人接听</option>
+						<option value="4">空号错号</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>内容</td>

@@ -41,6 +41,7 @@ public class Action_GetFollowContent extends ActionSupport {
 			map.put("followTime", sdf.format(fCon.getTime()));
 			map.put("followContent", fCon.getContent());
 			map.put("followEmployee", fCon.getEmployee());
+			map.put("answer", fCon.getAnswer());
 			mapList.add(map);
 		}
 		result = JSONArray.toJSONString(mapList);

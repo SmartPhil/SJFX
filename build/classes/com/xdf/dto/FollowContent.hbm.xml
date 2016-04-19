@@ -11,5 +11,6 @@
 		<property name="time" column="dtTime"></property>
 		<property name="content" column="sContent"></property>
 		<property name="employee" column="sFollowEmployee"></property>
+		<property name="answer" column="sAnswer"></property>
 	</class>
 </hibernate-mapping>

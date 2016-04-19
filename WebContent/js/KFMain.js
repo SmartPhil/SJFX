@@ -46,6 +46,7 @@ $(document).ready(function(){
 							+ "<td>" + result[i].followTime + "</td>"
 							+ "<td>" + result[i].followContent + "</td>"
 							+ "<td>" + result[i].followEmployee + "</td>"
+							+ "<td>" + result[i].answer + "</td>"
 							+ "</tr>")
 				}
 			},
@@ -69,6 +70,7 @@ $(document).ready(function(){
 				contactTel2 : $("#handle_contactTel2Td").text(),
 				followTime : $("#followTime").text(),
 				followContent : $("#followContent").val(),
+				answer : $("#answer").val(),
 				followEmployee : $("#usernameShow").text().split(":")[1]
 			},
 			success : function(data){
