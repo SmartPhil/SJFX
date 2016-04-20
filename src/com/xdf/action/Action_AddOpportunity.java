@@ -41,7 +41,14 @@ public class Action_AddOpportunity extends ActionSupport {
 		OpportunityDao opportunityDao = new OpportunityDaoImpl();
 		
 		boolean hasResult1 = false;
+		//去掉联系方式前后所有空格
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(!"".equals(contactTel1) && contactTel1 != null) {
+			contactTel1 = contactTel1.trim();
+		}
+		if (!"".equals(contactTel2) && contactTel2 != null) {
+			contactTel2 = contactTel2.trim();
+		}
 		Opportunity opportunity = opportunityDao.getOpportunityByContact(contactTel1, contactTel2);
 		if(opportunity != null){
 			Calendar now = Calendar.getInstance();

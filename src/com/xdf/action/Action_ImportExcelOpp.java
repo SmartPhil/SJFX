@@ -52,8 +52,8 @@ public class Action_ImportExcelOpp extends ActionSupport {
 					opportunity.setCreateDate(new Date());
 					opportunity.setStuName(resultList.get(i)[0]);
 					opportunity.setParentName(resultList.get(i)[1]);
-					opportunity.setContactTel1(resultList.get(i)[2]);
-					opportunity.setContactTel2(resultList.get(i)[3]);
+					opportunity.setContactTel1(resultList.get(i)[2].trim());
+					opportunity.setContactTel2(resultList.get(i)[3].trim());
 					opportunity.setNeedCls(resultList.get(i)[4]);
 					opportunity.setManagement(resultList.get(i)[5]);
 					opportunity.setArea(resultList.get(i)[6]);

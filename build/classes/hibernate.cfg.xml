@@ -9,14 +9,14 @@
 		<!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
 		
 		<!-- sql server 200 database -->
-		<!-- <property name="connection.url">jdbc:sqlserver://10.101.13.200:1433;databaseName=sj</property>
+		<property name="connection.url">jdbc:sqlserver://10.101.13.200:1433;databaseName=sj</property>
 		<property name="connection.username">app_kpi</property>
-		<property name="connection.password">3efh89!df</property> -->
+		<property name="connection.password">3efh89!df</property>
 		
 		<!-- sql server 55.12 database -->
-		<property name="connection.url">jdbc:sqlserver://192.168.55.12:1433;databaseName=SJFX</property> 
+		<!-- <property name="connection.url">jdbc:sqlserver://192.168.55.12:1433;databaseName=SJFX</property> 
 		<property name="connection.username">sa</property>
-		<property name="connection.password">tuny1r_123</property>
+		<property name="connection.password">tuny1r_123</property> -->
 		
 		<!-- mysql localhost database -->
 		<!-- <property name="connection.url">jdbc:mysql://localhost:3306/sjfx</property>
