@@ -67,7 +67,7 @@ public class Action_AddChannelUser extends ActionSupport {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	} 
 	public String getChannelName() {
 		return channelName;
 	}

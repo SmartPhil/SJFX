@@ -4,6 +4,8 @@
 <%@page import="com.xdf.dto.Management" %>
 <%@page import="com.xdf.dto.User" %>
 <%@page import="java.util.List"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,9 +25,35 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
-<% 
-	HttpSession sessions = request.getSession();
-	Object username = sessions.getAttribute("username");
+<%
+	Enumeration<String> enumeration = session.getAttributeNames();
+	String username = "";
+	boolean hasAttr = false;
+	
+	while(enumeration.hasMoreElements()){
+		String attr = enumeration.nextElement();
+		if("username".equals(attr)){
+			hasAttr = true;
+		}
+	}
+	PrintWriter printWriter = response.getWriter();
+	if(!hasAttr){
+		printWriter.print("<script>alert(\"请先登录！\")</script>");
+		printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+	}else {
+		//判断username是否有值
+		username = session.getAttribute("username").toString();
+		if("".equals(username) || username == null) {
+			printWriter.print("<script>alert(\"请先登录！\")</script>");
+			printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+		}else {
+			String role = session.getAttribute("role").toString();
+			if(!"1".equals(role)){
+				printWriter.print("<script>alert(\"您没有权限访问该页面！\")</script>");
+				printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+			}
+		}
+	}
 %>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -63,8 +91,10 @@
 		}
 	}
 %>
-<div id="tjByChannelDiv">
-	<table class="tjByChannelTable" border="1">
+
+<div class="panel panel-primary" style="width: 70%;margin-left: auto;margin-right: auto;">
+	<div class="panel-heading">商机量统计</div>
+	<table class="table table-bordered">
 			<tr>
 				<th rowspan="2">结算模式</th>
 				<th rowspan="2">咨询渠道</th>
@@ -306,50 +336,5 @@
 			</tr>
 	</table>
 </div>
-<br/>
-
-
-<%-- <div id="customRebateDiv">
-	<div id="customSearchDiv" style="border: 1px solid black">
-		起始时间：<input name="beginDate" type="text" id="customBeginDate" onclick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;
-		截止时间：<input name="endDate" type="text" id="customEndDate" onclick="WdatePicker()"> &nbsp;&nbsp;
-		渠道商:<select name="channel" id="customChannel">
-			<% for(int i = 0; i < channelList.size(); i++){ %>
-				<option><%=channelList.get(i).getName() %></option>
-			<%} %>
-		</select>&nbsp;&nbsp;
-		学生电话：<input name="stuContactTel" id="customStuContactTel"/>&nbsp;&nbsp;
-		<button id="customSearchButton">查询</button>
-		<button id="submitModifyRebate">修改返点比例</button>
-	</div>
-	<br/>
-	<table id="customRebateTable" border="1" class="imagetable">
-		<thead>
-			<tr>
-				<th>姓名</th>
-				<th>班级名称</th>
-				<th>学费</th>
-				<th>渠道</th>
-				<th>所属部门</th>
-				<th>返佣比例</th>
-				<th>佣金</th>
-			</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
-		<tfoot>
-			<tr>
-				<th>姓名</th>
-				<th>班级名称</th>
-				<th>学费</th>
-				<th>渠道</th>
-				<th>所属部门</th>
-				<th>返佣比例</th>
-				<th>佣金</th>
-			</tr>
-		</tfoot>
-	</table>
-</div> --%>
 </body>
 </html>

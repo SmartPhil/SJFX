@@ -141,53 +141,63 @@ public class Action_GetOppDealInfoByChannel extends ActionSupport {
 				//如果学员电话不为空！则按学员电话进行查询
 				List<HashMap<String, Object>> maps = new ArrayList<HashMap<String,Object>>();
 				Opportunity opportunity = oppDao.getOppByContact(stuContactTel);
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("createTime", sdf1.format(opportunity.getCreateDate()));
-				if("".equals(opportunity.getStuName()) || opportunity.getStuName() == null){
-					map.put("stuName", "无");
-				}else {
-					map.put("stuName", opportunity.getStuName());
-				}
-				if("".equals(opportunity.getParentName()) || opportunity.getParentName() == null){
-					map.put("parentName", "无");
-				}else {
-					map.put("parentName", opportunity.getParentName());
-				}
-				map.put("contactTel1", opportunity.getContactTel1());
-				if("".equals(opportunity.getContactTel2()) || opportunity.getContactTel2() == null){
-					map.put("contactTel2", "无");
-				}else {
-					map.put("contactTel2", opportunity.getContactTel2());
-				}
-				if(opportunity.getMark() == 0){
-					map.put("isValid", "有效性验证中");
-					map.put("noValidReason", "无");
-				}else if(opportunity.getMark() == 1){
-					if(opportunity.getIsValid() == 0){
-						map.put("isValid", "无效");
-						map.put("noValidReason", opportunity.getNoValidReason());
-					}else if(opportunity.getIsValid() == 1){
-						map.put("isValid", "有效");
-						map.put("noValidReason", "无");
+				//判断按照电话号码查询出来的商机是否是属于当前渠道商的
+				User user = userDao.getUserByUserName(username).get(0);
+				String channelName = user.getChannelName();
+				if (opportunity.getChannelName().equals(channelName)) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("createTime", sdf1.format(opportunity.getCreateDate()));
+					if("".equals(opportunity.getStuName()) || opportunity.getStuName() == null){
+						map.put("stuName", "无");
+					}else {
+						map.put("stuName", opportunity.getStuName());
 					}
-				}
-				if("".equals(opportunity.getNeedCls()) || opportunity.getNeedCls() == null){
-					map.put("needCls", "无");
+					if("".equals(opportunity.getParentName()) || opportunity.getParentName() == null){
+						map.put("parentName", "无");
+					}else {
+						map.put("parentName", opportunity.getParentName());
+					}
+					map.put("contactTel1", opportunity.getContactTel1());
+					if("".equals(opportunity.getContactTel2()) || opportunity.getContactTel2() == null){
+						map.put("contactTel2", "无");
+					}else {
+						map.put("contactTel2", opportunity.getContactTel2());
+					}
+					if(opportunity.getMark() == 0){
+						map.put("isValid", "有效性验证中");
+						map.put("noValidReason", "无");
+					}else if(opportunity.getMark() == 1){
+						if(opportunity.getIsValid() == 0){
+							map.put("isValid", "无效");
+							map.put("noValidReason", opportunity.getNoValidReason());
+						}else if(opportunity.getIsValid() == 1){
+							map.put("isValid", "有效");
+							map.put("noValidReason", "无");
+						}
+					}
+					if("".equals(opportunity.getNeedCls()) || opportunity.getNeedCls() == null){
+						map.put("needCls", "无");
+					}else {
+						map.put("needCls", opportunity.getNeedCls());
+					}
+					map.put("management", opportunity.getManagement());
+					if(opportunity.getState() == 0){
+						map.put("state", "待跟进");
+					}else if(opportunity.getState() == 1){
+						map.put("state", "已成单");
+					}
+					maps.add(map);
+					String oppInfo = JSONArray.toJSONString(maps);
+					HashMap<String, Object> resultMap = new HashMap<String, Object>();
+					resultMap.put("result", "success");
+					resultMap.put("oppInfo", oppInfo);
+					result = JSONObject.toJSONString(resultMap);
 				}else {
-					map.put("needCls", opportunity.getNeedCls());
+					HashMap<String, Object> resultMap = new HashMap<String, Object>();
+					resultMap.put("result", "success");
+					resultMap.put("oppInfo", "");
+					result = JSONObject.toJSONString(resultMap);
 				}
-				map.put("management", opportunity.getManagement());
-				if(opportunity.getState() == 0){
-					map.put("state", "待跟进");
-				}else if(opportunity.getState() == 1){
-					map.put("state", "已成单");
-				}
-				maps.add(map);
-				String oppInfo = JSONArray.toJSONString(maps);
-				HashMap<String, Object> resultMap = new HashMap<String, Object>();
-				resultMap.put("result", "success");
-				resultMap.put("oppInfo", oppInfo);
-				result = JSONObject.toJSONString(resultMap);
 			}
 		}
 		return SUCCESS;

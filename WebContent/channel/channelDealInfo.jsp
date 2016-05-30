@@ -1,5 +1,8 @@
 <%@page import="com.xdf.dto.Management"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.Enumeration"%>
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,16 +17,46 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/channelDealInfo.js"></script>
+<script type="text/javascript" src="< =request.getContextPath()%>/js/channelDealInfo.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-<% 
-	HttpSession sessions = request.getSession();
-	Object username = sessions.getAttribute("username");
-	Object channelname = sessions.getAttribute("channelName");
-	Object channeltype = sessions.getAttribute("channelType");
-	List<Management> managementList = (List<Management>)sessions.getAttribute("managementList");
+<%
+	Enumeration<String> enumeration = session.getAttributeNames();
+	String username = "";
+	String channelname = "";
+	String channeltype = "";
+	List<Management> managementList = new ArrayList<Management>();
+	boolean hasAttr = false;
+	
+	while(enumeration.hasMoreElements()){
+		String attr = enumeration.nextElement();
+		if("username".equals(attr)){
+			hasAttr = true;
+		}
+	}
+	PrintWriter printWriter = response.getWriter();
+	if(!hasAttr){
+		printWriter.print("<script>alert(\"请先登录！\")</script>");
+		printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+	}else {
+		//判断username是否有值
+		username = session.getAttribute("username").toString();
+		if("".equals(username) || username == null) {
+			printWriter.print("<script>alert(\"请先登录！\")</script>");
+			printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+		}else {
+			String role = session.getAttribute("role").toString();
+			if(!"4".equals(role)){
+				printWriter.print("<script>alert(\"您没有权限访问该页面！\")</script>");
+				printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+			}else {
+				channelname = session.getAttribute("channelName").toString();
+				channeltype = session.getAttribute("channelType").toString();
+				managementList = (List<Management>)session.getAttribute("managementList");
+			}
+		}
+	}
 %>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -54,8 +87,8 @@
   		</div>
   		&nbsp;&nbsp;&nbsp;&nbsp;
   		<div class="form-group">
-    		<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-    		<div class="input-group">
+    		<label class="sr-only" for ="exampleInputAmount">Amount (in dollars)</label>
+    		<div class="input-group">  
       			<div class="input-group-addon">截止时间</div>
       			<input type="text" class="form-control" id="endDate" placeholder="截止时间" onclick="WdatePicker()">
     		</div>

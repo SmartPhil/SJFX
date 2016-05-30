@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="javafx.scene.control.Alert"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="java.util.Enumeration"%>
 <%@page import="com.xdf.dto.Management"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -16,18 +21,48 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
-<% 
-	HttpSession sessions = request.getSession();
-	Object username = sessions.getAttribute("username");
-	Object channelname = sessions.getAttribute("channelName");
-	Object channeltype = sessions.getAttribute("channelType");
-	List<Management> managementList = (List<Management>)sessions.getAttribute("managementList");
+<%
+	Enumeration<String> enumeration = session.getAttributeNames();
+	String username = "";
+	String channelname = "";
+	String channeltype = "";
+	List<Management> managementList = new ArrayList<Management>();
+	boolean hasAttr = false;
+	
+	while(enumeration.hasMoreElements()){
+		String attr = enumeration.nextElement();
+		if("username".equals(attr)){
+			hasAttr = true;
+		}
+	}
+	PrintWriter printWriter = response.getWriter();
+	if(!hasAttr){
+		printWriter.print("<script>alert(\"请先登录！\")</script>");
+		printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+	}else {
+		//判断username是否有值
+		username = session.getAttribute("username").toString();
+		if("".equals(username) || username == null) {
+			printWriter.print("<script>alert(\"请先登录！\")</script>");
+			printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+		}else {
+			String role = session.getAttribute("role").toString();
+			if(!"4".equals(role)){
+				printWriter.print("<script>alert(\"您没有权限访问该页面！\")</script>");
+				printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+			}else {
+				channelname = session.getAttribute("channelName").toString();
+				channeltype = session.getAttribute("channelType").toString();
+				managementList = (List<Management>)session.getAttribute("managementList");
+			}
+		}
+	}
 %>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
-        		<img alt="" src="<%=request.getContextPath()%>/image/logo.png">
+        		<img alt="" src="<%=request.getContextPath() %>/image/logo.png">
       		</a>
 		</div>
 		<div class="collapse navbar-collapse" style="margin-left: auto;margin-right: auto;width: 70%;">
@@ -49,27 +84,27 @@
   			<p class="bg-primary">注意：带*号为必填项</p>	
   		</div>
   		<div class="form-group">
-  			<label for="exampleInputEmail1">学员姓名</label>
+  			<label for="stuName">学员姓名</label>
     		<input type="text" class="form-control" id="stuName" name="stuName" placeholder="请输入学员姓名">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputPassword1">家长姓名</label>
+    		<label for="parentName">家长姓名</label>
     		<input type="text" class="form-control" id="parentName" name="parentName" placeholder="请输入家长姓名">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">联系方式1<span class="badge">*</span></label>
+    		<label for="contactTel1">联系方式1<span class="badge">*</span></label>
     		<input type="text" class="form-control" id="contactTel1" name="contactTel1" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">联系方式2</label>
+    		<label for="contactTel2">联系方式2</label>
     		<input type="text" class="form-control" id="contactTel2" name="contactTel2" placeholder="请输入手机号码/座机号码">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">需求课程</label>
+    		<label for="consultCls">需求课程</label>
     		<textarea rows="3" cols="10" class="form-control" id="consultCls" name="consultCls" placeholder="请输入学员咨询的课程"></textarea>
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">所属部门<span class="badge">*</span></label>
+    		<label for="kfManagement">所属部门<span class="badge">*</span></label>
     		<select class="form-control" id="kfManagement" name="kfManagement">
     			<option value="" selected="selected"></option>
     			<% for(int i = 0; i < managementList.size(); i++){ %>
@@ -83,7 +118,7 @@
   		<input type="hidden" value="<%=channelname %>" id="giveOrg" name="giveOrg"/>
   		<input type="hidden" value="<%=channeltype %>" id="channelType" name="channelType"/>
   		<div class="form-group">
-    		<label for="exampleInputFile">所在区域</label>
+    		<label for="area">所在区域</label>
     		<select class="form-control" id="area" name="area">
     			<option value="" selected="selected"></option>
     			<option value="1">杨浦区</option>
@@ -107,15 +142,15 @@
     		</select>
   		</div>
 		<div class="form-group">
-    		<label for="exampleInputFile">联系地址</label>
+    		<label for="address">联系地址</label>
     		<input type="text" class="form-control" id="address" name="address" placeholder="请输入学员地址">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">学校</label>
+    		<label for="school">学校</label>
     		<input type="text" class="form-control" id="school" name="school" placeholder="请输入学员就读学校">
   		</div>
   		<div class="form-group">
-    		<label for="exampleInputFile">年级</label>
+    		<label for="grade">年级</label>
     		<select class="form-control" id="grade" name="grade">
     			<option value="" selected="selected"></option>
     			<option value="1">幼儿</option>

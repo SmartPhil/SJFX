@@ -4,6 +4,20 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<!-- <package name="all" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.xdf.interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+	</package> -->
+
 	<package name="loginPackage" extends="json-default">
 		<action name="login" class="com.xdf.action.Action_LoginAction" method="login">
 			<result name="success" type="json">

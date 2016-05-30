@@ -3,11 +3,6 @@
  */
 
 $(document).ready(function(){
-	$('#myButton').on('click', function () {
-	    
-	    
-	});
-	
 	//登陆操作
 	$("#btnLogin").click(function(){
 		var $btn = $(this).button('loading');

@@ -37,6 +37,7 @@ public class Action_LoginAction extends ActionSupport {
 			map.put("role", curtUser.getRole());
 			session = ActionContext.getContext().getSession();
 			session.put("username", curtUser.getUsername());
+			session.put("role", curtUser.getRole());
 			session.put("management", curtUser.getManagement());
 			session.put("managementList", managementList);
 			if(curtUser.getRole() == 4 || curtUser.getRole() == 5){

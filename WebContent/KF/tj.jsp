@@ -20,7 +20,7 @@ $.ajax({
 		for (var i = 0; i < data.length; i++) {
 			var tr = document.createElement("tr");
 			var td1 = document.createElement("td");
-			td1.appendChild(document.createTextNode(data[i].name))
+			td1.appendChild(document.createTextNode(data[i].name));
 			var td2 = document.createElement("td");
 			td2.appendChild(document.createTextNode(data[i].curtWeekCount));
 			var td3 = document.createElement("td");
@@ -47,116 +47,6 @@ $.ajax({
 			
 			table.appendChild(tr);
 		}
-		/* for(var i = 0; i < dataCollaList.length; i++){
-			var tr = document.createElement("tr");
-			if(i == 0){
-				var td = document.createElement("td");
-				td.appendChild(document.createTextNode("数据合作"));
-				td.setAttribute("rowspan", dataCollaList.length);
-				tr.appendChild(td);
-			}
-			var td1 = document.createElement("td");
-			td1.appendChild(document.createTextNode(dataCollaList[i].name))
-			var td2 = document.createElement("td");
-			td2.appendChild(document.createTextNode(dataCollaList[i].curtWeekCount));
-			var td3 = document.createElement("td");
-			td3.appendChild(document.createTextNode(dataCollaList[i].lastWeekCount));
-			var td4 = document.createElement("td");
-			td4.appendChild(document.createTextNode(dataCollaList[i].weekRisePercent));
-			if(Number(dataCollaList[i].weekRisePercent.split("%")[0]) < 0){
-				td4.style.color = "red";
-			}
-			var td5 = document.createElement("td");
-			td5.appendChild(document.createTextNode(dataCollaList[i].curtMonthCount));
-			var td6 = document.createElement("td");
-			td6.appendChild(document.createTextNode(dataCollaList[i].lastMonthCount));
-			var td7 = document.createElement("td");
-			td7.appendChild(document.createTextNode(dataCollaList[i].curtQuarter));
-			
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tr.appendChild(td3);
-			tr.appendChild(td4);
-			tr.appendChild(td5);
-			tr.appendChild(td6);
-			tr.appendChild(td7);
-			
-			table.appendChild(tr);
-		}
-		
-		for(var i = 0; i < netCollaList.length; i++){
-			var tr = document.createElement("tr");
-			if(i == 0){
-				var td = document.createElement("td");
-				td.appendChild(document.createTextNode("网络合作"));
-				td.setAttribute("rowspan", netCollaList.length);
-				tr.appendChild(td);
-			}
-			var td1 = document.createElement("td");
-			td1.appendChild(document.createTextNode(netCollaList[i].name))
-			var td2 = document.createElement("td");
-			td2.appendChild(document.createTextNode(netCollaList[i].curtWeekCount));
-			var td3 = document.createElement("td");
-			td3.appendChild(document.createTextNode(netCollaList[i].lastWeekCount));
-			var td4 = document.createElement("td");
-			td4.appendChild(document.createTextNode(netCollaList[i].weekRisePercent));
-			if(Number(netCollaList[i].weekRisePercent.split("%")[0]) < 0){
-				td4.style.color = "red";
-			}
-			var td5 = document.createElement("td");
-			td5.appendChild(document.createTextNode(netCollaList[i].curtMonthCount));
-			var td6 = document.createElement("td");
-			td6.appendChild(document.createTextNode(netCollaList[i].lastMonthCount));
-			var td7 = document.createElement("td");
-			td7.appendChild(document.createTextNode(netCollaList[i].curtQuarter));
-			
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tr.appendChild(td3);
-			tr.appendChild(td4);
-			tr.appendChild(td5);
-			tr.appendChild(td6);
-			tr.appendChild(td7);
-			
-			table.appendChild(tr);
-		}
-		
-		for (var i = 0; i < marketCollaList.length; i++) {
-			var tr = document.createElement("tr");
-			if(i == 0){
-				var td = document.createElement("td");
-				td.appendChild(document.createTextNode("市场推荐"));
-				td.setAttribute("rowspan", marketCollaList.length);
-				tr.appendChild(td);
-			}
-			var td1 = document.createElement("td");
-			td1.appendChild(document.createTextNode(marketCollaList[i].name))
-			var td2 = document.createElement("td");
-			td2.appendChild(document.createTextNode(marketCollaList[i].curtWeekCount));
-			var td3 = document.createElement("td");
-			td3.appendChild(document.createTextNode(marketCollaList[i].lastWeekCount));
-			var td4 = document.createElement("td");
-			td4.appendChild(document.createTextNode(marketCollaList[i].weekRisePercent));
-			if(Number(marketCollaList[i].weekRisePercent.split("%")[0]) < 0){
-				td4.style.color = "red";
-			}
-			var td5 = document.createElement("td");
-			td5.appendChild(document.createTextNode(marketCollaList[i].curtMonthCount));
-			var td6 = document.createElement("td");
-			td6.appendChild(document.createTextNode(marketCollaList[i].lastMonthCount));
-			var td7 = document.createElement("td");
-			td7.appendChild(document.createTextNode(marketCollaList[i].curtQuarter));
-			
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tr.appendChild(td3);
-			tr.appendChild(td4);
-			tr.appendChild(td5);
-			tr.appendChild(td6);
-			tr.appendChild(td7);
-			
-			table.appendChild(tr);
-		} */
 		
 		var totalTr = document.createElement("tr");
 		var tTd1 = document.createElement("td");
@@ -212,7 +102,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-</head>
+</head>  
 <body>
 <% 
 	HttpSession sessions = request.getSession();

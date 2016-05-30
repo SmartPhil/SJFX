@@ -27,11 +27,6 @@ public class Action_SearchOppBySC extends ActionSupport {
 	public String searchOpp(){
 		//获取当前用户及当前用户所创建的渠道商
 		UserDao userDao = new UserDaoImpl();
-		List<User> userList = userDao.getUserByUserName(user);
-		User curtUser = new User();
-		if(userList.size() > 0){
-			curtUser = userList.get(0);
-		}
 		List<User> channelList = userDao.getUserByCreator(user);
 		List<String> channelNames = new ArrayList<String>();
 		for (User user : channelList) {

@@ -181,7 +181,6 @@ public class Action_ExportTJByChannel extends ActionSupport {
 			}
 		}*/
 		
-		HSSFRow dataRow1 = sheet.createRow(2);
 		/*HSSFCell dataCell1 = dataRow1.createCell(0);
 		dataCell1.setCellValue("数据合作");
 		int dataCount = dataCollaList.size();

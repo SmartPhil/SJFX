@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.util.Enumeration"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -88,9 +90,35 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<% 
-	HttpSession sessions = request.getSession();
-	Object username = sessions.getAttribute("username");
+<%
+	Enumeration<String> enumeration = session.getAttributeNames();
+	String username = "";
+	boolean hasAttr = false;
+	
+	while(enumeration.hasMoreElements()){
+		String attr = enumeration.nextElement();
+		if("username".equals(attr)){
+			hasAttr = true;
+		}
+	}
+	PrintWriter printWriter = response.getWriter();
+	if(!hasAttr){
+		printWriter.print("<script>alert(\"请先登录！\")</script>");
+		printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+	}else {
+		//判断username是否有值
+		username = session.getAttribute("username").toString();
+		if("".equals(username) || username == null) {
+			printWriter.print("<script>alert(\"请先登录！\")</script>");
+			printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+		}else {
+			String role = session.getAttribute("role").toString();
+			if(!"1".equals(role)){
+				printWriter.print("<script>alert(\"您没有权限访问该页面！\")</script>");
+				printWriter.print("<script>window.location.href = \"../login.jsp\"</script>");
+			}
+		}
+	}
 %>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
